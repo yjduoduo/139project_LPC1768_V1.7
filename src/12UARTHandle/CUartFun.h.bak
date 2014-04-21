@@ -1,0 +1,75 @@
+/*
+;*********************************************************************************************************
+;*                                                
+;*                            ¶ÔÏó: CUartFun
+;*
+;*                        (c) Copyright 2010-2018, ½¯Ñ©Ã·
+;*                              All Rights Reserved
+;*                                    Ver1.0
+;* File : CUartFun.h
+;* By   : ½¯Ñ©Ã·
+;* Ê±¼ä : 2012-6-14
+;*********************************************************************************************************
+;*/
+//#include  "CUartFun.h"
+
+#ifndef CUartFun_H
+#define CUartFun_H	  
+
+#include <includes.h> 
+
+#ifdef  CUartFun_C
+#define EX_CUartFun
+#else
+#define EX_CUartFun extern 
+#endif
+
+/*******************************************************************/
+/******************       È«¾Ö³£Á¿¶¨Òåý     *********************/
+/*******************************************************************/
+//constant
+//50MÖ÷Æµ   ²ÉÓÃ10ms Ê±ÖÓ
+ 
+//#define cMaxUartRcvBuffNum  (0x001F47A0)
+#define cMaxHzkNum  (0x00045080)
+#define cMaxUartRcvBuffNum  0x100 //(0x00045100)
+
+/*******************************************************************/
+/******************       Êý¾Ý½á¹¹¶¨Òåý     *********************/
+/*******************************************************************/
+
+/*******************************************************************/
+/****************     ¹«ÓÐ³ÉÔ±±äÁ¿,º¯Êý¼°³£Á¿     ******************/
+/*******************************************************************/
+//public:
+EX_CUartFun   void   Init_CUartFun(void);    //³õÊ¼»¯
+
+ 
+EX_CUartFun   void   do_CUartFun(void);
+EX_CUartFun   void   Save_CUartFun(void);
+
+
+EX_CUartFun   void   InitBuff_CUartFun(void);          //³õÊ¼»¯
+EX_CUartFun   void   AddBuff_CUartFun(uint8 vData);    //³õÊ¼»¯
+
+EX_CUartFun   uint32  vUartRcvBuffRcv;
+EX_CUartFun   uint32  vUartRcvBuffCtrl;
+EX_CUartFun   uint8   vUart0SaveFlag;
+/*******************************************************************/
+/********************* Ë½ÓÐ³ÉÔ±±äÁ¿,º¯Êý¼°³£Á¿    *******************/
+/*******************************************************************/
+//Private:
+#ifdef  CUartFun_C
+
+uint32 vUartSaveAddr; 
+
+uint8   vUartRcvBuff[cMaxUartRcvBuffNum] __attribute__ ((section ("Uart_RcvRAM"), zero_init));
+uint32  vUartRcvBuffCtrl;
+uint32  vUartRcvBuffRcv;
+
+
+//void  SaveBuff_CUartFun(uint32 vSaveAddr,uint32 vSaveLen);    //³õÊ¼»¯
+
+#endif
+#endif
+

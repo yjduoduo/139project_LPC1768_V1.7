@@ -1,0 +1,14 @@
+.\output\csyscheck.o: ..\src\Menu\CSysCheck.c
+.\output\csyscheck.o: ..\src\APP\Config.h
+.\output\csyscheck.o: ..\src\Menu\CSysCheck.h
+.\output\csyscheck.o: ..\src\Board\lcd.h
+.\output\csyscheck.o: ..\inc\lpc17xx.h
+.\output\csyscheck.o: ..\inc\core_cm3.h
+.\output\csyscheck.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\csyscheck.o: ..\inc\system_LPC17xx.h
+.\output\csyscheck.o: ..\inc\LPC17xx.h
+.\output\csyscheck.o: ..\src\common\CGetCompSum.h
+.\output\csyscheck.o: ..\src\common\CFlashParam.h
+.\output\csyscheck.o: ..\src\Board\pcf8563.h
+.\output\csyscheck.o: ..\src\common\CMaDefine.h
+.\output\csyscheck.o: ..\src\Hardware\UART\uart.h

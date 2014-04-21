@@ -1,0 +1,11 @@
+.\output\cgpioirq.o: ..\src\Hardware\IRQ\CGpioIrq.c
+.\output\cgpioirq.o: ..\src\Hardware\IRQ\CGpioIrq.h
+.\output\cgpioirq.o: ..\src\APP\Config.h
+.\output\cgpioirq.o: ..\inc\LPC17xx.H
+.\output\cgpioirq.o: ..\inc\core_cm3.h
+.\output\cgpioirq.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\cgpioirq.o: ..\inc\system_LPC17xx.h
+.\output\cgpioirq.o: ..\inc\LPC17xx.h
+.\output\cgpioirq.o: ..\src\Hardware\Timer\CTimeDef.h
+.\output\cgpioirq.o: ..\src\common\CSetCurrent.h
+.\output\cgpioirq.o: ..\src\CLoopCtrl\CLpCkCtrl.h
