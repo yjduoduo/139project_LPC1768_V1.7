@@ -278,9 +278,7 @@ void Clr2msArrived(void);
 
 
 
-
-
-
+#line 67 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 
 
@@ -288,6 +286,10 @@ uint8    vRun1s;
 
 uint16   vRunTime0;  
 uint16   vRunTime1; 
+
+
+uint16 vPWM1Time = 0;
+uint8  vPWM1StopFlag = 0;
  
 uint16   mRunTime0;  
 uint8    vPIT0Run; 
@@ -2524,7 +2526,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -2542,7 +2544,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -2707,7 +2709,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -2740,7 +2742,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -4681,6 +4683,10 @@ void pwm1_enable(void);
 void pwm1_disable(void);
 
 
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
+
 
 
 #line 39 "..\\src\\APP\\include.h"
@@ -6084,6 +6090,26 @@ void   T1Int_CTimeCtrl(void)
     Set20ms_CSysRunFlag();
     vAddScreenMask();
 
+    
+    if(get_PWM1_Started())
+    {
+        vPWM1Time++;
+        if(vPWM1Time >(160/20))
+        {
+            PWM1_Stop();
+            vPWM1StopFlag =1;
+            vPWM1Time = 0;
+        }
+        if(vPWM1StopFlag && vPWM1Time > (20/20))
+        {
+            vPWM1StopFlag = 0;
+            PWM1_Start();
+            vPWM1Time = 0;
+        }
+
+    }else{
+        vPWM1Time = 0;
+    }
 
 
 }

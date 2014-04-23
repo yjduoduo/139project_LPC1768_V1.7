@@ -316,6 +316,26 @@ void   T1Int_CTimeCtrl(void)
     Set20ms_CSysRunFlag();
     vAddScreenMask();
 
+    //control pwm1 start and stop
+    if(get_PWM1_Started())
+    {
+        vPWM1Time++;
+        if(vPWM1Time >cTime1_160ms_Count)
+        {
+            PWM1_Stop();
+            vPWM1StopFlag =1;
+            vPWM1Time = 0;
+        }
+        if(vPWM1StopFlag && vPWM1Time > cTime1_20ms_Count)
+        {
+            vPWM1StopFlag = 0;
+            PWM1_Start();
+            vPWM1Time = 0;
+        }
+
+    }else{
+        vPWM1Time = 0;
+    }
 
 
 }

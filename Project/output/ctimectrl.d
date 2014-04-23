@@ -20,7 +20,7 @@
 .\output\ctimectrl.o: ..\src\APP\include.h
 .\output\ctimectrl.o: ..\inc\LPC17xx.h
 .\output\ctimectrl.o: ..\inc\core_cm3.h
-.\output\ctimectrl.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ctimectrl.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ctimectrl.o: ..\inc\system_LPC17xx.h
 .\output\ctimectrl.o: ..\inc\LPC17xx.h
 .\output\ctimectrl.o: ..\src\common\buffer.h

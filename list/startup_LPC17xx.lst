@@ -426,8 +426,8 @@ ARM Macro Assembler    Page 7
               00000200 
               00000000 
 Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\output
-\startup_LPC17xx.d -o.\output\startup_LPC17xx.o -IC:\Keil\ARM\RV31\Inc -IC:\Kei
-l\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NXP\LPC17xx --predefine="__RTX SETA 1" --
+\startup_LPC17xx.d -o.\output\startup_LPC17xx.o -If:\Keil\ARM\RV31\Inc -If:\Kei
+l\ARM\CMSIS\Include -If:\Keil\ARM\Inc\NXP\LPC17xx --predefine="__RTX SETA 1" --
 list=..\list\startup_LPC17xx.lst ..\src\startup_LPC17xx.s
 
 

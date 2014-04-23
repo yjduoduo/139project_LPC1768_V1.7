@@ -721,7 +721,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -739,7 +739,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -904,7 +904,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -937,7 +937,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -3487,6 +3487,10 @@ void pwm1_enable(void);
 void pwm1_disable(void);
 
 
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
+
 
 
 #line 39 "..\\src\\APP\\include.h"
@@ -5228,7 +5232,7 @@ extern   void   T1Int_CTimeCtrl(void);
  
  
 
-#line 87 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 97 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 22 "..\\src\\CRunCtrl\\CRunCtrl.c"
 #line 1 "..\\src\\common\\CFlashParam.h"
@@ -5876,7 +5880,8 @@ void hardware_init(void)
     Led_Init();
     Relay_Init();
     PWM_Init();
-    PWM1_Set(50000,0);
+   
+    PWM1_Set(50000,200);
 }
 void ctrl_init(void)
 {
@@ -5924,8 +5929,14 @@ void deal_lcd(void)
 void deal_speaker(void)
 {
     
-    if(GetSpeaker_Flag()&&!GetZjFlag())
+
+    if(GetSpeaker_Flag())
         CSpeakerPWM();
+
+
+
+
+
 
 }
 void deal_all_led(void)
@@ -5979,7 +5990,6 @@ void   do_CRunCtrl(void)
 
 
 
-
         HandleInfo_Uart1();
 
         return;
@@ -6008,9 +6018,11 @@ void   do_CRunCtrl(void)
 
 
 
+        deal_speaker();
+
         return;
     }
-#line 247 "..\\src\\CRunCtrl\\CRunCtrl.c"
+#line 255 "..\\src\\CRunCtrl\\CRunCtrl.c"
 }
 
 

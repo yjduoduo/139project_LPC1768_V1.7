@@ -2,7 +2,7 @@
 .\output\chistorylist.o: ..\src\APP\include.h
 .\output\chistorylist.o: ..\inc\LPC17xx.h
 .\output\chistorylist.o: ..\inc\core_cm3.h
-.\output\chistorylist.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\chistorylist.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\chistorylist.o: ..\inc\system_LPC17xx.h
 .\output\chistorylist.o: ..\inc\LPC17xx.h
 .\output\chistorylist.o: ..\src\APP\Config.h

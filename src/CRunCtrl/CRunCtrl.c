@@ -48,7 +48,8 @@ void hardware_init(void)
     Led_Init();
     Relay_Init();
     PWM_Init();
-    PWM1_Set(PWM_CYCLE,0);
+   //  PWM1_Set(PWM_CYCLE,PWM_OFFSET);
+    PWM1_Set(50000,200);
 }
 void ctrl_init(void)
 {
@@ -96,8 +97,14 @@ void deal_lcd(void)
 void deal_speaker(void)
 {
     //非自检且打开时
-    if(GetSpeaker_Flag()&&!GetZjFlag())
+    #if 1 //test
+    if(GetSpeaker_Flag())
         CSpeakerPWM();
+        #else
+            if(GetSpeaker_Flag()&&!GetZjFlag())
+        CSpeakerPWM();
+        
+        #endif
 
 }
 void deal_all_led(void)
@@ -148,7 +155,6 @@ void   do_CRunCtrl(void)
         //显示页面
         DisplayKeyMenu();
         Clr_Alarm(); //reset for alarm
-//        deal_speaker();
 
 
 //        无线发送与接收，串口1
@@ -179,6 +185,8 @@ void   do_CRunCtrl(void)
 
 //        Scan_Key();//循环扫描，非定时器来扫描
 
+
+        deal_speaker();
 
         return;
     }

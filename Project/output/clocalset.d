@@ -4,7 +4,7 @@
 .\output\clocalset.o: ..\src\Board\lcd.h
 .\output\clocalset.o: ..\inc\lpc17xx.h
 .\output\clocalset.o: ..\inc\core_cm3.h
-.\output\clocalset.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\clocalset.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\clocalset.o: ..\inc\system_LPC17xx.h
 .\output\clocalset.o: ..\inc\LPC17xx.h
 .\output\clocalset.o: ..\src\MenuCtrl\CTaskSure.h

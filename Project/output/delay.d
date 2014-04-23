@@ -2,7 +2,7 @@
 .\output\delay.o: ..\src\APP\include.h
 .\output\delay.o: ..\inc\LPC17xx.h
 .\output\delay.o: ..\inc\core_cm3.h
-.\output\delay.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\delay.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\delay.o: ..\inc\system_LPC17xx.h
 .\output\delay.o: ..\inc\LPC17xx.h
 .\output\delay.o: ..\src\APP\Config.h

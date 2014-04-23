@@ -2,7 +2,7 @@
 .\output\alarmenu.o: ..\src\APP\include.h
 .\output\alarmenu.o: ..\inc\LPC17xx.h
 .\output\alarmenu.o: ..\inc\core_cm3.h
-.\output\alarmenu.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\alarmenu.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\alarmenu.o: ..\inc\system_LPC17xx.h
 .\output\alarmenu.o: ..\inc\LPC17xx.h
 .\output\alarmenu.o: ..\src\APP\Config.h

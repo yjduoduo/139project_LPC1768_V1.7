@@ -554,6 +554,7 @@ void selftest_ok(void)
     Led_ALL_On();
     SetZjFlag(1);
     PWM1_Start();
+    set_PWM1_Started();
     //—” ±
     DelayMs(15000);
     TestSelf_Menu();

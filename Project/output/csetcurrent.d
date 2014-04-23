@@ -2,7 +2,7 @@
 .\output\csetcurrent.o: ..\src\APP\include.h
 .\output\csetcurrent.o: ..\inc\LPC17xx.h
 .\output\csetcurrent.o: ..\inc\core_cm3.h
-.\output\csetcurrent.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\csetcurrent.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\csetcurrent.o: ..\inc\system_LPC17xx.h
 .\output\csetcurrent.o: ..\inc\LPC17xx.h
 .\output\csetcurrent.o: ..\src\APP\Config.h

@@ -1,10 +1,10 @@
 .\output\main.o: ..\src\APP\main.c
 .\output\main.o: ..\inc\LPC17xx.H
 .\output\main.o: ..\inc\core_cm3.h
-.\output\main.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\main.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\main.o: ..\inc\system_LPC17xx.h
 .\output\main.o: ..\inc\LPC17xx.h
-.\output\main.o: C:\Keil\ARM\RV31\Inc\stdio.H
+.\output\main.o: f:\Keil\ARM\RV31\Inc\stdio.H
 .\output\main.o: ..\inc\type.h
 .\output\main.o: ..\src\APP\main.h
 .\output\main.o: ..\src\APP\include.h

@@ -86,5 +86,9 @@ void pwm1_enable(void);
 void pwm1_disable(void);
 
 
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
+
 #endif /* end __PWM_H */
 

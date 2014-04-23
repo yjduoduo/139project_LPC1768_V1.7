@@ -3,7 +3,7 @@
 .\output\ctime.o: ..\src\APP\Config.h
 .\output\ctime.o: ..\inc\LPC17xx.H
 .\output\ctime.o: ..\inc\core_cm3.h
-.\output\ctime.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ctime.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ctime.o: ..\inc\system_LPC17xx.h
 .\output\ctime.o: ..\inc\LPC17xx.h
 .\output\ctime.o: ..\src\Hardware\Timer\CTimeDef.h

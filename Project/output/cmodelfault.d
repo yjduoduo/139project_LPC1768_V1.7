@@ -2,7 +2,7 @@
 .\output\cmodelfault.o: ..\src\APP\include.h
 .\output\cmodelfault.o: ..\inc\LPC17xx.h
 .\output\cmodelfault.o: ..\inc\core_cm3.h
-.\output\cmodelfault.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\cmodelfault.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\cmodelfault.o: ..\inc\system_LPC17xx.h
 .\output\cmodelfault.o: ..\inc\LPC17xx.h
 .\output\cmodelfault.o: ..\src\APP\Config.h

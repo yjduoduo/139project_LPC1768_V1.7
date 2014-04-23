@@ -1,11 +1,11 @@
 .\output\uart.o: ..\src\Hardware\UART\uart.c
-.\output\uart.o: C:\Keil\ARM\RV31\Inc\stdarg.h
-.\output\uart.o: C:\Keil\ARM\RV31\Inc\stdio.h
-.\output\uart.o: C:\Keil\ARM\RV31\Inc\stdlib.h
-.\output\uart.o: C:\Keil\ARM\RV31\Inc\string.h
+.\output\uart.o: f:\Keil\ARM\RV31\Inc\stdarg.h
+.\output\uart.o: f:\Keil\ARM\RV31\Inc\stdio.h
+.\output\uart.o: f:\Keil\ARM\RV31\Inc\stdlib.h
+.\output\uart.o: f:\Keil\ARM\RV31\Inc\string.h
 .\output\uart.o: ..\inc\lpc17xx.h
 .\output\uart.o: ..\inc\core_cm3.h
-.\output\uart.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\uart.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\uart.o: ..\inc\system_LPC17xx.h
 .\output\uart.o: ..\inc\LPC17xx.h
 .\output\uart.o: ..\inc\type.h

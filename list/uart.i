@@ -19,7 +19,7 @@
 
 
  
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdarg.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdarg.h"
  
  
  
@@ -38,7 +38,7 @@
 
 
 
-#line 26 "C:\\Keil\\ARM\\RV31\\Inc\\stdarg.h"
+#line 26 "f:\\Keil\\ARM\\RV31\\Inc\\stdarg.h"
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-#line 118 "C:\\Keil\\ARM\\RV31\\Inc\\stdarg.h"
+#line 118 "f:\\Keil\\ARM\\RV31\\Inc\\stdarg.h"
 
 
 
@@ -139,7 +139,7 @@
 
  
 #line 22 "..\\src\\Hardware\\UART\\uart.c"
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
  
  
  
@@ -165,7 +165,7 @@
 
 
 
-#line 34 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
+#line 34 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
 
 
   
@@ -232,7 +232,7 @@ typedef struct __FILE FILE;
 extern FILE __stdin, __stdout, __stderr;
 extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
 
-#line 125 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
+#line 125 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
     
 
     
@@ -981,13 +981,13 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
 
-#line 944 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
+#line 944 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.h"
 
 
 
  
 #line 23 "..\\src\\Hardware\\UART\\uart.c"
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
  
  
  
@@ -1025,7 +1025,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
 
-#line 45 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 45 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 
   
@@ -1045,7 +1045,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
     typedef unsigned short wchar_t;  
-#line 74 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 74 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 typedef struct div_t { int quot, rem; } div_t;
     
@@ -1056,7 +1056,7 @@ typedef struct lldiv_t { __int64 quot, rem; } lldiv_t;
     
 
 
-#line 95 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 95 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
    
 
 
@@ -1069,7 +1069,7 @@ typedef struct lldiv_t { __int64 quot, rem; } lldiv_t;
 
 
  
-#line 114 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 114 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
    
 
 
@@ -1360,7 +1360,7 @@ extern __declspec(__nothrow) int atexit(void (*  )(void)) __attribute__((__nonnu
 
 
  
-#line 414 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 414 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 
 extern __declspec(__nothrow) __declspec(__noreturn) void exit(int  );
@@ -1433,7 +1433,7 @@ extern  void *bsearch(const void *  , const void *  ,
 
 
  
-#line 502 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 502 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 
 extern  void qsort(void *  , size_t  , size_t  ,
@@ -1450,7 +1450,7 @@ extern  void qsort(void *  , size_t  , size_t  ,
 
  
 
-#line 531 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 531 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 extern __declspec(__nothrow) __pure int abs(int  );
    
@@ -1526,7 +1526,7 @@ extern __declspec(__nothrow) __pure lldiv_t lldiv(__int64  , __int64  );
 
 
  
-#line 612 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 612 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 
 
@@ -1704,12 +1704,12 @@ extern __declspec(__nothrow) int __C_library_version_number(void);
 
 
 
-#line 866 "C:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
+#line 866 "f:\\Keil\\ARM\\RV31\\Inc\\stdlib.h"
 
 
  
 #line 24 "..\\src\\Hardware\\UART\\uart.c"
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
  
  
  
@@ -1739,7 +1739,7 @@ extern __declspec(__nothrow) int __C_library_version_number(void);
 
 
 
-#line 37 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 37 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 
 
   
@@ -1881,7 +1881,7 @@ extern __declspec(__nothrow) size_t strxfrm(char * __restrict  , const char * __
  
 
 
-#line 184 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 184 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 extern __declspec(__nothrow) void *memchr(const void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
 
    
@@ -1892,7 +1892,7 @@ extern __declspec(__nothrow) void *memchr(const void *  , int  , size_t  ) __att
 
  
 
-#line 200 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 200 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 extern __declspec(__nothrow) char *strchr(const char *  , int  ) __attribute__((__nonnull__(1)));
 
    
@@ -1910,7 +1910,7 @@ extern __declspec(__nothrow) size_t strcspn(const char *  , const char *  ) __at
 
  
 
-#line 223 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 223 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 extern __declspec(__nothrow) char *strpbrk(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
 
    
@@ -1920,7 +1920,7 @@ extern __declspec(__nothrow) char *strpbrk(const char *  , const char *  ) __att
 
  
 
-#line 238 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 238 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 extern __declspec(__nothrow) char *strrchr(const char *  , int  ) __attribute__((__nonnull__(1)));
 
    
@@ -1938,7 +1938,7 @@ extern __declspec(__nothrow) size_t strspn(const char *  , const char *  ) __att
 
  
 
-#line 261 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 261 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 extern __declspec(__nothrow) char *strstr(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
 
    
@@ -2124,7 +2124,7 @@ extern __declspec(__nothrow) void _membitmovewb(void *  , const void *  , int  ,
 
 
 
-#line 493 "C:\\Keil\\ARM\\RV31\\Inc\\string.h"
+#line 493 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
 
 
 
@@ -2303,7 +2303,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -2321,7 +2321,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -2486,7 +2486,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -2519,7 +2519,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -5244,6 +5244,10 @@ void PWM1_Stop( void );
 void pwm1_enable(void);
 void pwm1_disable(void);
 
+
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
 
 
 

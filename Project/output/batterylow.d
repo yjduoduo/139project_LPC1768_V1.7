@@ -2,7 +2,7 @@
 .\output\batterylow.o: ..\src\APP\include.h
 .\output\batterylow.o: ..\inc\LPC17xx.h
 .\output\batterylow.o: ..\inc\core_cm3.h
-.\output\batterylow.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\batterylow.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\batterylow.o: ..\inc\system_LPC17xx.h
 .\output\batterylow.o: ..\inc\LPC17xx.h
 .\output\batterylow.o: ..\src\APP\Config.h

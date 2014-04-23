@@ -3,7 +3,7 @@
 .\output\sysctrl.o: ..\src\APP\include.h
 .\output\sysctrl.o: ..\inc\LPC17xx.h
 .\output\sysctrl.o: ..\inc\core_cm3.h
-.\output\sysctrl.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\sysctrl.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\sysctrl.o: ..\inc\system_LPC17xx.h
 .\output\sysctrl.o: ..\inc\LPC17xx.h
 .\output\sysctrl.o: ..\src\APP\Config.h

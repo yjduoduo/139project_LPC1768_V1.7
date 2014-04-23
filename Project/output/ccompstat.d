@@ -2,7 +2,7 @@
 .\output\ccompstat.o: ..\src\APP\include.h
 .\output\ccompstat.o: ..\inc\LPC17xx.h
 .\output\ccompstat.o: ..\inc\core_cm3.h
-.\output\ccompstat.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ccompstat.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ccompstat.o: ..\inc\system_LPC17xx.h
 .\output\ccompstat.o: ..\inc\LPC17xx.h
 .\output\ccompstat.o: ..\src\APP\Config.h

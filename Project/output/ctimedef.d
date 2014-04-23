@@ -3,6 +3,6 @@
 .\output\ctimedef.o: ..\src\APP\Config.h
 .\output\ctimedef.o: ..\inc\LPC17xx.H
 .\output\ctimedef.o: ..\inc\core_cm3.h
-.\output\ctimedef.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ctimedef.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ctimedef.o: ..\inc\system_LPC17xx.h
 .\output\ctimedef.o: ..\inc\LPC17xx.h

@@ -2,7 +2,7 @@
 .\output\cannotate.o: ..\src\APP\include.h
 .\output\cannotate.o: ..\inc\LPC17xx.h
 .\output\cannotate.o: ..\inc\core_cm3.h
-.\output\cannotate.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\cannotate.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\cannotate.o: ..\inc\system_LPC17xx.h
 .\output\cannotate.o: ..\inc\LPC17xx.h
 .\output\cannotate.o: ..\src\APP\Config.h

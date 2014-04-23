@@ -2,7 +2,7 @@
 .\output\ccompara.o: ..\src\APP\include.h
 .\output\ccompara.o: ..\inc\LPC17xx.h
 .\output\ccompara.o: ..\inc\core_cm3.h
-.\output\ccompara.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ccompara.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ccompara.o: ..\inc\system_LPC17xx.h
 .\output\ccompara.o: ..\inc\LPC17xx.h
 .\output\ccompara.o: ..\src\APP\Config.h

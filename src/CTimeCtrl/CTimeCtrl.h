@@ -55,16 +55,26 @@ EX_CTimeCtrl   void   T1Int_CTimeCtrl(void);
 
 #define cTime1_Base 20
 
+#define  cTime1_20ms_Count      (20/cTime1_Base)
 #define  cTime1_40ms_Count      (40/cTime1_Base)
 #define  cTime1_100ms_Count     (100/cTime1_Base)
+#define  cTime1_160ms_Count     (160/cTime1_Base)
+#define  cTime1_200ms_Count     (200/cTime1_Base)
+#define  cTime1_500ms_Count     (500/cTime1_Base)
 #define  cTime1_1s_Count        (1000/cTime1_Base)
 #define  cTime1_5s_Count        (5000/cTime1_Base)
 #define  cTime1_1m_Count        (60000/cTime1_Base)
+
+
 
 uint8    vRun1s;   
 
 uint16   vRunTime0;  
 uint16   vRunTime1; 
+
+//pwm1 control start and stop
+uint16 vPWM1Time = 0;
+uint8  vPWM1StopFlag = 0;
  
 uint16   mRunTime0;  
 uint8    vPIT0Run; 

@@ -2,7 +2,7 @@
 .\output\pwm.o: ..\src\APP\include.h
 .\output\pwm.o: ..\inc\LPC17xx.h
 .\output\pwm.o: ..\inc\core_cm3.h
-.\output\pwm.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\pwm.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\pwm.o: ..\inc\system_LPC17xx.h
 .\output\pwm.o: ..\inc\LPC17xx.h
 .\output\pwm.o: ..\src\APP\Config.h

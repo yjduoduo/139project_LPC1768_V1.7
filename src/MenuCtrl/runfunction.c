@@ -272,8 +272,10 @@ void menu_alarm_fire(void)
 
 
         //非自检且打开时
-        if(GetSpeaker_Flag()&&!GetZjFlag())
+        if(GetSpeaker_Flag()&&!GetZjFlag()){
             PWM1_Start();
+            set_PWM1_Started();
+            }
         Alarm_Menu(get_alarm_first_part(),
                    get_menu_alarm_info()->part,
                    get_menu_alarm_info()->ciraddr,

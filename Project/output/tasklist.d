@@ -2,7 +2,7 @@
 .\output\tasklist.o: ..\src\APP\include.h
 .\output\tasklist.o: ..\inc\LPC17xx.h
 .\output\tasklist.o: ..\inc\core_cm3.h
-.\output\tasklist.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\tasklist.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\tasklist.o: ..\inc\system_LPC17xx.h
 .\output\tasklist.o: ..\inc\LPC17xx.h
 .\output\tasklist.o: ..\src\APP\Config.h

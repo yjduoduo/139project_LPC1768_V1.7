@@ -2,7 +2,7 @@
 .\output\cintstend.o: ..\src\APP\include.h
 .\output\cintstend.o: ..\inc\LPC17xx.h
 .\output\cintstend.o: ..\inc\core_cm3.h
-.\output\cintstend.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\cintstend.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\cintstend.o: ..\inc\system_LPC17xx.h
 .\output\cintstend.o: ..\inc\LPC17xx.h
 .\output\cintstend.o: ..\src\APP\Config.h

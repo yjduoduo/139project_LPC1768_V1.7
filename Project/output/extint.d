@@ -2,7 +2,7 @@
 .\output\extint.o: ..\src\APP\include.h
 .\output\extint.o: ..\inc\LPC17xx.h
 .\output\extint.o: ..\inc\core_cm3.h
-.\output\extint.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\extint.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\extint.o: ..\inc\system_LPC17xx.h
 .\output\extint.o: ..\inc\LPC17xx.h
 .\output\extint.o: ..\src\APP\Config.h

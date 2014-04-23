@@ -203,7 +203,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -221,7 +221,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -386,7 +386,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -419,7 +419,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -3050,6 +3050,10 @@ void pwm1_enable(void);
 void pwm1_disable(void);
 
 
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
+
 
 
 #line 39 "..\\src\\APP\\include.h"
@@ -4812,6 +4816,33 @@ typedef unsigned int       BOOL;
 volatile uint32 match_counter1;
 
 
+  
+
+                                                                           
+
+                                                                           
+
+                                                                                      
+
+
+
+ 
+
+
+
+
+
+void  beepReverse (void)
+{
+    if (((*(volatile unsigned long *)(0x2009C000 + 0x14)) & (1 << 3))!=0) {
+        (*(volatile unsigned long *)(0x2009C000 + 0x40)) |= (1 << 3); (*(volatile unsigned long *)(0x2009C000 + 0x5C)) = (1 << 3);
+    } else {
+        (*(volatile unsigned long *)(0x2009C000 + 0x40)) |= (1 << 3); (*(volatile unsigned long *)(0x2009C000 + 0x58)) = (1 << 3);
+    }
+}
+
+
+
 
 
 
@@ -4823,6 +4854,7 @@ volatile uint32 match_counter1;
  
 void PWM1_IRQHandler (void) 
 {
+#line 64 "..\\src\\Hardware\\PWM.c"
   uint32 regVal;
 
   regVal = (*(volatile unsigned long *)(0x40018000 + 0x00));
@@ -4832,6 +4864,7 @@ void PWM1_IRQHandler (void)
   }
   (*(volatile unsigned long *)(0x40018000 + 0x00)) |= regVal;		 
   return;
+
 }
 
 
@@ -4847,6 +4880,8 @@ void PWM1_IRQHandler (void)
 
 void PWM_Init(void)
 {
+
+#line 112 "..\\src\\Hardware\\PWM.c"
 	match_counter1 = 0;
     (*(volatile unsigned long *)(0x400FC000 + 0x0C4)) 	|= (1 << 6);		    									 
 	   
@@ -4868,6 +4903,7 @@ void PWM_Init(void)
 	(*(volatile unsigned long *)(0x40018000 + 0x50)) =  (1 << 4);
 	
 	NVIC_EnableIRQ(PWM1_IRQn);
+#line 151 "..\\src\\Hardware\\PWM.c"
 }
 void pwm1_enable(void)
 {
@@ -4885,15 +4921,17 @@ void PWM1_Set(uint32 cycle, uint32 offset )
 
 
 
-	(*(volatile unsigned long *)(0x40018000 + 0x40)) = cycle * 2/3+ offset;
+	(*(volatile unsigned long *)(0x40018000 + 0x40)) = cycle * 1/2+ offset;
 
 
+#line 180 "..\\src\\Hardware\\PWM.c"
 
 	
 
  
 
 		(*(volatile unsigned long *)(0x40018000 + 0x50)) = (1 << 4);
+
 }
 
 
@@ -4909,10 +4947,25 @@ void PWM1_Start( void )
 {
 	 
 
-    (*(volatile unsigned long *)(0x40018000 + 0x4C)) =  (1 << 12) ;
-	(*(volatile unsigned long *)(0x40018000 + 0x04)) = 0x00000001 | 0x00000008;	 
-}
 
+
+     (*(volatile unsigned long *)(0x40018000 + 0x4C)) =  (1 << 12) ;
+	(*(volatile unsigned long *)(0x40018000 + 0x04)) = 0x00000001 | 0x00000008;	 
+  
+}
+uint8 pwm1startflag=0;
+uint8 get_PWM1_Started(void)
+{
+  return pwm1startflag;
+}
+void set_PWM1_Started(void)
+{
+  pwm1startflag=1;
+}
+void clr_PWM1_Started(void)
+{
+  pwm1startflag=0;
+}
 
 
 

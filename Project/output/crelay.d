@@ -2,7 +2,7 @@
 .\output\crelay.o: ..\src\APP\include.h
 .\output\crelay.o: ..\inc\LPC17xx.h
 .\output\crelay.o: ..\inc\core_cm3.h
-.\output\crelay.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\crelay.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\crelay.o: ..\inc\system_LPC17xx.h
 .\output\crelay.o: ..\inc\LPC17xx.h
 .\output\crelay.o: ..\src\APP\Config.h

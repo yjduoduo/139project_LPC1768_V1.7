@@ -3,7 +3,7 @@
 .\output\i2c.o: ..\src\APP\config.h
 .\output\i2c.o: ..\inc\LPC17xx.H
 .\output\i2c.o: ..\inc\core_cm3.h
-.\output\i2c.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\i2c.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\i2c.o: ..\inc\system_LPC17xx.h
 .\output\i2c.o: ..\inc\LPC17xx.h
 .\output\i2c.o: ..\src\APP\include.h

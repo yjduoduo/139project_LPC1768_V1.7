@@ -2,7 +2,7 @@
 .\output\ccomann.o: ..\src\APP\include.h
 .\output\ccomann.o: ..\inc\LPC17xx.h
 .\output\ccomann.o: ..\inc\core_cm3.h
-.\output\ccomann.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ccomann.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ccomann.o: ..\inc\system_LPC17xx.h
 .\output\ccomann.o: ..\inc\LPC17xx.h
 .\output\ccomann.o: ..\src\APP\Config.h

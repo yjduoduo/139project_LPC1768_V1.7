@@ -4,7 +4,7 @@
 .\output\csyscheck.o: ..\src\Board\lcd.h
 .\output\csyscheck.o: ..\inc\lpc17xx.h
 .\output\csyscheck.o: ..\inc\core_cm3.h
-.\output\csyscheck.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\csyscheck.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\csyscheck.o: ..\inc\system_LPC17xx.h
 .\output\csyscheck.o: ..\inc\LPC17xx.h
 .\output\csyscheck.o: ..\src\common\CGetCompSum.h

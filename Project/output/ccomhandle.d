@@ -1,12 +1,12 @@
 .\output\ccomhandle.o: ..\src\12UARTHandle\CComHandle.c
-.\output\ccomhandle.o: C:\Keil\ARM\RV31\Inc\string.h
-.\output\ccomhandle.o: C:\Keil\ARM\RV31\Inc\math.h
-.\output\ccomhandle.o: C:\Keil\ARM\RV31\Inc\time.h
-.\output\ccomhandle.o: C:\Keil\ARM\RV31\Inc\stdlib.h
+.\output\ccomhandle.o: f:\Keil\ARM\RV31\Inc\string.h
+.\output\ccomhandle.o: f:\Keil\ARM\RV31\Inc\math.h
+.\output\ccomhandle.o: f:\Keil\ARM\RV31\Inc\time.h
+.\output\ccomhandle.o: f:\Keil\ARM\RV31\Inc\stdlib.h
 .\output\ccomhandle.o: ..\src\APP\include.h
 .\output\ccomhandle.o: ..\inc\LPC17xx.h
 .\output\ccomhandle.o: ..\inc\core_cm3.h
-.\output\ccomhandle.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ccomhandle.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ccomhandle.o: ..\inc\system_LPC17xx.h
 .\output\ccomhandle.o: ..\inc\LPC17xx.h
 .\output\ccomhandle.o: ..\src\APP\Config.h

@@ -2,7 +2,7 @@
 .\output\ctaskup.o: ..\src\APP\include.h
 .\output\ctaskup.o: ..\inc\LPC17xx.h
 .\output\ctaskup.o: ..\inc\core_cm3.h
-.\output\ctaskup.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\ctaskup.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\ctaskup.o: ..\inc\system_LPC17xx.h
 .\output\ctaskup.o: ..\inc\LPC17xx.h
 .\output\ctaskup.o: ..\src\APP\Config.h

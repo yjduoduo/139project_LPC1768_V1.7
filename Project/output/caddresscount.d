@@ -2,7 +2,7 @@
 .\output\caddresscount.o: ..\src\APP\include.h
 .\output\caddresscount.o: ..\inc\LPC17xx.h
 .\output\caddresscount.o: ..\inc\core_cm3.h
-.\output\caddresscount.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\caddresscount.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\caddresscount.o: ..\inc\system_LPC17xx.h
 .\output\caddresscount.o: ..\inc\LPC17xx.h
 .\output\caddresscount.o: ..\src\APP\Config.h

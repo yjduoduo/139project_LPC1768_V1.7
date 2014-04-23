@@ -185,7 +185,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -203,7 +203,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -368,7 +368,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -401,7 +401,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -1904,7 +1904,7 @@ typedef struct
 
 
 #line 15 "..\\src\\APP\\main.c"
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
  
  
  
@@ -1930,7 +1930,7 @@ typedef struct
 
 
 
-#line 34 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
+#line 34 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
 
 
   
@@ -1997,7 +1997,7 @@ typedef struct __FILE FILE;
 extern FILE __stdin, __stdout, __stderr;
 extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
 
-#line 125 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
+#line 125 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
     
 
     
@@ -2746,7 +2746,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
 
-#line 944 "C:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
+#line 944 "f:\\Keil\\ARM\\RV31\\Inc\\stdio.H"
 
 
 
@@ -4033,6 +4033,10 @@ void PWM1_Stop( void );
 void pwm1_enable(void);
 void pwm1_disable(void);
 
+
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
 
 
 

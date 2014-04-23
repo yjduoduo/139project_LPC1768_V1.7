@@ -524,6 +524,7 @@ uint16 Get_KeyValue(void)
             vKeyCounter[1] = 0;
             BEEPOff();
             PWM1_Stop();
+            clr_PWM1_Started();
             SetAlarmFlag(POS_ALARM_BIT,0);//reset alarm flag,so pwm1 stop
 
             return KEY_Silence;
@@ -590,6 +591,7 @@ uint16 Get_KeyValue(void)
             vKeyCounter[1] = 0;
             BEEPOff();
             PWM1_Stop();
+            clr_PWM1_Started();
             SetAlarmFlag(POS_ALARM_BIT,0);//reset alarm flag,so pwm1 stop
 
             return KEY_Silence;

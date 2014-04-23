@@ -2,7 +2,7 @@
 .\output\breakdown.o: ..\src\APP\include.h
 .\output\breakdown.o: ..\inc\LPC17xx.h
 .\output\breakdown.o: ..\inc\core_cm3.h
-.\output\breakdown.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\breakdown.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\breakdown.o: ..\inc\system_LPC17xx.h
 .\output\breakdown.o: ..\inc\LPC17xx.h
 .\output\breakdown.o: ..\src\APP\Config.h

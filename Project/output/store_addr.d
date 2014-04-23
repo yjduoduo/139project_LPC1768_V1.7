@@ -3,7 +3,7 @@
 .\output\store_addr.o: ..\src\APP\include.h
 .\output\store_addr.o: ..\inc\LPC17xx.h
 .\output\store_addr.o: ..\inc\core_cm3.h
-.\output\store_addr.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\store_addr.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\store_addr.o: ..\inc\system_LPC17xx.h
 .\output\store_addr.o: ..\inc\LPC17xx.h
 .\output\store_addr.o: ..\src\APP\Config.h

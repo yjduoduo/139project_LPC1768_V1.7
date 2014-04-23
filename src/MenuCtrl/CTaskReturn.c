@@ -124,6 +124,7 @@ void CLevel23_Return(void)
 
         SetZjFlag(0);//中断里打开喇叭响检测
         PWM1_Stop();
+        clr_PWM1_Started();
 
         Test_Menu(1);
 

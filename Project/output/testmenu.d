@@ -2,7 +2,7 @@
 .\output\testmenu.o: ..\src\APP\include.h
 .\output\testmenu.o: ..\inc\LPC17xx.h
 .\output\testmenu.o: ..\inc\core_cm3.h
-.\output\testmenu.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\testmenu.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\testmenu.o: ..\inc\system_LPC17xx.h
 .\output\testmenu.o: ..\inc\LPC17xx.h
 .\output\testmenu.o: ..\src\APP\Config.h

@@ -5,7 +5,7 @@
 .\output\pcf8563.o: ..\src\APP\include.h
 .\output\pcf8563.o: ..\inc\LPC17xx.h
 .\output\pcf8563.o: ..\inc\core_cm3.h
-.\output\pcf8563.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\pcf8563.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\pcf8563.o: ..\inc\system_LPC17xx.h
 .\output\pcf8563.o: ..\inc\LPC17xx.h
 .\output\pcf8563.o: ..\src\common\buffer.h

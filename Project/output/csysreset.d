@@ -2,7 +2,7 @@
 .\output\csysreset.o: ..\src\APP\include.h
 .\output\csysreset.o: ..\inc\LPC17xx.h
 .\output\csysreset.o: ..\inc\core_cm3.h
-.\output\csysreset.o: C:\Keil\ARM\RV31\Inc\stdint.h
+.\output\csysreset.o: f:\Keil\ARM\RV31\Inc\stdint.h
 .\output\csysreset.o: ..\inc\system_LPC17xx.h
 .\output\csysreset.o: ..\inc\LPC17xx.h
 .\output\csysreset.o: ..\src\APP\Config.h

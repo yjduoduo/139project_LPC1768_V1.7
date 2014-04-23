@@ -355,7 +355,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -373,7 +373,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -538,7 +538,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -571,7 +571,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -3269,6 +3269,10 @@ void pwm1_enable(void);
 void pwm1_disable(void);
 
 
+uint8 get_PWM1_Started(void);
+void set_PWM1_Started(void);
+void clr_PWM1_Started(void);
+
 
 
 #line 39 "..\\src\\APP\\include.h"
@@ -5616,7 +5620,7 @@ extern   void   T1Int_CTimeCtrl(void);
  
  
 
-#line 87 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 97 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 27 "..\\src\\Hardware\\Timer\\CTime.c"
 
@@ -5951,6 +5955,21 @@ void CLedShow(void)
 }
 void CSpeakerPWM(void)
 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
