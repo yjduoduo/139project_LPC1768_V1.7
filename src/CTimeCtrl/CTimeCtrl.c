@@ -320,13 +320,13 @@ void   T1Int_CTimeCtrl(void)
     if(get_PWM1_Started())
     {
         vPWM1Time++;
-        if(vPWM1Time >cTime1_160ms_Count)
+        if(vPWM1Time >= cTime1_160ms_Count)
         {
             PWM1_Stop();
             vPWM1StopFlag =1;
             vPWM1Time = 0;
         }
-        if(vPWM1StopFlag && vPWM1Time > cTime1_20ms_Count)
+        if(vPWM1StopFlag && vPWM1Time >= cTime1_20ms_Count)
         {
             vPWM1StopFlag = 0;
             PWM1_Start();

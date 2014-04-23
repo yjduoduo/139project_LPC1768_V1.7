@@ -5945,9 +5945,21 @@ void deal_all_led(void)
         RunLed_CRunCtrl();
 }
 
+void pwm1_test_start_stop()
+{
+    static uint8 startflag = 1;
+    if(startflag)
+    {
+        PWM1_Start();
+        set_PWM1_Started();
+        startflag = 0;
+    }
+}
+
 
 void   do_CRunCtrl(void)
 {   
+
 
     
     
@@ -6022,7 +6034,7 @@ void   do_CRunCtrl(void)
 
         return;
     }
-#line 255 "..\\src\\CRunCtrl\\CRunCtrl.c"
+#line 267 "..\\src\\CRunCtrl\\CRunCtrl.c"
 }
 
 

@@ -112,10 +112,22 @@ void deal_all_led(void)
     if(!GetZjFlag())
         RunLed_CRunCtrl();
 }
+//≤‚ ‘œ˚“Ùπ¶ƒ‹
+void pwm1_test_start_stop()
+{
+    static uint8 startflag = 1;
+    if(startflag)
+    {
+        PWM1_Start();
+        set_PWM1_Started();
+        startflag = 0;
+    }
+}
 
 
 void   do_CRunCtrl(void)
 {   
+//    pwm1_test_start_stop();
 #if 1
     //    if(GetReset_CSysRunFlag())
     //    {

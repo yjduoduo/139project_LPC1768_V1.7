@@ -6094,13 +6094,13 @@ void   T1Int_CTimeCtrl(void)
     if(get_PWM1_Started())
     {
         vPWM1Time++;
-        if(vPWM1Time >(160/20))
+        if(vPWM1Time >= (160/20))
         {
             PWM1_Stop();
             vPWM1StopFlag =1;
             vPWM1Time = 0;
         }
-        if(vPWM1StopFlag && vPWM1Time > (20/20))
+        if(vPWM1StopFlag && vPWM1Time >= (20/20))
         {
             vPWM1StopFlag = 0;
             PWM1_Start();
