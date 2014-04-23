@@ -356,19 +356,8 @@ void CLedShow(void)
 }
 void CSpeakerPWM(void)
 {
-// extern volatile uint32 match_counter1;
-//   if(get_PWM1_Started())
-//   {
-//       if(0==match_counter1%1)
-//     {
-//         PWM1_Stop();
 
-//     }
-//     else
-//     {
-//       PWM1_Start();
-//     } 
-//   }
+
 
   
 //    不在此处理 蜂鸣器

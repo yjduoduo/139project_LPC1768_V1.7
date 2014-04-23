@@ -5880,7 +5880,7 @@ void hardware_init(void)
     Led_Init();
     Relay_Init();
     PWM_Init();
-   
+    
     PWM1_Set(50000,200);
 }
 void ctrl_init(void)
@@ -5929,15 +5929,8 @@ void deal_lcd(void)
 void deal_speaker(void)
 {
     
-
-    if(GetSpeaker_Flag())
+    if(GetSpeaker_Flag()&&!GetZjFlag())
         CSpeakerPWM();
-
-
-
-
-
-
 }
 void deal_all_led(void)
 {
@@ -6001,7 +5994,7 @@ void   do_CRunCtrl(void)
         Clr_Alarm(); 
 
 
-
+        
         HandleInfo_Uart1();
 
         return;
@@ -6013,9 +6006,9 @@ void   do_CRunCtrl(void)
         state_loopld_printf();
 
         
+        
 
-
-
+        
 
 
         return;
@@ -6027,14 +6020,14 @@ void   do_CRunCtrl(void)
 
         deal_lcd();
 
-
+        
 
 
         deal_speaker();
 
         return;
     }
-#line 267 "..\\src\\CRunCtrl\\CRunCtrl.c"
+#line 260 "..\\src\\CRunCtrl\\CRunCtrl.c"
 }
 
 

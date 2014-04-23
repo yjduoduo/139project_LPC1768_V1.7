@@ -6059,6 +6059,22 @@ void   T0Int_CTimeCtrl(void)
         AnsCommT0_CTimeCtrl();
     }
 }
+void set_speark_ss_time(uint16 startT,uint16 stopT)
+{
+    vPWM1Time++;
+    if((vPWM1Time >= startT) && !vPWM1StopFlag)
+    {
+        PWM1_Stop();
+        vPWM1StopFlag =1;
+        vPWM1Time = 0;
+    }
+    if(vPWM1StopFlag && vPWM1Time >= stopT)
+    {
+        vPWM1StopFlag = 0;
+        PWM1_Start();
+        vPWM1Time = 0;
+    }
+}
 
 
 void   T1Int_CTimeCtrl(void)
@@ -6093,22 +6109,19 @@ void   T1Int_CTimeCtrl(void)
     
     if(get_PWM1_Started())
     {
-        vPWM1Time++;
-        if(vPWM1Time >= (160/20))
+        if((1) == GetMenuFlag())
         {
-            PWM1_Stop();
-            vPWM1StopFlag =1;
-            vPWM1Time = 0;
-        }
-        if(vPWM1StopFlag && vPWM1Time >= (20/20))
+            set_speark_ss_time((500/20),(500/20));
+        }else if((0x03) == GetMenuFlag())
         {
-            vPWM1StopFlag = 0;
-            PWM1_Start();
-            vPWM1Time = 0;
+            set_speark_ss_time((100/20),(1000/20));
+        }else{
+            set_speark_ss_time((1000/20),(500/20));
         }
 
     }else{
         vPWM1Time = 0;
+        vPWM1StopFlag = 0;
     }
 
 

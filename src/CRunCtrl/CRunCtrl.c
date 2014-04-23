@@ -48,7 +48,7 @@ void hardware_init(void)
     Led_Init();
     Relay_Init();
     PWM_Init();
-   //  PWM1_Set(PWM_CYCLE,PWM_OFFSET);
+    //  PWM1_Set(PWM_CYCLE,PWM_OFFSET);
     PWM1_Set(50000,200);
 }
 void ctrl_init(void)
@@ -97,15 +97,8 @@ void deal_lcd(void)
 void deal_speaker(void)
 {
     //非自检且打开时
-    #if 1 //test
-    if(GetSpeaker_Flag())
+    if(GetSpeaker_Flag()&&!GetZjFlag())
         CSpeakerPWM();
-        #else
-            if(GetSpeaker_Flag()&&!GetZjFlag())
-        CSpeakerPWM();
-        
-        #endif
-
 }
 void deal_all_led(void)
 {
@@ -127,7 +120,7 @@ void pwm1_test_start_stop()
 
 void   do_CRunCtrl(void)
 {   
-//    pwm1_test_start_stop();
+//        pwm1_test_start_stop();
 #if 1
     //    if(GetReset_CSysRunFlag())
     //    {
@@ -169,7 +162,7 @@ void   do_CRunCtrl(void)
         Clr_Alarm(); //reset for alarm
 
 
-//        无线发送与接收，串口1
+        //        无线发送与接收，串口1
         HandleInfo_Uart1();
 
         return;
@@ -181,9 +174,9 @@ void   do_CRunCtrl(void)
         state_loopld_printf();
 
         //无线发送与接收，串口1
-//        HandleInfo_Uart1();
+        //        HandleInfo_Uart1();
 
-//         info_loopldbuf();
+        //         info_loopldbuf();
 
 
         return;
@@ -195,7 +188,7 @@ void   do_CRunCtrl(void)
 
         deal_lcd();
 
-//        Scan_Key();//循环扫描，非定时器来扫描
+        //        Scan_Key();//循环扫描，非定时器来扫描
 
 
         deal_speaker();

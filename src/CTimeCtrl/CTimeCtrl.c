@@ -285,6 +285,22 @@ void   T0Int_CTimeCtrl(void)
         AnsCommT0_CTimeCtrl();
     }
 }
+void set_speark_ss_time(uint16 startT,uint16 stopT)
+{
+    vPWM1Time++;
+    if((vPWM1Time >= startT) && !vPWM1StopFlag)
+    {
+        PWM1_Stop();
+        vPWM1StopFlag =1;
+        vPWM1Time = 0;
+    }
+    if(vPWM1StopFlag && vPWM1Time >= stopT)
+    {
+        vPWM1StopFlag = 0;
+        PWM1_Start();
+        vPWM1Time = 0;
+    }
+}
 
 //20ms 定时处理
 void   T1Int_CTimeCtrl(void)
@@ -319,22 +335,19 @@ void   T1Int_CTimeCtrl(void)
     //control pwm1 start and stop
     if(get_PWM1_Started())
     {
-        vPWM1Time++;
-        if(vPWM1Time >= cTime1_160ms_Count)
+        if(MENU_FIREALARM == GetMenuFlag())//火警声
         {
-            PWM1_Stop();
-            vPWM1StopFlag =1;
-            vPWM1Time = 0;
-        }
-        if(vPWM1StopFlag && vPWM1Time >= cTime1_20ms_Count)
+            set_speark_ss_time(cTime1_500ms_Count,cTime1_500ms_Count);
+        }else if(MENU_FAULTALARM == GetMenuFlag())//故障声
         {
-            vPWM1StopFlag = 0;
-            PWM1_Start();
-            vPWM1Time = 0;
+            set_speark_ss_time(cTime1_100ms_Count,cTime1_1s_Count);
+        }else{
+            set_speark_ss_time(cTime1_1s_Count,cTime1_500ms_Count);
         }
 
     }else{
         vPWM1Time = 0;
+        vPWM1StopFlag = 0;
     }
 
 
