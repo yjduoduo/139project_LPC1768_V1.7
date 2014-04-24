@@ -26,6 +26,7 @@
 
 
 //报警类型定义
+#define ALARM_NORMAL 0//正常
 #define ALARM_FIRE 1//火警
 #define ALARM_BAT_LOW 2//电池欠压
 #define ALARM_FAULT 3//故障

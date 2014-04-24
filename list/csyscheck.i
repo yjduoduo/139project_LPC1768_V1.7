@@ -302,7 +302,7 @@ typedef enum IRQn
  
 
 
-#line 1 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
  
  
 
@@ -320,7 +320,7 @@ typedef enum IRQn
 
 
 
-#line 25 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 25 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -485,7 +485,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 196 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 196 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
      
 
@@ -518,7 +518,7 @@ typedef unsigned       __int64 uintmax_t;
 
 
 
-#line 260 "C:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
+#line 260 "f:\\Keil\\ARM\\RV31\\Inc\\stdint.h"
 
 
 
@@ -2948,7 +2948,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -3093,7 +3093,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -3111,6 +3111,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -3118,6 +3121,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);

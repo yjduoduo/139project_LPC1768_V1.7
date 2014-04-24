@@ -282,7 +282,7 @@ void UART0_IRQHandler (void)
         if(data3[11]==0x83)
         {
             tp2=0;
-            SetFlag_195(1);
+            SetFlag_195();
             ClrData3();
         }
     }

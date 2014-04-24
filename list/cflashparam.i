@@ -3797,7 +3797,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -3942,7 +3942,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -3960,6 +3960,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -3967,6 +3970,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);
@@ -4074,6 +4079,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -4836,7 +4842,7 @@ void clr_xialasignal(void);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -4952,6 +4958,7 @@ void check_lp_running(void);
 
 uint8 check_psn_all0xff(void);
 
+void menu_fault_deal(alarminfo* alarm_info);
 
 
 
@@ -6265,7 +6272,7 @@ void save_alarm_info(void)
 }
 
 
-static void set_alarm(uint32 row,uint32 col, uint8 tmp)
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp)
 {
     set_array(alarm_record,row,col,tmp);
 }
@@ -6313,36 +6320,48 @@ uint8 get_alarm_firstalarm(uint32 row)
 
 void set_alarm_inzone(uint32 item, uint8 tmp)
 {
-    set_alarm(item,1,tmp);
+    set_alarm_info(item,1,tmp);
 }
 void set_alarm_part(uint32 item, uint8 tmp)
 {
-    set_alarm(item,2,tmp);
+    set_alarm_info(item,2,tmp);
 }
 
 void set_alarm_ciraddr(uint32 item, uint8 tmp)
 {
-    set_alarm(item,3,tmp);
+    set_alarm_info(item,3,tmp);
 }
 
 void set_alarm_alarmsum(uint32 item, uint8 tmp)
 {
-    set_alarm(item,4,tmp);
+    set_alarm_info(item,4,tmp);
 }
 void set_alarm_type(uint32 item, uint8 tmp)
 {
-    set_alarm(item,5,tmp);
+    set_alarm_info(item,5,tmp);
 }
 
 void set_alarm_alarmed(uint32 item, uint8 tmp)
 {
-    set_alarm(item,6,tmp);
+    set_alarm_info(item,6,tmp);
 }
 void set_alarm_firstalarm(uint32 item, uint8 tmp)
 {
-    set_alarm(item,15,tmp);
+    set_alarm_info(item,15,tmp);
 }
 
+void set_alarm_attr(uint32 row, uint8 tmp)
+{
+    set_alarm_info(row,16,tmp);
+}
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag)
+{
+    set_alarm_info(item,18,flag);
+}
+void clr_alarm_f_recvmess3h(uint32 item)
+{
+    set_alarm_f_recvmess3h(item,0);
+}
 
 void set_alarm_allinfo(uint32 item,alarminfo *info)
 {
@@ -6352,17 +6371,18 @@ void set_alarm_allinfo(uint32 item,alarminfo *info)
     set_alarm_alarmsum(item,info->alarmsum);
     set_alarm_type(item,info->type);
     set_alarm_alarmed(item,info->alarmed);
-    set_alarm(item,7,info->dateyear.second);
-    set_alarm(item,8,info->dateyear.minute);
-    set_alarm(item,9,info->dateyear.hour);
-    set_alarm(item,10,info->dateyear.day);
-    set_alarm(item,11,info->dateyear.week);
-    set_alarm(item,12,info->dateyear.month);
-    set_alarm(item,13,info->dateyear.year/100);
-    set_alarm(item,14,info->dateyear.year%100);
+    set_alarm_info(item,7,info->dateyear.second);
+    set_alarm_info(item,8,info->dateyear.minute);
+    set_alarm_info(item,9,info->dateyear.hour);
+    set_alarm_info(item,10,info->dateyear.day);
+    set_alarm_info(item,11,info->dateyear.week);
+    set_alarm_info(item,12,info->dateyear.month);
+    set_alarm_info(item,13,info->dateyear.year/100);
+    set_alarm_info(item,14,info->dateyear.year%100);
     set_alarm_firstalarm(item,(0x00));
-    set_alarm(item,16,info->attr);
-    set_alarm(item,17,info->vAnnRow);
+    set_alarm_info(item,16,info->attr);
+    set_alarm_info(item,17,info->vAnnRow);
+    set_alarm_info(item,18,info->f_recvmesat3h);
 }
 
 void clr_alarm_allinfo(void)
@@ -6391,6 +6411,12 @@ uint8 get_alarm_type(uint32 item)
     return get_alarm_info(item,5);
 }
 
+uint8 get_alarm_f_recvmess3h(uint32 item)
+{
+    return get_alarm_info(item,18);
+}
+
+
 void get_alarm_allinfo(uint32 item, alarminfo *info)
 {
     info->inzone = get_alarm_info(item,1);
@@ -6409,6 +6435,7 @@ void get_alarm_allinfo(uint32 item, alarminfo *info)
     info->firstalarm    = get_alarm_info(item,15);
     info->attr          = get_alarm_info(item,16);
     info->vAnnRow       = get_alarm_info(item,17);
+    info->f_recvmesat3h = get_alarm_info(item,18);
 }
 
 void set_alarm_first(alarminfo *info)
@@ -7365,7 +7392,7 @@ int16 GetNum(uint8 psn0,uint8 psn1,uint8 psn2,uint8 psn3)
         }
     }
     return temp;
-#line 2085 "..\\src\\common\\CFlashParam.c"
+#line 2105 "..\\src\\common\\CFlashParam.c"
 
 }
 void CAddCirCounter(void)

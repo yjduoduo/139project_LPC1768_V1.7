@@ -90,7 +90,7 @@ static PCF8563_DATE history_alarmtime;//历史记录的时间
 /*~~~~~~~~~~~~~~~~~~~~[各个节点缓冲区长度]~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
+//各个内容必须不同，否则有初始化问题
 #define ONESIZE (1)
 #define BIGSIZE (8)
 #define ALARMSIZE (18)/*与HISTSIZE相同了，不行*/
@@ -199,7 +199,7 @@ typedef struct alarminfo{
     uint8 firstalarm;//是否为首警 --添加
     uint8 attr;//报警属性,  --添加
     uint8 vAnnRow;//注释序列号 --添加
-    uint8 reserve;
+    uint8 f_recvmesat3h;//3hour recv message?
 }alarminfo;
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -344,7 +344,7 @@ uint8 get_mask_info(uint32 row)/*CGetMaskPSN*/;
 void init_alarm_info(void);
 //保存报警信息
 void save_alarm_info(void)/**/;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col)/**/;
 //获取报警属性
 uint8 get_alarm_attr(uint32 row);
@@ -362,6 +362,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 //清除报警信息
 void clr_alarm_allinfo(void);
@@ -369,6 +372,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+//3hour recved message flag?
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 //设置首警
 void set_alarm_first(alarminfo *info);

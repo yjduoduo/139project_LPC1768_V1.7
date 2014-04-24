@@ -25,6 +25,8 @@
 #include  "CFlashParam.h"
 #include  "include.h"
 #include  "CKeyCounter.h"
+#include  "CComHandle.h"
+
 
 void  Init_CTimeCtrl(void)
 {
@@ -302,53 +304,127 @@ void set_speark_ss_time(uint16 startT,uint16 stopT)
         vPWM1Time = 0;
     }
 }
+/***********************************************************
+********************[6小时检测部件是否存在]*********************
+**********************************************************/
+
+#define vTimer1_Base 1UL  /*(1 minute)*/
+#define vTimer1_3H   60*3/vTimer1_Base
+#define vTimer1_6H   60*6/vTimer1_Base
+
+typedef struct _CompNotExist
+{
+    uint32 vTime1_3h_counter;
+    uint8 faultnums;
+
+}CompNotExist;
+
+
+CompNotExist vTime1_3h_exist[MAX_COMP+1]={0,};
+//每分钟为每个部件添加一次
+void add_timer1_3h_counter(void)
+{
+    uint8 i=0;
+    for(i=1;i<=MAX_LOOP;i++)
+    {
+        vTime1_3h_exist[i].vTime1_3h_counter++;
+    }
+}
+//获取计时数
+uint32 get_3h_counter(uint8 part)
+{
+    if(part>MAX_COMP)
+        return 0;
+    return vTime1_3h_exist[part].vTime1_3h_counter;
+}
+//清计时，重新计时
+void clr_3h_counter(uint8 part)
+{
+    if(part>MAX_COMP)
+        return;
+    vTime1_3h_exist[part].vTime1_3h_counter = 0;
+}
+//通讯时，判断时间是否在正常范围内，小于6个小时就可以清空
+void clr_faultnum_3h_(uint8 part)
+{
+    if(get_3h_counter(part) < vTimer1_6H )
+    {
+        vTime1_3h_exist[part].faultnums = 0;
+    }
+}
+
+//主循环处理6小时故障
+void judge_3h_over(uint8 part)
+{
+    if(get_3h_counter(part) > vTimer1_6H + 5)
+    {
+        vTime1_3h_exist[part].faultnums = 2;
+    }
+    else if(get_3h_counter(part) > vTimer1_3H + 5)
+    {
+        vTime1_3h_exist[part].faultnums++;
+    }
+
+    if(vTime1_3h_exist[part].faultnums >= 2)
+    {
+        //        menu_fault_deal(&alarm_info);
+        //故障菜单
+//         menu_fault_deal();
+
+    }
+}
+
 
 //20ms 定时处理
 void   T1Int_CTimeCtrl(void)
 {  //time share ctrl
     vRunTime1++;
-    if(vRunTime1 > cTime1_1m_Count)
+    if(vRunTime1 > cTime1_3h_Count)
     {
         vRunTime1=0;
-        Set1m_CSysRunFlag();
-    }
-    if(vRunTime1 % cTime1_5s_Count == 0)
-    {
-        Set5s_CSysRunFlag();
-    }
-    if(vRunTime1 % cTime1_1s_Count == 0)
-    {
-        Set1s_CSysRunFlag();
     }
 
+    if(vRunTime1 %  cTime1_40ms_Count == 0)
+    {
+        Set40ms_CSysRunFlag();
+    }
     if(vRunTime1 % cTime1_100ms_Count == 0)
     {
         Set100ms_CSysRunFlag();
     }
-    if(vRunTime1 %  cTime1_40ms_Count == 0)
+    if(vRunTime1 % cTime1_1s_Count == 0)
     {
-        Set40ms_CSysRunFlag();
+        Set1s_CSysRunFlag();
     }
     //界面轮显时间控制
     if(vRunTime1 % cTime1_3s_Count == 0)
     {
         set_alarm_loop_show();
     }
-
-
+    if(vRunTime1 % cTime1_5s_Count == 0)
+    {
+        Set5s_CSysRunFlag();
+    }
+    if(vRunTime1 % cTime1_1m_Count == 0)
+    {
+        add_timer1_3h_counter();
+        Set1m_CSysRunFlag();
+    }
     Set20ms_CSysRunFlag();
     vAddScreenMask();
 
-    //control pwm1 start and stop
+    //control pwm1 start and stop periodicity
     if(get_PWM1_Started())
     {
         if(MENU_FIREALARM == GetMenuFlag())//火警声
         {
             set_speark_ss_time(cTime1_500ms_Count,cTime1_500ms_Count);
-        }else if(MENU_FAULTALARM == GetMenuFlag())//故障声
+        }
+        else if(MENU_FAULTALARM == GetMenuFlag())//故障声
         {
             set_speark_ss_time(cTime1_100ms_Count,cTime1_1s_Count);
-        }else{
+        }
+        else{
             set_speark_ss_time(cTime1_1s_Count,cTime1_500ms_Count);
         }
 

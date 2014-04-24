@@ -229,62 +229,6 @@ void menu_alarm_fire(void)
     static uint8 current_alarmpart = INITVAL;
     uint8 alarmnums = get_firealarm_nums()/*get_record_alarmnum()*/;
 
-    //     uint8 item = 0;
-    //     alarminfo showinfo;//上下按键显示信息
-
-    //    if(KEY_Up == Get_KeyValue())//上按键
-    //    {
-    //        Debug("up key!!_menu_alarm_fire\n");
-    //        if(!get_alarm_newest_nums())//报警数为0
-    //        {
-    //            return;
-    //        }
-
-    //        item = get_cur_alarmpart();
-    //        Debug("up item:%d\n",item);
-    //        if(item <=get_record_alarmnum())
-    //        {
-    //            get_alarm_allinfo(item,&showinfo);
-    //            Alarm_Menu(get_alarm_first_part(),
-    //                       showinfo.part,
-    //                       showinfo.ciraddr,
-    //                       get_firealarm_nums(),
-    //                       showinfo.type,
-    //                       &showinfo.dateyear);//time
-
-    //            add_record_showalarm();
-    //        }
-    //        return;
-
-    //    }
-    //    else if(KEY_Down == Get_KeyValue())//下按键
-    //    {
-    //        Debug("down key!!_menu_alarm_fire\n");
-
-    //        item = get_cur_alarmpart();
-    //        Debug("down item:%d\n",item);
-    //        if(item <=get_record_alarmnum())
-    //        {
-    //            get_alarm_allinfo(item,&showinfo);
-    //            Alarm_Menu(get_alarm_first_part(),
-    //                       showinfo.part,
-    //                       showinfo.ciraddr,
-    //                       get_firealarm_nums(),
-    //                       showinfo.type,
-    //                       &showinfo.dateyear);//time
-    //            if(get_record_showalarm()>0)
-    //                sub_record_showalarm();
-    //        }
-
-    //        return;
-
-    //    }
-    //    else
-    //    {
-
-
-
-
     if(current_alarmpart != get_menu_alarm_info()->part)
     {
 
@@ -363,13 +307,11 @@ void menu_alarm_fire(void)
 //}
 void menu_alarm_fault(void)
 {
-    ClearScreen(0);
-    //        ClearScreen(0);
-    //        Breakdown(alarm_info->attr,
-    //                  alarm_info->part,
-    //                  get_faultalarm_nums(),alarm_info->type,&alarm_info->dateyear);
-
-
+    //非自检且打开时
+    if(GetSpeaker_Flag()&&!GetZjFlag()){
+        PWM1_Start();
+        set_PWM1_Started();
+    }
     Breakdown(get_menu_alarm_info()->attr,
               get_menu_alarm_info()->part,
               get_faultalarm_nums(),
@@ -379,21 +321,21 @@ void menu_alarm_fault(void)
 #define Time100ms (100)
 #define Time3s    (3000/Time100ms)
 
-//after 30s return to alarm page if have alarm info,so reset will clear
-void have_alarm_backafter30s()
-{
-    static uint8 time_alarm_backct=Time3s;
-    if(GetDisplay_alarm_flag() == PAGE_AT_FIRE
-            ||GetDisplay_alarm_flag() == PAGE_AT_BATLOW
-            ||GetDisplay_alarm_flag() == PAGE_AT_FAULT)
-        time_alarm_backct--;
-    else
-        return;
-    if(0 == time_alarm_backct){
-        SetMenuFlag(MENU_FIREALARM);//return to alarm info
-        time_alarm_backct = Time3s;
-    }
-}
+////after 30s return to alarm page if have alarm info,so reset will clear
+//void have_alarm_backafter30s()
+//{
+//    static uint8 time_alarm_backct=Time3s;
+//    if(GetDisplay_alarm_flag() == PAGE_AT_FIRE
+//            ||GetDisplay_alarm_flag() == PAGE_AT_BATLOW
+//            ||GetDisplay_alarm_flag() == PAGE_AT_FAULT)
+//        time_alarm_backct--;
+//    else
+//        return;
+//    if(0 == time_alarm_backct){
+//        SetMenuFlag(MENU_FIREALARM);//return to alarm info
+//        time_alarm_backct = Time3s;
+//    }
+//}
 
 void DisplayKeyMenu(void)//主界面
 {
@@ -726,7 +668,7 @@ void inqury_state__byuart0(void)
 {
     if(GetFlag_195())//&&GetE3_flag())//有查询命令标志
     {
-        if((GetAlarmFlag(POS_INQUIRY_BIT)==ALARM_FIRE))
+        if((GetAlarmFlag(POS_ALARM_BIT)==ALARM_FIRE))
         {
             /*
 警报类型：
@@ -735,16 +677,17 @@ void inqury_state__byuart0(void)
 其它正常
 */
             //            //发送火警
-            Query_ByUart0(0x0A,0x00,GetAlarmFlag(POS_INQUIRY_BIT));
+            Query_ByUart0(0x0A,0x00,GetAlarmFlag(POS_ALARM_BIT));
         }
-        else if((GetAlarmFlag(POS_INQUIRY_BIT) == ALARM_FAULT)||
-                GetAlarmFlag(POS_INQUIRY_BIT) == ALARM_BAT_LOW)
+        else if((GetAlarmFlag(POS_ALARM_BIT) == ALARM_FAULT)||
+                GetAlarmFlag(POS_ALARM_BIT) == ALARM_BAT_LOW)
         {
-            Query_ByUart0(0x0B,0x00,GetAlarmFlag(POS_INQUIRY_BIT));//部位故障
+            Query_ByUart0(0x0B,0x00,GetAlarmFlag(POS_ALARM_BIT));//部位故障
         }
         else//normal state
             Query_ByUart0(0x13,0x00,0x00);
-        SetFlag_195(0);
+
+        ClrFlag_195();
 
     }
 }

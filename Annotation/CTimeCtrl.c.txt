@@ -1,0 +1,23 @@
+//E:/139/gasproject_LPC1768_V1.7/src/CTimeCtrl/CTimeCtrl.c
+//2014/04/24 13:22:03
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void  Init_CTimeCtrl(void);
+void  IncT0Count_CTimeCtrl(void);
+//下降沿，根据计数判断命令，
+void  SetCommT0_CTimeCtrl(void);
+void  SaveComm_CTimeCtrl(uint8 vComm);
+//槽脉宽段处理
+void  AnsCommT0_CTimeCtrl(void);
+//产生回路波型中断   100us定时
+void   T0Int_CTimeCtrl(void);
+void set_speark_ss_time(uint16 startT,uint16 stopT);
+//每分钟为每个部件添加一次
+void add_timer1_3h_counter(void);
+//获取计时数
+uint32 get_3h_counter(uint8 part);
+//清计时，重新计时
+void clr_3h_counter(uint8 part);
+uint8 judge_3h_over(uint8 part);

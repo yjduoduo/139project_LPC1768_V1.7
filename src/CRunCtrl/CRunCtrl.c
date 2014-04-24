@@ -116,7 +116,16 @@ void pwm1_test_start_stop()
         startflag = 0;
     }
 }
-
+//检测是否在线
+void detect_online(void)
+{
+    uint8 i;
+    for(i =COMP_START;i<=MAX_COMP;i++)
+    {
+        if(get_comp_partnumber(i) != INITVAL)
+            judge_3h_over(i);
+    }
+}
 
 void   do_CRunCtrl(void)
 {   
@@ -139,6 +148,7 @@ void   do_CRunCtrl(void)
         Clr5s_CSysRunFlag();
 
         SendHeart();
+        detect_online();
         return;
     }
     if(Get1s_CSysRunFlag())
@@ -171,7 +181,7 @@ void   do_CRunCtrl(void)
     if(Get40ms_CSysRunFlag())
     {
         Clr40ms_CSysRunFlag();
-        state_loopld_printf();
+//        state_loopld_printf();
 
         //无线发送与接收，串口1
         //        HandleInfo_Uart1();

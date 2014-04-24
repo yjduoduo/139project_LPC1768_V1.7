@@ -231,9 +231,14 @@ uint8 GetReleaseFlag(void)
 {
     return vReleaseFlag;
 }
-void SetFlag_195(uint8 tmp)
+//195»ð¾¯±êÖ¾
+void SetFlag_195(void)
 {
-    vFlag_195=tmp;
+    vFlag_195=1;
+}
+void ClrFlag_195(void)
+{
+    vFlag_195=0;
 }
 uint8 GetFlag_195(void)
 {

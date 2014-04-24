@@ -3887,7 +3887,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -4032,7 +4032,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -4050,6 +4050,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -4057,6 +4060,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);
@@ -4164,6 +4169,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -5062,13 +5068,14 @@ void clr_xialasignal(void);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -5253,7 +5260,8 @@ uint8 GetAlarmInfoFlag(void);
 void SetReleaseFlag(uint8 tmp);
 uint8 GetReleaseFlag(void);
 
-void SetFlag_195(uint8 tmp);
+void SetFlag_195(void);
+void ClrFlag_195(void);
 uint8 GetFlag_195(void);
 
 void SetCirAddrCurrent(uint8 tmp);
@@ -5626,11 +5634,21 @@ extern   void   T0Int_CTimeCtrl(void);
 extern   void   T1Int_CTimeCtrl(void);
  
  
+
+
+extern void add_timer1_3h_counter(void);
+
+extern uint32 get_3h_counter(uint8 part);
+
+extern void clr_3h_counter(uint8 part);
+
+void clr_faultnum_3h_(uint8 part);
+extern void judge_3h_over(uint8 part);
  
  
  
 
-#line 97 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 108 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 27 "..\\src\\Hardware\\Timer\\CTime.c"
 

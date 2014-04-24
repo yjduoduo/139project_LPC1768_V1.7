@@ -3746,7 +3746,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -3891,7 +3891,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -3909,6 +3909,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -3916,6 +3919,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);
@@ -4023,6 +4028,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -4917,7 +4923,7 @@ void DisplayJBHZKBlack(uint8  ss,uint8  page,uint8  column,uint16 xHZcode);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -5033,6 +5039,7 @@ void check_lp_running(void);
 
 uint8 check_psn_all0xff(void);
 
+void menu_fault_deal(alarminfo* alarm_info);
 
 
 

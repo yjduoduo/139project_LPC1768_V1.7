@@ -35,6 +35,7 @@
 #include  "store_addr.h"
 #include  "CNodeInfo.h"
 #include  "CGrapParam.h"
+#include  "CTimeCtrl.h"
 
 
 //宏定义
@@ -451,7 +452,9 @@ void menu_firealarm_face(alarminfo* alarm1_info)
     Debug("vAnnRow: %d\n",alarm1_info->vAnnRow);
 
 
+    Flag195 = 1;
 
+    SetAlarmFlag(POS_ALARM_BIT,ALARM_FIRE);
     //灯处理
     led_relay_deal();
 
@@ -474,6 +477,8 @@ void menu_firealarm_face(alarminfo* alarm1_info)
     //保存历史记录
     set_hist_allinfo(GetHistConter(),&histinfo);
     save_hist_all();
+
+
     //    FirstAlarm_Flag++;//not first alarm again
     //    //    SetFirstAlarm_Addr(0,GetPSNFormFlash(num,POS_INZONE));
     //    //    SetFirstAlarm_Addr(1,GetPSNFormFlash(num,POS_PARTNUMBER));
@@ -599,6 +604,9 @@ void menu_fault_deal(alarminfo* alarm_info)
     histinfo.dateyear   = alarm_info->dateyear;
     histinfo.vAnnRow    = alarm_info->vAnnRow;
 
+    Flag195 = 1;
+    reset_fault_flag = 1;
+
     Debug("=====>>fault alarm_info\n");
     Debug("part: %d\n",alarm_info->part);
     Debug("ciraddr: %d\n",alarm_info->ciraddr);
@@ -621,18 +629,10 @@ void menu_fault_deal(alarminfo* alarm_info)
         SetDisplay_alarm_flag(PAGE_AT_FAULT);
         //设置内容到另外一个存储中
         set_menu_alarm_info(*alarm_info);
-
-        //        ClearScreen(0);
-        //        Breakdown(alarm_info->attr,
-        //                  alarm_info->part,
-        //                  get_faultalarm_nums(),alarm_info->type,&alarm_info->dateyear);
-
     }
 
     set_hist_allinfo(GetHistConter(),&histinfo);
     save_hist_all();
-
-
 }
 const uint8 fault_restore_cfg[2]={0x0b,0x01};
 
@@ -651,23 +651,13 @@ void normal_deal(uint8 num,uint8 cir_addr)
         Led_Fault_Off();
         Fault_Relay_Off();
         //清除故障报警
-        if(GetDatatoFlash(num,COM_POS_DEVSTATE) == ATTR_FAULT)
+        if((ATTR_FAULT == get_alarm_attr(num) )||
+                (ATTR_BAT_LOW == get_alarm_attr(num)))
         {
-            SetDatatoFlash(num,COM_POS_DEVSTATE,0);
-            //            SetCirAlarmData(get_comp_ciraddr(num),0);
+            set_alarm_attr(num,ATTR_NORMAL);
         }
-        SetMenuFlag(MENU_MAIN);
-    }
-    if(reset_batt_flag)
-    {
-        reset_batt_flag=0;
-        Led_Fault_Off();
-        Fault_Relay_Off();
-        if(GetDatatoFlash(num,COM_POS_DEVSTATE) == ATTR_BAT_LOW)
-        {
-            SetDatatoFlash(num,COM_POS_DEVSTATE,0);
-            //            SetCirAlarmData(get_comp_ciraddr(num),0);
-        }
+        SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
+        SetDisplay_alarm_flag(PAGE_AT_NORMAL);
         SetMenuFlag(MENU_MAIN);
     }
 }
@@ -683,7 +673,6 @@ void HandleInfo_Uart1(void)//主循环中
 
     int16 num;//模块位置
     //处理无线模块收到的数据，无线模块与部件，139之间通讯协议，长度9字节
-    //循环查询，太浪费了，改为使用变量查询
     pdUartRcv = GetComData(com1Count);//(PdUartMsgUnion)data;
 
     if(wireless_data_check() == SUC)//如果有串口1有数据为真
@@ -725,6 +714,10 @@ void HandleInfo_Uart1(void)//主循环中
                 OnLCD();
                 SetFlagLed(1);
                 UartBindSend(CMD_COMPENET,9);
+//3hour故障处理
+                clr_alarm_f_recvmess3h(num);
+                clr_3h_counter(num);
+                clr_faultnum_3h_(num);
 
 
                 //屏蔽否？

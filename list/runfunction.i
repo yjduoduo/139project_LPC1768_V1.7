@@ -3747,7 +3747,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -3892,7 +3892,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -3910,6 +3910,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -3917,6 +3920,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);
@@ -4024,6 +4029,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -4879,13 +4885,14 @@ uint8 get_ok_tkeyflag(void);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -5145,6 +5152,7 @@ void check_lp_running(void);
 
 uint8 check_psn_all0xff(void);
 
+void menu_fault_deal(alarminfo* alarm_info);
 
 
 
@@ -5290,7 +5298,8 @@ uint8 GetAlarmInfoFlag(void);
 void SetReleaseFlag(uint8 tmp);
 uint8 GetReleaseFlag(void);
 
-void SetFlag_195(uint8 tmp);
+void SetFlag_195(void);
+void ClrFlag_195(void);
 uint8 GetFlag_195(void);
 
 void SetCirAddrCurrent(uint8 tmp);
@@ -5420,7 +5429,7 @@ void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -6014,62 +6023,6 @@ void menu_alarm_fire(void)
     static uint8 current_alarmpart = (0xff);
     uint8 alarmnums = get_firealarm_nums() ;
 
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-    
-    
-    
-
-
-
-
     if(current_alarmpart != get_menu_alarm_info()->part)
     {
 
@@ -6148,13 +6101,11 @@ void menu_alarm_fire(void)
 
 void menu_alarm_fault(void)
 {
-    ClearScreen(0);
     
-    
-    
-    
-
-
+    if(GetSpeaker_Flag()&&!GetZjFlag()){
+        PWM1_Start();
+        set_PWM1_Started();
+    }
     Breakdown(get_menu_alarm_info()->attr,
               get_menu_alarm_info()->part,
               get_faultalarm_nums(),
@@ -6165,20 +6116,20 @@ void menu_alarm_fault(void)
 
 
 
-void have_alarm_backafter30s()
-{
-    static uint8 time_alarm_backct=(3000/(100));
-    if(GetDisplay_alarm_flag() == (1)
-            ||GetDisplay_alarm_flag() == (2)
-            ||GetDisplay_alarm_flag() == (3))
-        time_alarm_backct--;
-    else
-        return;
-    if(0 == time_alarm_backct){
-        SetMenuFlag((1));
-        time_alarm_backct = (3000/(100));
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void DisplayKeyMenu(void)
 {
@@ -6396,7 +6347,7 @@ void SendHeart(void)
     
     
 }
-#line 695 "..\\src\\MenuCtrl\\runfunction.c"
+#line 637 "..\\src\\MenuCtrl\\runfunction.c"
 
 
 
@@ -6431,7 +6382,7 @@ void inqury_state__byuart0(void)
 {
     if(GetFlag_195())
     {
-        if((GetAlarmFlag(1)==1))
+        if((GetAlarmFlag(0)==1))
         {
             
 
@@ -6440,16 +6391,17 @@ void inqury_state__byuart0(void)
 
  
             
-            Query_ByUart0(0x0A,0x00,GetAlarmFlag(1));
+            Query_ByUart0(0x0A,0x00,GetAlarmFlag(0));
         }
-        else if((GetAlarmFlag(1) == 3)||
-                GetAlarmFlag(1) == 2)
+        else if((GetAlarmFlag(0) == 3)||
+                GetAlarmFlag(0) == 2)
         {
-            Query_ByUart0(0x0B,0x00,GetAlarmFlag(1));
+            Query_ByUart0(0x0B,0x00,GetAlarmFlag(0));
         }
         else
             Query_ByUart0(0x13,0x00,0x00);
-        SetFlag_195(0);
+
+        ClrFlag_195();
 
     }
 }

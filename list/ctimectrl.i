@@ -270,6 +270,16 @@ void Clr2msArrived(void);
    void   T1Int_CTimeCtrl(void);
  
  
+
+
+ void add_timer1_3h_counter(void);
+
+ uint32 get_3h_counter(uint8 part);
+
+ void clr_3h_counter(uint8 part);
+
+void clr_faultnum_3h_(uint8 part);
+ void judge_3h_over(uint8 part);
  
  
  
@@ -278,13 +288,13 @@ void Clr2msArrived(void);
 
 
 
-#line 68 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
-
+#line 79 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 uint8    vRun1s;   
 
 uint16   vRunTime0;  
-uint16   vRunTime1; 
+uint32   vRunTime1;
+
 
 
 uint16 vPWM1Time = 0;
@@ -2057,7 +2067,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -2202,7 +2212,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -2220,6 +2230,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -2227,6 +2240,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);
@@ -5081,13 +5096,14 @@ void Delay1Ms(uint32 t);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -5887,6 +5903,125 @@ void SetMenuFlag(uint8 tmp);
 void SetPasswordFlag(uint8 tmp);
 uint8 GetPasswordFlag(void);
 #line 28 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 1 "..\\src\\12UARTHandle\\CComHandle.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 16 "..\\src\\12UARTHandle\\CComHandle.h"
+
+
+
+
+
+
+
+
+
+
+
+#line 36 "..\\src\\12UARTHandle\\CComHandle.h"
+
+
+
+
+
+
+
+#line 49 "..\\src\\12UARTHandle\\CComHandle.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 79 "..\\src\\12UARTHandle\\CComHandle.h"
+
+
+
+
+
+
+
+
+
+
+#line 97 "..\\src\\12UARTHandle\\CComHandle.h"
+
+#line 130 "..\\src\\12UARTHandle\\CComHandle.h"
+void SetFirstAlarm_Flag(uint8 tmp);
+
+void SetDisplay_alarm_flag(uint8 tmp);
+uint8 GetDisplay_alarm_flag(void);
+void Setdisplay_alarm(uint8 row,uint8 tmp);
+uint8 Getdisplay_alarm(uint8 row);
+PCF8563_DATE Getalarmtime(void);
+void AddHeartFaultFlag(void);
+
+
+void SetSum(uint8 row,uint8 tmp);
+uint8 GetSum(uint8 row);
+
+
+
+
+
+void SetConvertdata(uint8 col,uint8 tmp);
+
+void UartBindSend(uint8 cmd,uint8 len);
+uint8 wireless_data_check(void);
+void HandleInfo_Uart1(void);
+void set_firealarm_ciraddr(uint8 cir_addr);
+
+void set_faultalarm_ciraddr(uint8 cir_addr);
+
+void set_normalalarm_ciraddr(uint8 cir_addr);
+
+uint8 CompareAddr(uint8 psn0,uint8 psn1,uint8 psn2,uint8 psn3, int16 *com_num);
+
+void check_lp_running(void);
+
+
+
+uint8 check_psn_all0xff(void);
+
+void menu_fault_deal(alarminfo* alarm_info);
+
+
+
+
+ 
+
+
+#line 29 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+
 
 void  Init_CTimeCtrl(void)
 {
@@ -6033,7 +6168,7 @@ void  AnsCommT0_CTimeCtrl(void)
         if(vRunTime0 < m_AnsStatTime[GetComm_CLpScanCtrl()])
         {
 
-#line 206 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 208 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 
 
             
@@ -6135,38 +6270,110 @@ void set_speark_ss_time(uint16 startT,uint16 stopT)
 }
 
 
+ 
+
+
+
+
+
+typedef struct _CompNotExist
+{
+    uint32 vTime1_3h_counter;
+    uint8 faultnums;
+
+}CompNotExist;
+
+
+CompNotExist vTime1_3h_exist[50+1]={0,};
+
+void add_timer1_3h_counter(void)
+{
+    uint8 i=0;
+    for(i=1;i<=200;i++)
+    {
+        vTime1_3h_exist[i].vTime1_3h_counter++;
+    }
+}
+
+uint32 get_3h_counter(uint8 part)
+{
+    if(part>50)
+        return 0;
+    return vTime1_3h_exist[part].vTime1_3h_counter;
+}
+
+void clr_3h_counter(uint8 part)
+{
+    if(part>50)
+        return;
+    vTime1_3h_exist[part].vTime1_3h_counter = 0;
+}
+
+void clr_faultnum_3h_(uint8 part)
+{
+    if(get_3h_counter(part) < 60*6/1UL )
+    {
+        vTime1_3h_exist[part].faultnums = 0;
+    }
+}
+
+
+void judge_3h_over(uint8 part)
+{
+    if(get_3h_counter(part) > 60*6/1UL + 5)
+    {
+        vTime1_3h_exist[part].faultnums = 2;
+    }
+    else if(get_3h_counter(part) > 60*3/1UL + 5)
+    {
+        vTime1_3h_exist[part].faultnums++;
+    }
+
+    if(vTime1_3h_exist[part].faultnums >= 2)
+    {
+        
+        
+
+
+    }
+}
+
+
+
 void   T1Int_CTimeCtrl(void)
 {  
     vRunTime1++;
-    if(vRunTime1 > (60000/20))
+    if(vRunTime1 > (3600000/20))
     {
         vRunTime1=0;
-        Set1m_CSysRunFlag();
-    }
-    if(vRunTime1 % (5000/20) == 0)
-    {
-        Set5s_CSysRunFlag();
-    }
-    if(vRunTime1 % (1000/20) == 0)
-    {
-        Set1s_CSysRunFlag();
     }
 
+    if(vRunTime1 %  (40/20) == 0)
+    {
+        Set40ms_CSysRunFlag();
+    }
     if(vRunTime1 % (100/20) == 0)
     {
         Set100ms_CSysRunFlag();
     }
-    if(vRunTime1 %  (40/20) == 0)
+    if(vRunTime1 % (1000/20) == 0)
     {
-        Set40ms_CSysRunFlag();
+        Set1s_CSysRunFlag();
     }
     
     if(vRunTime1 % (3000/20) == 0)
     {
         set_alarm_loop_show();
     }
-
-
+    if(vRunTime1 % (5000/20) == 0)
+    {
+        Set5s_CSysRunFlag();
+    }
+    if(vRunTime1 % (60000/20) == 0)
+    {
+        add_timer1_3h_counter();
+        Set1m_CSysRunFlag();
+    }
     Set20ms_CSysRunFlag();
     vAddScreenMask();
 
@@ -6176,10 +6383,12 @@ void   T1Int_CTimeCtrl(void)
         if((1) == GetMenuFlag())
         {
             set_speark_ss_time((500/20),(500/20));
-        }else if((0x03) == GetMenuFlag())
+        }
+        else if((0x03) == GetMenuFlag())
         {
             set_speark_ss_time((100/20),(1000/20));
-        }else{
+        }
+        else{
             set_speark_ss_time((1000/20),(500/20));
         }
 

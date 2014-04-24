@@ -968,7 +968,7 @@ void save_alarm_info(void)/**/
 }
 
 
-static void set_alarm(uint32 row,uint32 col, uint8 tmp)
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp)
 {
     set_array(alarm_record,row,col,tmp);
 }
@@ -1016,36 +1016,48 @@ uint8 get_alarm_firstalarm(uint32 row)
 //获取报警信息属性列表 list--------------------------
 void set_alarm_inzone(uint32 item, uint8 tmp)
 {
-    set_alarm(item,1,tmp);
+    set_alarm_info(item,1,tmp);
 }
 void set_alarm_part(uint32 item, uint8 tmp)
 {
-    set_alarm(item,2,tmp);
+    set_alarm_info(item,2,tmp);
 }
 
 void set_alarm_ciraddr(uint32 item, uint8 tmp)
 {
-    set_alarm(item,3,tmp);
+    set_alarm_info(item,3,tmp);
 }
 
 void set_alarm_alarmsum(uint32 item, uint8 tmp)
 {
-    set_alarm(item,4,tmp);
+    set_alarm_info(item,4,tmp);
 }
 void set_alarm_type(uint32 item, uint8 tmp)
 {
-    set_alarm(item,5,tmp);
+    set_alarm_info(item,5,tmp);
 }
 
 void set_alarm_alarmed(uint32 item, uint8 tmp)
 {
-    set_alarm(item,6,tmp);
+    set_alarm_info(item,6,tmp);
 }
 void set_alarm_firstalarm(uint32 item, uint8 tmp)
 {
-    set_alarm(item,15,tmp);
+    set_alarm_info(item,15,tmp);
 }
-
+//获取报警属性
+void set_alarm_attr(uint32 row, uint8 tmp)
+{
+    set_alarm_info(row,16,tmp);
+}
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag)
+{
+    set_alarm_info(item,18,flag);
+}
+void clr_alarm_f_recvmess3h(uint32 item)
+{
+    set_alarm_f_recvmess3h(item,0);
+}
 
 void set_alarm_allinfo(uint32 item,alarminfo *info)
 {
@@ -1055,17 +1067,18 @@ void set_alarm_allinfo(uint32 item,alarminfo *info)
     set_alarm_alarmsum(item,info->alarmsum);
     set_alarm_type(item,info->type);
     set_alarm_alarmed(item,info->alarmed);
-    set_alarm(item,7,info->dateyear.second);
-    set_alarm(item,8,info->dateyear.minute);
-    set_alarm(item,9,info->dateyear.hour);
-    set_alarm(item,10,info->dateyear.day);
-    set_alarm(item,11,info->dateyear.week);
-    set_alarm(item,12,info->dateyear.month);
-    set_alarm(item,13,info->dateyear.year/100);
-    set_alarm(item,14,info->dateyear.year%100);
+    set_alarm_info(item,7,info->dateyear.second);
+    set_alarm_info(item,8,info->dateyear.minute);
+    set_alarm_info(item,9,info->dateyear.hour);
+    set_alarm_info(item,10,info->dateyear.day);
+    set_alarm_info(item,11,info->dateyear.week);
+    set_alarm_info(item,12,info->dateyear.month);
+    set_alarm_info(item,13,info->dateyear.year/100);
+    set_alarm_info(item,14,info->dateyear.year%100);
     set_alarm_firstalarm(item,ALARM_NOTFIST);//非首警
-    set_alarm(item,16,info->attr);//属性
-    set_alarm(item,17,info->vAnnRow);//属性
+    set_alarm_info(item,16,info->attr);//属性
+    set_alarm_info(item,17,info->vAnnRow);//属性
+    set_alarm_info(item,18,info->f_recvmesat3h);
 }
 //清除报警信息
 void clr_alarm_allinfo(void)
@@ -1093,6 +1106,12 @@ uint8 get_alarm_type(uint32 item)
 {
     return get_alarm_info(item,5);
 }
+//3hour recved message flag?
+uint8 get_alarm_f_recvmess3h(uint32 item)
+{
+    return get_alarm_info(item,18);
+}
+
 
 void get_alarm_allinfo(uint32 item, alarminfo *info)
 {
@@ -1112,6 +1131,7 @@ void get_alarm_allinfo(uint32 item, alarminfo *info)
     info->firstalarm    = get_alarm_info(item,15);
     info->attr          = get_alarm_info(item,16);
     info->vAnnRow       = get_alarm_info(item,17);
+    info->f_recvmesat3h = get_alarm_info(item,18);
 }
 //设置首警
 void set_alarm_first(alarminfo *info)

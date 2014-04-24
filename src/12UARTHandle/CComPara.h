@@ -116,8 +116,9 @@ uint8 GetAlarmInfoFlag(void);
 
 void SetReleaseFlag(uint8 tmp);
 uint8 GetReleaseFlag(void);
-
-void SetFlag_195(uint8 tmp);
+//195»ð¾¯±êÖ¾
+void SetFlag_195(void);
+void ClrFlag_195(void);
 uint8 GetFlag_195(void);
 
 void SetCirAddrCurrent(uint8 tmp);

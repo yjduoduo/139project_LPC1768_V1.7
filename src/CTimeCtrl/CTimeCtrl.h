@@ -47,6 +47,16 @@ EX_CTimeCtrl   void   T0Int_CTimeCtrl(void);    //初始化
 EX_CTimeCtrl   void   T1Int_CTimeCtrl(void);
  
  
+
+//????????????
+EX_CTimeCtrl void add_timer1_3h_counter(void);
+//?????
+EX_CTimeCtrl uint32 get_3h_counter(uint8 part);
+//????????
+EX_CTimeCtrl void clr_3h_counter(uint8 part);
+//???????????????????6????????
+void clr_faultnum_3h_(uint8 part);
+EX_CTimeCtrl void judge_3h_over(uint8 part);
 /*******************************************************************/
 /********************* 私有成员变量,函数及常量    *******************/
 /*******************************************************************/
@@ -65,12 +75,13 @@ EX_CTimeCtrl   void   T1Int_CTimeCtrl(void);
 #define  cTime1_5s_Count        (5000/cTime1_Base)
 #define  cTime1_1m_Count        (60000/cTime1_Base)
 #define  cTime1_3s_Count        (3000/cTime1_Base)
-
+#define  cTime1_3h_Count        (3600000/cTime1_Base)
 
 uint8    vRun1s;   
 
 uint16   vRunTime0;  
-uint16   vRunTime1; 
+uint32   vRunTime1;
+
 
 //pwm1 control start and stop
 uint16 vPWM1Time = 0;

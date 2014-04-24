@@ -65,3 +65,4 @@
 .\output\ctimectrl.o: ..\src\13CirCon\CAddressCount.h
 .\output\ctimectrl.o: ..\src\common\CFlash_ADDR_Def.h
 .\output\ctimectrl.o: ..\src\MenuCtrl\CKeyCounter.h
+.\output\ctimectrl.o: ..\src\12UARTHandle\CComHandle.h

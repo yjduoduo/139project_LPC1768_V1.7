@@ -73,3 +73,5 @@
 .\output\ccomhandle.o: ..\src\componentinfo\store_addr.h
 .\output\ccomhandle.o: ..\src\CNodeInfo\CNodeInfo.h
 .\output\ccomhandle.o: ..\src\common\CGrapParam.h
+.\output\ccomhandle.o: ..\src\CTimeCtrl\CTimeCtrl.h
+.\output\ccomhandle.o: ..\src\Hardware\Timer\CTimeDef.h

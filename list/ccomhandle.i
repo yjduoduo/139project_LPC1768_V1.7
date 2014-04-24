@@ -5860,7 +5860,7 @@ typedef struct alarminfo{
     uint8 firstalarm;
     uint8 attr;
     uint8 vAnnRow;
-    uint8 reserve;
+    uint8 f_recvmesat3h;
 }alarminfo;
 
  
@@ -6005,7 +6005,7 @@ uint8 get_mask_info(uint32 row) ;
 void init_alarm_info(void);
 
 void save_alarm_info(void) ;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col) ;
 
 uint8 get_alarm_attr(uint32 row);
@@ -6023,6 +6023,9 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
 
 void clr_alarm_allinfo(void);
@@ -6030,6 +6033,8 @@ void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 
 void set_alarm_first(alarminfo *info);
@@ -6137,6 +6142,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
 
 
 #line 16 "..\\src\\MenuCtrl\\runfunction.h"
+
 
 
 
@@ -7022,6 +7028,7 @@ void check_lp_running(void);
 
 uint8 check_psn_all0xff(void);
 
+void menu_fault_deal(alarminfo* alarm_info);
 
 
 
@@ -7124,7 +7131,8 @@ uint8 GetAlarmInfoFlag(void);
 void SetReleaseFlag(uint8 tmp);
 uint8 GetReleaseFlag(void);
 
-void SetFlag_195(uint8 tmp);
+void SetFlag_195(void);
+void ClrFlag_195(void);
 uint8 GetFlag_195(void);
 
 void SetCirAddrCurrent(uint8 tmp);
@@ -7167,7 +7175,7 @@ uint8 GetFlagLed(void);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 473 "..\\src\\common\\CFlashParam.h"
+#line 478 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -8038,6 +8046,201 @@ extern  void    ClrCkCyc_CNodeInfo(uint8 vAddr);
 
 
 #line 38 "..\\src\\12UARTHandle\\CComHandle.c"
+#line 1 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+#line 20 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 1 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+#line 19 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+ 
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 60 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+
+
+
+
+
+
+#line 78 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+ 
+ 
+  
+typedef union type_WaitToRun{
+    uint32 Word;
+    struct
+    {
+        volatile uint32 b2ms:1;
+        uint32 b20ms:1;
+        uint32 b100ms:1;
+        uint32 b500ms:1;
+    }Flag;
+
+
+}WaitToRun;
+ 
+ 	
+
+ 
+ 
+ 
+
+  
+extern  uint32   Get_CTime0Def(void);
+extern  void     Set_CTime0Def(uint32 vTimeId); 
+extern  uint32   Sel_CTime0Def(uint8 vTimer);
+extern  uint32   Get_Timer_100us(void);
+extern  uint32   Get_Timer_200us(void);
+extern  uint32   Get_Timer_600us(void);
+extern  uint32   Get_Timer_2ms(void);
+extern  uint32   Get_Timer_5ms(void);
+extern  uint32   Get_Timer_8ms(void);
+extern  uint32   Get_Timer_10ms(void);
+extern  uint32   Get_Timer_20ms(void);
+
+void AddTwoFallEdgeCounter(void);
+void ClrTwoFallEdgeCounter(void);
+uint32 GetTwoFallEdgeCounter(void);
+
+void AddRisedgeCounter(void);
+void ClrRisedgeCounter(void);
+uint32 GetRisedgeCounter(void);
+
+void AddWait2msCounter(void);
+void ClrWait2msCounter(void);
+uint32 GetWait2msCounter(void);
+uint8 Is2msArrived(void);
+void Enable2ms(void);
+void Disable2ms(void);
+uint8 Get2msState(void);
+
+
+
+void Set2msArrived(void);
+uint32 Get2msArrived(void);
+void Clr2msArrived(void);
+
+
+  
+ 
+ 
+
+
+#line 154 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+
+#line 21 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+extern   void   Init_CTimeCtrl(void);    
+
+extern   void   T0Int_CTimeCtrl(void);    
+
+extern   void   T1Int_CTimeCtrl(void);
+ 
+ 
+
+
+extern void add_timer1_3h_counter(void);
+
+extern uint32 get_3h_counter(uint8 part);
+
+extern void clr_3h_counter(uint8 part);
+
+void clr_faultnum_3h_(uint8 part);
+extern void judge_3h_over(uint8 part);
+ 
+ 
+ 
+
+#line 108 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+
+#line 39 "..\\src\\12UARTHandle\\CComHandle.c"
 
 
 
@@ -8454,7 +8657,9 @@ void menu_firealarm_face(alarminfo* alarm1_info)
     lcd_printf("vAnnRow: %d\n",alarm1_info->vAnnRow);
 
 
+    Flag195 = 1;
 
+    SetAlarmFlag(0,1);
     
     led_relay_deal();
 
@@ -8477,6 +8682,8 @@ void menu_firealarm_face(alarminfo* alarm1_info)
     
     set_hist_allinfo(GetHistConter(),&histinfo);
     save_hist_all();
+
+
     
     
     
@@ -8602,6 +8809,9 @@ void menu_fault_deal(alarminfo* alarm_info)
     histinfo.dateyear   = alarm_info->dateyear;
     histinfo.vAnnRow    = alarm_info->vAnnRow;
 
+    Flag195 = 1;
+    reset_fault_flag = 1;
+
     lcd_printf("=====>>fault alarm_info\n");
     lcd_printf("part: %d\n",alarm_info->part);
     lcd_printf("ciraddr: %d\n",alarm_info->ciraddr);
@@ -8624,18 +8834,10 @@ void menu_fault_deal(alarminfo* alarm_info)
         SetDisplay_alarm_flag((3));
         
         set_menu_alarm_info(*alarm_info);
-
-        
-        
-        
-        
-
     }
 
     set_hist_allinfo(GetHistConter(),&histinfo);
     save_hist_all();
-
-
 }
 const uint8 fault_restore_cfg[2]={0x0b,0x01};
 
@@ -8654,23 +8856,13 @@ void normal_deal(uint8 num,uint8 cir_addr)
         Led_Fault_Off();
         Fault_Relay_Off();
         
-        if(GetDatatoFlash(num,(3)) == (0x32))
+        if(((0x32) == get_alarm_attr(num) )||
+                ((0x31) == get_alarm_attr(num)))
         {
-            SetDatatoFlash(num,(3),0);
-            
+            set_alarm_attr(num,(0x30));
         }
-        SetMenuFlag((0));
-    }
-    if(reset_batt_flag)
-    {
-        reset_batt_flag=0;
-        Led_Fault_Off();
-        Fault_Relay_Off();
-        if(GetDatatoFlash(num,(3)) == (0x31))
-        {
-            SetDatatoFlash(num,(3),0);
-            
-        }
+        SetAlarmFlag(0,0);
+        SetDisplay_alarm_flag((0));
         SetMenuFlag((0));
     }
 }
@@ -8685,7 +8877,6 @@ void HandleInfo_Uart1(void)
     uint8 cir_addr=0;
 
     int16 num;
-    
     
     pdUartRcv = GetComData(com1Count);
 
@@ -8728,6 +8919,10 @@ void HandleInfo_Uart1(void)
                 OnLCD();
                 SetFlagLed(1);
                 UartBindSend(0x40,9);
+
+                clr_alarm_f_recvmess3h(num);
+                clr_3h_counter(num);
+                clr_faultnum_3h_(num);
 
 
                 

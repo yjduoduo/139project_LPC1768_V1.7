@@ -163,6 +163,7 @@ void check_lp_running(void);
 
 uint8 check_psn_all0xff(void);
 
+void menu_fault_deal(alarminfo* alarm_info);
 
 #endif /* end __UARTHandle_H */
 /*****************************************************************************
