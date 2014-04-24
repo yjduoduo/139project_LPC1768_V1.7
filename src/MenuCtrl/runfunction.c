@@ -229,6 +229,7 @@ void menu_alarm_fire(void)
     static uint8 current_alarmpart = INITVAL;
     uint8 alarmnums = get_firealarm_nums()/*get_record_alarmnum()*/;
 
+    Debug("get_alarm_loop_show:%d\n",get_alarm_loop_show());
     if(current_alarmpart != get_menu_alarm_info()->part)
     {
 
@@ -255,21 +256,20 @@ void menu_alarm_fire(void)
         set_record_showalarm(get_record_alarmnum());
 
         add_alarmnums(get_menu_alarm_info()->part);
-        pos = alarmnums;//添加位置
+        pos = alarmnums-1;//添加位置
     }
     else if((alarmnums > 1)&&get_alarm_loop_show() )
     {
+
         uint8 part = alarmpart[pos];
         //get item by part
         uint8 item = get_alarm_item_bypart(part);
+
         clr_alarm_loop_show();
+
         get_alarm_allinfo(item,&alarm_info_loop);
-        if(pos > 1)
-            pos--;
-        else if(1 == pos)
-            pos = 0;
-        else
-            pos = alarmnums;
+        Debug("loop show pos:%d\n",pos);
+        Debug("alarmnums:%d\n",alarmnums);
 
         Alarm_Menu(get_alarm_first_part(),
                    alarm_info_loop.part,
@@ -279,15 +279,43 @@ void menu_alarm_fire(void)
                    &(alarm_info_loop.dateyear));//time
 
 
+
+        if(pos > 1)
+            pos--;
+        else if(1 == pos)
+            pos = 0;
+        else if(0 == pos)
+            pos = alarmnums-1;
+
     }
     else
     {
-        Alarm_Menu(get_alarm_first_part(),
-                   get_menu_alarm_info()->part,
-                   get_menu_alarm_info()->ciraddr,
-                   alarmnums/*get_firealarm_nums()*/,
-                   get_menu_alarm_info()->type,
-                   &(get_menu_alarm_info()->dateyear));//time
+        if(alarmnums > 1)
+        {
+            uint8 part = alarmpart[pos];
+            //get item by part
+            uint8 item = get_alarm_item_bypart(part);
+
+            clr_alarm_loop_show();
+
+            get_alarm_allinfo(item,&alarm_info_loop);
+            Debug("loop show pos:%d\n",pos);
+            Debug("alarmnums:%d\n",alarmnums);
+
+            Alarm_Menu(get_alarm_first_part(),
+                       alarm_info_loop.part,
+                       alarm_info_loop.ciraddr,
+                       alarmnums/*get_firealarm_nums()*/,
+                       alarm_info_loop.type,
+                       &(alarm_info_loop.dateyear));//time
+        }else{
+            Alarm_Menu(get_alarm_first_part(),
+                       get_menu_alarm_info()->part,
+                       get_menu_alarm_info()->ciraddr,
+                       alarmnums/*get_firealarm_nums()*/,
+                       get_menu_alarm_info()->type,
+                       &(get_menu_alarm_info()->dateyear));//time
+        }
     }
 
 

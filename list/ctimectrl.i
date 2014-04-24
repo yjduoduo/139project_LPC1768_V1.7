@@ -288,7 +288,7 @@ void clr_faultnum_3h_(uint8 part);
 
 
 
-#line 79 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 80 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 uint8    vRun1s;   
 
@@ -6320,6 +6320,7 @@ void clr_faultnum_3h_(uint8 part)
 
 void judge_3h_over(uint8 part)
 {
+    lcd_printf("part:%d,counter:%d\n",part,get_3h_counter(part));
     if(get_3h_counter(part) > 60*6/1UL + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;
@@ -6334,6 +6335,7 @@ void judge_3h_over(uint8 part)
         
         
 
+        
 
     }
 }

@@ -4948,7 +4948,7 @@ uint8 get_alarm_loop_show(void);
 
 
 static uint8 time_sendheart;
-uint8 loopflag=0; 
+volatile uint8 loopflag=0; 
 #line 19 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\tasklist.h"
 
@@ -6023,6 +6023,7 @@ void menu_alarm_fire(void)
     static uint8 current_alarmpart = (0xff);
     uint8 alarmnums = get_firealarm_nums() ;
 
+    lcd_printf("get_alarm_loop_show:%d\n",get_alarm_loop_show());
     if(current_alarmpart != get_menu_alarm_info()->part)
     {
 
@@ -6049,21 +6050,20 @@ void menu_alarm_fire(void)
         set_record_showalarm(get_record_alarmnum());
 
         add_alarmnums(get_menu_alarm_info()->part);
-        pos = alarmnums;
+        pos = alarmnums-1;
     }
     else if((alarmnums > 1)&&get_alarm_loop_show() )
     {
+
         uint8 part = alarmpart[pos];
         
         uint8 item = get_alarm_item_bypart(part);
+
         clr_alarm_loop_show();
+
         get_alarm_allinfo(item,&alarm_info_loop);
-        if(pos > 1)
-            pos--;
-        else if(1 == pos)
-            pos = 0;
-        else
-            pos = alarmnums;
+        lcd_printf("loop show pos:%d\n",pos);
+        lcd_printf("alarmnums:%d\n",alarmnums);
 
         Alarm_Menu(get_alarm_first_part(),
                    alarm_info_loop.part,
@@ -6073,15 +6073,43 @@ void menu_alarm_fire(void)
                    &(alarm_info_loop.dateyear));
 
 
+
+        if(pos > 1)
+            pos--;
+        else if(1 == pos)
+            pos = 0;
+        else if(0 == pos)
+            pos = alarmnums-1;
+
     }
     else
     {
-        Alarm_Menu(get_alarm_first_part(),
-                   get_menu_alarm_info()->part,
-                   get_menu_alarm_info()->ciraddr,
-                   alarmnums ,
-                   get_menu_alarm_info()->type,
-                   &(get_menu_alarm_info()->dateyear));
+        if(alarmnums > 1)
+        {
+            uint8 part = alarmpart[pos];
+            
+            uint8 item = get_alarm_item_bypart(part);
+
+            clr_alarm_loop_show();
+
+            get_alarm_allinfo(item,&alarm_info_loop);
+            lcd_printf("loop show pos:%d\n",pos);
+            lcd_printf("alarmnums:%d\n",alarmnums);
+
+            Alarm_Menu(get_alarm_first_part(),
+                       alarm_info_loop.part,
+                       alarm_info_loop.ciraddr,
+                       alarmnums ,
+                       alarm_info_loop.type,
+                       &(alarm_info_loop.dateyear));
+        }else{
+            Alarm_Menu(get_alarm_first_part(),
+                       get_menu_alarm_info()->part,
+                       get_menu_alarm_info()->ciraddr,
+                       alarmnums ,
+                       get_menu_alarm_info()->type,
+                       &(get_menu_alarm_info()->dateyear));
+        }
     }
 
 
@@ -6347,7 +6375,7 @@ void SendHeart(void)
     
     
 }
-#line 637 "..\\src\\MenuCtrl\\runfunction.c"
+#line 665 "..\\src\\MenuCtrl\\runfunction.c"
 
 
 

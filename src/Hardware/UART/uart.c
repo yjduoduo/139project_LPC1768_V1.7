@@ -220,7 +220,7 @@ uint8 GetAnnRow(/*uint8 dep,*/uint8 comp)
             break;
         }
     }
-    Debug("row is:%d\n",num);
+//    Debug("row is:%d\n",num);
     return num;
 }
 

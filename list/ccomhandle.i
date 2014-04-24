@@ -8238,7 +8238,7 @@ extern void judge_3h_over(uint8 part);
  
  
 
-#line 108 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 109 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 39 "..\\src\\12UARTHandle\\CComHandle.c"
 
@@ -8844,9 +8844,10 @@ const uint8 fault_restore_cfg[2]={0x0b,0x01};
 void normal_deal(uint8 num,uint8 cir_addr)
 {
     lcd_printf("normal,ciraddr:%d\n",cir_addr);
-    set_normalalarm_ciraddr(cir_addr);
     if(Flag195)
     {
+
+        set_normalalarm_ciraddr(cir_addr);
         Query_ByUart0(fault_restore_cfg[0],fault_restore_cfg[1],cir_addr);
     }
     Flag195 = 0;
@@ -8861,8 +8862,8 @@ void normal_deal(uint8 num,uint8 cir_addr)
         {
             set_alarm_attr(num,(0x30));
         }
-        SetAlarmFlag(0,0);
-        SetDisplay_alarm_flag((0));
+
+
         SetMenuFlag((0));
     }
 }

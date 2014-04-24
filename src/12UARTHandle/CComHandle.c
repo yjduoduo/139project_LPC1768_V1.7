@@ -639,9 +639,10 @@ const uint8 fault_restore_cfg[2]={0x0b,0x01};
 void normal_deal(uint8 num,uint8 cir_addr)
 {
     Debug("normal,ciraddr:%d\n",cir_addr);
-    set_normalalarm_ciraddr(cir_addr);
     if(Flag195)
     {//π ’œª÷∏¥
+
+        set_normalalarm_ciraddr(cir_addr);
         Query_ByUart0(fault_restore_cfg[0],fault_restore_cfg[1],cir_addr);
     }
     Flag195 = 0;
@@ -656,8 +657,8 @@ void normal_deal(uint8 num,uint8 cir_addr)
         {
             set_alarm_attr(num,ATTR_NORMAL);
         }
-        SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
-        SetDisplay_alarm_flag(PAGE_AT_NORMAL);
+//        SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
+//        SetDisplay_alarm_flag(PAGE_AT_NORMAL);
         SetMenuFlag(MENU_MAIN);
     }
 }

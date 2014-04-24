@@ -69,5 +69,5 @@ uint8 get_alarm_loop_show(void);
 #define HEARTLOSTTIMES 3
 //心跳时间设置
 static uint8 time_sendheart;
-uint8 loopflag=0; //火警时界面轮显循环显示
+volatile uint8 loopflag=0; //火警时界面轮显循环显示
 #endif

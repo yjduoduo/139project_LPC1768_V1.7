@@ -7731,7 +7731,7 @@ uint8 GetAnnRow( uint8 comp)
             break;
         }
     }
-    lcd_printf("row is:%d\n",num);
+
     return num;
 }
 
