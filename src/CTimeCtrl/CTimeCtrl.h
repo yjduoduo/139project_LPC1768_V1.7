@@ -64,7 +64,7 @@ EX_CTimeCtrl   void   T1Int_CTimeCtrl(void);
 #define  cTime1_1s_Count        (1000/cTime1_Base)
 #define  cTime1_5s_Count        (5000/cTime1_Base)
 #define  cTime1_1m_Count        (60000/cTime1_Base)
-
+#define  cTime1_3s_Count        (3000/cTime1_Base)
 
 
 uint8    vRun1s;   

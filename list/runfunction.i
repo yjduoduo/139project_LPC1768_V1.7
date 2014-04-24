@@ -12,6 +12,7 @@
 
 
  
+
 #line 1 "..\\src\\APP\\include.h"
 
 
@@ -4064,15 +4065,9 @@ void set_history_alarm_pos(uint16 pos);
 void set_menu_alarm_info(alarminfo alarm_info);
 
 
-
-
-
-
-
-
-
-
-static uint8 time_sendheart;
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -4932,6 +4927,11 @@ void set_history_alarm_pos(uint16 pos);
 void set_menu_alarm_info(alarminfo alarm_info);
 
 
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
+
+
 
 
 
@@ -4941,8 +4941,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 
 
 static uint8 time_sendheart;
-
-#line 18 "..\\src\\MenuCtrl\\runfunction.c"
+uint8 loopflag=0; 
+#line 19 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\tasklist.h"
 
 
@@ -4981,7 +4981,7 @@ void Silence_Task(void);
 
 
 
-#line 19 "..\\src\\MenuCtrl\\runfunction.c"
+#line 20 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\CKeyCounter.h"
 
 
@@ -5035,7 +5035,7 @@ void SetMenuFlag(uint8 tmp);
 
 void SetPasswordFlag(uint8 tmp);
 uint8 GetPasswordFlag(void);
-#line 20 "..\\src\\MenuCtrl\\runfunction.c"
+#line 21 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\12UARTHandle\\CComHandle.h"
 
 
@@ -5152,7 +5152,7 @@ uint8 check_psn_all0xff(void);
  
 
 
-#line 21 "..\\src\\MenuCtrl\\runfunction.c"
+#line 22 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\13CirCon\\CAddressCount.h"
 
 
@@ -5195,7 +5195,7 @@ void add_weixialasignal(void);
 
 void clr_weixialasignal(void);
 void clr_xialasignal(void);
-#line 22 "..\\src\\MenuCtrl\\runfunction.c"
+#line 23 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\12UARTHandle\\CComPara.h"
 
 
@@ -5315,7 +5315,7 @@ uint8 GetFlagLed(void);
  
 
 
-#line 23 "..\\src\\MenuCtrl\\runfunction.c"
+#line 24 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\Board\\CLED.h"
 
 
@@ -5359,8 +5359,8 @@ void Led_Fire_Init(void);
 void Led_Fire_On(void);
 void Led_Fire_Off(void);
 
-#line 24 "..\\src\\MenuCtrl\\runfunction.c"
 #line 25 "..\\src\\MenuCtrl\\runfunction.c"
+#line 26 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\Menu\\CModelFault.h"
 
 
@@ -5380,7 +5380,7 @@ void Led_Fire_Off(void);
 
 void menu_wirelessmod_fault(void);
 
-#line 26 "..\\src\\MenuCtrl\\runfunction.c"
+#line 27 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\14Sand195\\CSendTo195.h"
 
 
@@ -5402,7 +5402,7 @@ void SaveData195(uint8 col,uint8 tmp);
 uint8 GetData195(uint8 col);
 void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
 
-#line 27 "..\\src\\MenuCtrl\\runfunction.c"
+#line 28 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -5426,7 +5426,7 @@ void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
  
 
 
-#line 28 "..\\src\\MenuCtrl\\runfunction.c"
+#line 29 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\timesharectrl\\SysCtrl.h"
 #line 4 "..\\src\\timesharectrl\\SysCtrl.h"
 
@@ -5577,7 +5577,7 @@ extern  uint8 Get_CSys1MFlag(void);
 
 
 
-#line 29 "..\\src\\MenuCtrl\\runfunction.c"
+#line 30 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\Hardware\\Timer\\CTimeDef.h"
 
 
@@ -5706,7 +5706,7 @@ void Clr2msArrived(void);
 #line 154 "..\\src\\Hardware\\Timer\\CTimeDef.h"
 
 
-#line 30 "..\\src\\MenuCtrl\\runfunction.c"
+#line 31 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\CTaskSure.h"
 
 
@@ -5813,7 +5813,7 @@ void set_entry_localaddr_flag(void);
 uint8 get_entry_localaddr_flag(void);
 void clr_entry_localaddr_flag(void);
 void reset_ok(void);
-#line 31 "..\\src\\MenuCtrl\\runfunction.c"
+#line 32 "..\\src\\MenuCtrl\\runfunction.c"
 
 extern volatile uint32 match_counter1;
 uint8 vCounterLed=0;
@@ -5918,7 +5918,7 @@ alarminfo* get_menu_alarm_info(void)
 uint8 record_alarmnum=0; 
 static uint8 record_showalarm=0; 
 
-uint8 alarmpart[200]={0,};
+uint8 alarmpart[50+1]={0,};
 uint8 alarm_newest_pos =0;
 void set_alarm_newest_pos(uint8 row)
 {
@@ -5944,6 +5944,7 @@ void add_alarmnums(uint8 part)
         lcd_printf("alarm nums err!\n");
     }
 }
+
 uint8 get_record_alarmnum(void)
 {
     return record_alarmnum;
@@ -5990,10 +5991,29 @@ uint8 get_alarm_newest_nums()
     return num;
 }
 
+
+void clr_alarm_loop_show(void)
+{
+    loopflag=0;
+}
+void set_alarm_loop_show(void)
+{
+    loopflag=1;
+}
+uint8 get_alarm_loop_show(void)
+{
+    return loopflag;
+}
+
+
+alarminfo alarm_info_loop;
+static uint8 pos;
 void menu_alarm_fire(void)
 {
     
     static uint8 current_alarmpart = (0xff);
+    uint8 alarmnums = get_firealarm_nums() ;
+
     
     
 
@@ -6046,6 +6066,7 @@ void menu_alarm_fire(void)
     
     
     
+
 
 
 
@@ -6061,11 +6082,11 @@ void menu_alarm_fire(void)
         if(GetSpeaker_Flag()&&!GetZjFlag()){
             PWM1_Start();
             set_PWM1_Started();
-            }
+        }
         Alarm_Menu(get_alarm_first_part(),
                    get_menu_alarm_info()->part,
                    get_menu_alarm_info()->ciraddr,
-                   get_firealarm_nums(),
+                   alarmnums ,
                    get_menu_alarm_info()->type,
                    &(get_menu_alarm_info()->dateyear));
 
@@ -6075,13 +6096,37 @@ void menu_alarm_fire(void)
         set_record_showalarm(get_record_alarmnum());
 
         add_alarmnums(get_menu_alarm_info()->part);
+        pos = alarmnums;
+    }
+    else if((alarmnums > 1)&&get_alarm_loop_show() )
+    {
+        uint8 part = alarmpart[pos];
+        
+        uint8 item = get_alarm_item_bypart(part);
+        clr_alarm_loop_show();
+        get_alarm_allinfo(item,&alarm_info_loop);
+        if(pos > 1)
+            pos--;
+        else if(1 == pos)
+            pos = 0;
+        else
+            pos = alarmnums;
+
+        Alarm_Menu(get_alarm_first_part(),
+                   alarm_info_loop.part,
+                   alarm_info_loop.ciraddr,
+                   alarmnums ,
+                   alarm_info_loop.type,
+                   &(alarm_info_loop.dateyear));
+
+
     }
     else
     {
         Alarm_Menu(get_alarm_first_part(),
                    get_menu_alarm_info()->part,
                    get_menu_alarm_info()->ciraddr,
-                   get_firealarm_nums(),
+                   alarmnums ,
                    get_menu_alarm_info()->type,
                    &(get_menu_alarm_info()->dateyear));
     }
@@ -6203,16 +6248,16 @@ void DisplayKeyMenu(void)
                 (*(volatile unsigned long *)(0x2009C000 + 0x5C)) |= 1<<3;
                 SetMenuFlag((1));
                 SetPasswordFlag(1);
-
+                
             }
 
-
-
-
-
-
+            
+            
+            
+            
+            
             SetAlarmFlag(0,0);
-
+            
             SetReleaseFlag(0);
             Led_Silence_Off();
         }
@@ -6222,7 +6267,7 @@ void DisplayKeyMenu(void)
         (*(volatile unsigned long *)(0x2009C000 + 0x5C)) |= 1<<3;
         SetAlarmFlag(0,0);
         if(GetDisplay_alarm_flag())
-        Led_Silence_On();
+            Led_Silence_On();
         PWM1_Stop();
     }
 
@@ -6351,7 +6396,7 @@ void SendHeart(void)
     
     
 }
-#line 649 "..\\src\\MenuCtrl\\runfunction.c"
+#line 695 "..\\src\\MenuCtrl\\runfunction.c"
 
 
 

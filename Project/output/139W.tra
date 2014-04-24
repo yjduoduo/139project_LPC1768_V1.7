@@ -80,7 +80,7 @@
 ### ADS-LD Output File: '.\output\139W.axf'
 ### ADS-LD Command File: '.\output\139W.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\output\139W.lnp', Handle=0x000007D0
+### Creating CmdFile '.\output\139W.lnp', Handle=0x000002E4
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\output\139W.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

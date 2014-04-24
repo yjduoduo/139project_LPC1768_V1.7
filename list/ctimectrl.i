@@ -278,8 +278,7 @@ void Clr2msArrived(void);
 
 
 
-#line 67 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
-
+#line 68 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 
 uint8    vRun1s;   
@@ -5129,6 +5128,11 @@ void set_history_alarm_pos(uint16 pos);
 
 void set_menu_alarm_info(alarminfo alarm_info);
 
+
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
+
 #line 58 "..\\src\\APP\\include.h"
 
 #line 1 "..\\src\\APP\\publicparam.h"
@@ -5829,6 +5833,60 @@ void clr_xialasignal(void);
 
 
 #line 27 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 1 "..\\src\\MenuCtrl\\CKeyCounter.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+#line 27 "..\\src\\MenuCtrl\\CKeyCounter.h"
+
+void SetCounter1(uint8 tmp);
+void AddCounter1(void);
+void SubCounter1(void);
+uint8 GetCounter1(void);
+
+void SetCounter2(uint8 tmp);
+void AddCounter2(void);
+void SubCounter2(void);
+uint8 GetCounter2(void);
+
+
+void SetCounter3(uint8 tmp);
+void AddCounter3(void);
+void SubCounter3(void);
+uint8 GetCounter3(void);
+
+
+
+void SetGrapCount(uint8 tmp);
+void AddGrapCount(void);
+void SubGrapCount(void);
+void ClrGrapCount(void);
+uint8 GetGrapCount(void);
+
+void AddMenuFlag(void);
+void SubMenuFlag(void);
+uint8 GetMenuFlag(void);
+void SetMenuFlag(uint8 tmp);
+
+void SetPasswordFlag(uint8 tmp);
+uint8 GetPasswordFlag(void);
+#line 28 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 
 void  Init_CTimeCtrl(void)
 {
@@ -5975,7 +6033,7 @@ void  AnsCommT0_CTimeCtrl(void)
         if(vRunTime0 < m_AnsStatTime[GetComm_CLpScanCtrl()])
         {
 
-#line 205 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 206 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 
 
             
@@ -6102,6 +6160,12 @@ void   T1Int_CTimeCtrl(void)
     {
         Set40ms_CSysRunFlag();
     }
+    
+    if(vRunTime1 % (3000/20) == 0)
+    {
+        set_alarm_loop_show();
+    }
+
 
     Set20ms_CSysRunFlag();
     vAddScreenMask();

@@ -53,6 +53,11 @@ void set_history_alarm_pos(uint16 pos);
 
 void set_menu_alarm_info(alarminfo alarm_info);
 
+
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
+
 #ifdef _VAR_RUNFUNCTION
 //Get5s_CSysRunFlag
 #define TIME_ONE 1  //one time
@@ -63,5 +68,5 @@ void set_menu_alarm_info(alarminfo alarm_info);
 #define HEARTLOSTTIMES 3
 //心跳时间设置
 static uint8 time_sendheart;
-
+uint8 loopflag=0; //火警时界面轮显循环显示
 #endif

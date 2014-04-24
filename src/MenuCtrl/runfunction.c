@@ -11,9 +11,10 @@
 ;* 时间 : 2013-06-8
 ;*********************************************************************************************************
 ;*/
-#define _VAR_RUNFUNCTION
+
 #include  "include.h"
 #include  "key.h"
+#define _VAR_RUNFUNCTION
 #include  "runfunction.h"
 #include  "tasklist.h"
 #include  "CKeyCounter.h"
@@ -132,7 +133,7 @@ alarminfo* get_menu_alarm_info(void)
 uint8 record_alarmnum=0; //记录保存信息的最大位置
 static uint8 record_showalarm=0; //记录上下按键显示的位置
 
-uint8 alarmpart[MAX_LOOP]={0,};//此中保存的是part值
+uint8 alarmpart[MAX_COMP+1]={0,};//此中保存的是part值
 uint8 alarm_newest_pos =0;
 void set_alarm_newest_pos(uint8 row)
 {
@@ -158,6 +159,7 @@ void add_alarmnums(uint8 part)
         Debug("alarm nums err!\n");
     }
 }
+//报警数目
 uint8 get_record_alarmnum(void)
 {
     return record_alarmnum;
@@ -203,11 +205,30 @@ uint8 get_alarm_newest_nums()
     }
     return num;
 }
+//火警时界面轮显循环显示
 
+void clr_alarm_loop_show(void)
+{
+    loopflag=0;
+}
+void set_alarm_loop_show(void)
+{
+    loopflag=1;
+}
+uint8 get_alarm_loop_show(void)
+{
+    return loopflag;
+}
+
+//界面轮显
+alarminfo alarm_info_loop;
+static uint8 pos;
 void menu_alarm_fire(void)
 {
     //获取最新的报警部件
     static uint8 current_alarmpart = INITVAL;
+    uint8 alarmnums = get_firealarm_nums()/*get_record_alarmnum()*/;
+
     //     uint8 item = 0;
     //     alarminfo showinfo;//上下按键显示信息
 
@@ -263,6 +284,7 @@ void menu_alarm_fire(void)
 
 
 
+
     if(current_alarmpart != get_menu_alarm_info()->part)
     {
 
@@ -275,11 +297,11 @@ void menu_alarm_fire(void)
         if(GetSpeaker_Flag()&&!GetZjFlag()){
             PWM1_Start();
             set_PWM1_Started();
-            }
+        }
         Alarm_Menu(get_alarm_first_part(),
                    get_menu_alarm_info()->part,
                    get_menu_alarm_info()->ciraddr,
-                   get_firealarm_nums(),
+                   alarmnums/*get_firealarm_nums()*/,
                    get_menu_alarm_info()->type,
                    &(get_menu_alarm_info()->dateyear));//time
 
@@ -289,13 +311,37 @@ void menu_alarm_fire(void)
         set_record_showalarm(get_record_alarmnum());
 
         add_alarmnums(get_menu_alarm_info()->part);
+        pos = alarmnums;//添加位置
+    }
+    else if((alarmnums > 1)&&get_alarm_loop_show() )
+    {
+        uint8 part = alarmpart[pos];
+        //get item by part
+        uint8 item = get_alarm_item_bypart(part);
+        clr_alarm_loop_show();
+        get_alarm_allinfo(item,&alarm_info_loop);
+        if(pos > 1)
+            pos--;
+        else if(1 == pos)
+            pos = 0;
+        else
+            pos = alarmnums;
+
+        Alarm_Menu(get_alarm_first_part(),
+                   alarm_info_loop.part,
+                   alarm_info_loop.ciraddr,
+                   alarmnums/*get_firealarm_nums()*/,
+                   alarm_info_loop.type,
+                   &(alarm_info_loop.dateyear));//time
+
+
     }
     else
     {
         Alarm_Menu(get_alarm_first_part(),
                    get_menu_alarm_info()->part,
                    get_menu_alarm_info()->ciraddr,
-                   get_firealarm_nums(),
+                   alarmnums/*get_firealarm_nums()*/,
                    get_menu_alarm_info()->type,
                    &(get_menu_alarm_info()->dateyear));//time
     }
@@ -417,16 +463,16 @@ void DisplayKeyMenu(void)//主界面
                 BEEPOff();
                 SetMenuFlag(MENU_FIREALARM);
                 SetPasswordFlag(1);
-//                Main_Menu(1);
+                //                Main_Menu(1);
             }
 
-//            SetMenuFlag(MENU_MAIN);
-//            SetPasswordFlag(1);
-//            SetCheckInfoFlag(0,0);
-//            SetCheckInfoFlag(1,0);
-//            SetCheckInfoFlag(2,0);
+            //            SetMenuFlag(MENU_MAIN);
+            //            SetPasswordFlag(1);
+            //            SetCheckInfoFlag(0,0);
+            //            SetCheckInfoFlag(1,0);
+            //            SetCheckInfoFlag(2,0);
             SetAlarmFlag(0,0);
-//            ShuaFlag=0;
+            //            ShuaFlag=0;
             SetReleaseFlag(0);
             Led_Silence_Off();
         }
@@ -436,7 +482,7 @@ void DisplayKeyMenu(void)//主界面
         BEEPOff();
         SetAlarmFlag(0,0);
         if(GetDisplay_alarm_flag())
-        Led_Silence_On();
+            Led_Silence_On();
         PWM1_Stop();
     }
 

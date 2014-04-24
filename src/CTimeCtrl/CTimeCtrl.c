@@ -23,7 +23,8 @@
 #include  "uart.h"
 #include  "CAddressCount.h"
 #include  "CFlashParam.h"
-#include   "include.h"
+#include  "include.h"
+#include  "CKeyCounter.h"
 
 void  Init_CTimeCtrl(void)
 {
@@ -328,6 +329,12 @@ void   T1Int_CTimeCtrl(void)
     {
         Set40ms_CSysRunFlag();
     }
+    //界面轮显时间控制
+    if(vRunTime1 % cTime1_3s_Count == 0)
+    {
+        set_alarm_loop_show();
+    }
+
 
     Set20ms_CSysRunFlag();
     vAddScreenMask();

@@ -4204,6 +4204,11 @@ void set_history_alarm_pos(uint16 pos);
 
 void set_menu_alarm_info(alarminfo alarm_info);
 
+
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
+
 #line 58 "..\\src\\APP\\include.h"
 
 #line 1 "..\\src\\APP\\publicparam.h"
@@ -5103,6 +5108,11 @@ void show_head_menu(void);
 void set_history_alarm_pos(uint16 pos);
 
 void set_menu_alarm_info(alarminfo alarm_info);
+
+
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
 
 #line 21 "..\\src\\Hardware\\Timer\\CTime.c"
 #line 1 "..\\src\\Board\\CLED.h"
