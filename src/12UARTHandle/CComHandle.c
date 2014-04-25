@@ -714,7 +714,11 @@ void HandleInfo_Uart1(void)//主循环中
                     return;
                 OnLCD();
                 SetFlagLed(1);
-                UartBindSend(CMD_COMPENET,9);
+                uart1_cmd_reponse_atfire(get_comp_psn3(num),
+                                         get_comp_psn2(num),
+                                         get_comp_psn1(num),
+                                         get_comp_psn0(num));
+//                UartBindSend(CMD_COMPENET,9);
 //3hour故障处理
                 clr_alarm_f_recvmess3h(num);
                 clr_3h_counter(num);

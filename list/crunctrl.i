@@ -4163,6 +4163,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -5273,7 +5274,7 @@ extern void judge_3h_over(uint8 part);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  

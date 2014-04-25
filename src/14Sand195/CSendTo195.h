@@ -17,4 +17,6 @@
 void SaveData195(uint8 col,uint8 tmp);
 uint8 GetData195(uint8 col);
 void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
+void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+
 

@@ -684,7 +684,7 @@ void puts__(char *s)
     }
 }
 //ต๗สิ
-//#define DEBUGFlag
+#define DEBUGFlag
 
 //void Uart0_printf(char *str,...)
 #ifdef DEBUGFlag

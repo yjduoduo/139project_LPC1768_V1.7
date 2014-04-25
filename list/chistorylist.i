@@ -3804,6 +3804,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -4923,7 +4924,7 @@ void DisplayJBHZKBlack(uint8  ss,uint8  page,uint8  column,uint16 xHZcode);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  

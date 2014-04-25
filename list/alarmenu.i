@@ -3804,6 +3804,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -4813,7 +4814,7 @@ void Alarm_Menu(uint8 fisrtpart,uint8 otherpart,uint8 cirAddr,uint16 alarmsum,ui
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  

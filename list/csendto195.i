@@ -3804,6 +3804,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -4794,6 +4795,8 @@ void clr_xialasignal(void);
 void SaveData195(uint8 col,uint8 tmp);
 uint8 GetData195(uint8 col);
 void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
+void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+
 
 #line 16 "..\\src\\14Sand195\\CSendTo195.c"
 #line 1 "..\\src\\12UARTHandle\\CComHandle.h"
@@ -4918,6 +4921,15 @@ void menu_fault_deal(alarminfo* alarm_info);
 
 
 uint8 Send195[15]={0};
+
+
+ 
+
+uint8 SendVH75[9]={0};
+
+
+
+
 void SaveData195(uint8 col,uint8 tmp)
 {
 	Send195[col]=tmp;
@@ -4954,6 +4966,26 @@ void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr)
     Send195[14]=(uint8)(dat&0x00ff);
 
  	UARTSend(0,Send195,15);
+}
+
+void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
+{
+    uint8 num;
+    uint16 dat;
+    dat = 0;
+
+    SendVH75[0]=0x82;
+    SendVH75[1]=0x40;
+    SendVH75[2]=PSN3;
+    SendVH75[3]=PSN2;
+    SendVH75[4]=PSN1;
+    SendVH75[5]=PSN0;
+    SendVH75[6]=(0x33);
+    SendVH75[7]=(0x00);
+    for(num = 0; num < 8; num++)					
+        dat += SendVH75[num];
+    SendVH75[8]=(uint8)(dat&0x00ff);
+    UARTSend(1,SendVH75,9);
 }
 
 

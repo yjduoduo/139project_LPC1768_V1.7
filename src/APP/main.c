@@ -22,7 +22,6 @@
 #define PORT_NUM			1
 #define LOCATION_NUM		0
 
-
 int main (void) 
 {
     SystemClockUpdate();

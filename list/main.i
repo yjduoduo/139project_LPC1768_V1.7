@@ -4788,6 +4788,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -5814,7 +5815,6 @@ extern   void   LpCk_CRunCtrl(void);
 #line 59 "..\\src\\CRunCtrl\\CRunCtrl.h"
 
 #line 21 "..\\src\\APP\\main.c"
-
 
 
 

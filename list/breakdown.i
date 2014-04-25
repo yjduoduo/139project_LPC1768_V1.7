@@ -3804,6 +3804,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -4811,7 +4812,7 @@ void Breakdown(uint8 attr,uint8 compent,uint16 sum,uint8 type,PCF8563_DATE* time
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  

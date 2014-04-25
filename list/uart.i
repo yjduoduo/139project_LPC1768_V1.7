@@ -5999,6 +5999,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -7540,7 +7541,7 @@ extern  void  ClrReset_CLpScanCtrl(void);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -8199,11 +8200,17 @@ void puts__(char *s)
 
 
 
-
+char  debugbuf[128];
 
 void lcd_printf(char *str,...)
 {
-#line 702 "..\\src\\Hardware\\UART\\uart.c"
+
+    va_list ptr;
+    __va_start(ptr, str);
+    vsprintf(debugbuf,str,ptr);
+    puts__(debugbuf);
+    __va_end(ptr);
+
 }
 
 

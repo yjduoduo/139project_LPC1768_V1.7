@@ -5918,6 +5918,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -7175,7 +7176,7 @@ uint8 GetFlagLed(void);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -7307,6 +7308,8 @@ uint8 GetPasswordFlag(void);
 void SaveData195(uint8 col,uint8 tmp);
 uint8 GetData195(uint8 col);
 void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
+void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+
 
 #line 28 "..\\src\\12UARTHandle\\CComHandle.c"
 #line 1 "..\\src\\MenuCtrl\\CTaskSure.h"
@@ -8919,7 +8922,11 @@ void HandleInfo_Uart1(void)
                     return;
                 OnLCD();
                 SetFlagLed(1);
-                UartBindSend(0x40,9);
+                uart1_cmd_reponse_atfire(get_comp_psn3(num),
+                                         get_comp_psn2(num),
+                                         get_comp_psn1(num),
+                                         get_comp_psn0(num));
+
 
                 clr_alarm_f_recvmess3h(num);
                 clr_3h_counter(num);

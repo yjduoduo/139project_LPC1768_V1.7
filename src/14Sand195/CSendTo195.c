@@ -18,6 +18,15 @@
 #define	CONVERT195(X)	((X&0x00ff)*256+(X&0xff00)/256)//高低位转换
 #define  SEND195LEN   15
 uint8 Send195[15]={0};
+
+/******************************
+  ******反馈给模块**************/
+#define  SENDV75LEN   9
+uint8 SendVH75[SENDV75LEN]={0};
+
+
+
+
 void SaveData195(uint8 col,uint8 tmp)
 {
 	Send195[col]=tmp;
@@ -54,6 +63,26 @@ void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr)
     Send195[14]=(uint8)(dat&0x00ff);//LOW CS
 //    check_lp_running();
  	UARTSend(0,Send195,SEND195LEN);
+}
+//火警状态下给vh75探头的反馈
+void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
+{
+    uint8 num;
+    uint16 dat;
+    dat = 0;
+//0x82 0x40 psn3 psn2 psn1 psn0 status val cs
+    SendVH75[0]=0x82;
+    SendVH75[1]=0x40;
+    SendVH75[2]=PSN3;//HEADER
+    SendVH75[3]=PSN2;//CMD
+    SendVH75[4]=PSN1;
+    SendVH75[5]=PSN0;
+    SendVH75[6]=ATTR_FIRE;//DSTADDR
+    SendVH75[7]=ZEROVAL;//SRCADDR
+    for(num = 0; num < 8; num++)					//checksum calculate
+        dat += SendVH75[num];
+    SendVH75[8]=(uint8)(dat&0x00ff);//CS
+    UARTSend(1,SendVH75,SENDV75LEN);
 }
 
 

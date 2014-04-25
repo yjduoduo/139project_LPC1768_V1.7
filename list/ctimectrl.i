@@ -2125,6 +2125,7 @@ typedef struct compent{
 
 
 
+
  
 void SetHistFlag(uint8 tmp);
 uint8 GetHistFlag(void);
@@ -5096,7 +5097,7 @@ void Delay1Ms(uint32 t);
 
 #line 16 "..\\src\\common\\CFlashParam.h"
 
-#line 478 "..\\src\\common\\CFlashParam.h"
+#line 479 "..\\src\\common\\CFlashParam.h"
 
 
  
@@ -6320,7 +6321,7 @@ void clr_faultnum_3h_(uint8 part)
 
 void judge_3h_over(uint8 part)
 {
-    lcd_printf("part:%d,counter:%d\n",part,get_3h_counter(part));
+    lcd_printf("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
     if(get_3h_counter(part) > 60*6/1UL + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;

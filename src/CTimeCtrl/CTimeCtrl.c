@@ -356,7 +356,7 @@ void clr_faultnum_3h_(uint8 part)
 //主循环处理6小时故障
 void judge_3h_over(uint8 part)
 {
-    Debug("part:%d,counter:%d\n",part,get_3h_counter(part));
+    Debug("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
     if(get_3h_counter(part) > vTimer1_6H + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;
