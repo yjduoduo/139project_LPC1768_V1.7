@@ -2697,6 +2697,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -2741,7 +2742,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -3753,7 +3754,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -5639,6 +5640,8 @@ extern   void   T1Int_CTimeCtrl(void);
 
 extern void add_timer1_3h_counter(void);
 
+void reset_timer1_3h_counter(void);
+
 extern uint32 get_3h_counter(uint8 part);
 
 extern void clr_3h_counter(uint8 part);
@@ -5649,7 +5652,7 @@ extern void judge_3h_over(uint8 part);
  
  
 
-#line 109 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 111 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 27 "..\\src\\Hardware\\Timer\\CTime.c"
 

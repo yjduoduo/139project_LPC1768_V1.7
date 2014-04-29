@@ -1,0 +1,64 @@
+//E:/139/gasproject_LPC1768_V1.7/src/MenuCtrl/CTaskSure.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void SetZjFlag(uint8 tmp);
+uint8 GetZjFlag(void);
+void Set_Note_Flag(void);
+void Clr_Note_Flag(void);
+uint8 Get_Note_Flag(void);
+void setup_ok(void);
+void query_ok(void);
+void test_ok(void);
+void reset_ok(void);
+void factory_ok(void);
+void speaker_ok(void);
+void CLevel1_Sure(uint8 tmp)//第一层任务;
+void get_local_addr(void);
+//检测回路合法
+void detect_circuirt(void);
+void set_entry_localaddr_flag(void);
+uint8 get_entry_localaddr_flag(void);
+void clr_entry_localaddr_flag(void);
+void menu_setup_localaddr_ok(void);
+void menu_setup_compreg_ok(void);
+void menu_setup_datetime_ok(void);
+void setup_Sure(uint8 tmp);
+void set_enter_flag(void);
+uint8 get_enter_falg(void);
+void clr_enter_flag(void);
+void query_system_ok(void);
+void query_compstatus_ok(void);
+void query_historyrecord_ok(void);
+void query_Sure(uint8 tmp);
+void selftest_ok(void);
+void sigstrength_ok(void);
+void test_Sure(uint8 tmp)//;
+void SetSpeaker_ON(void);
+void SetSpeaker_OFF(void);
+//0：off,1:on
+uint8 GetSpeaker_Flag(void);
+void CLevel27_Sure(void)//打开关闭蜂鸣器;
+//基地址值
+uint16 local_addr_value(void);
+void menu_set_localaddr_ok(void);
+//show compoent tips info if not registed
+void menu_comp_noreg(void);
+void menu_press_ok_complete(uint8 line);
+void menu_setup_done(void);
+void menu_press_ok_save(void);
+void menu_deling(void);
+void menu_opsing(void);
+void menu_ops_done(void);
+void menu_comp_masked(void);
+void menu_comp_started(void);
+void menu_colon(void);
+void menu_compset(void);
+uint8 opstype_deleted(void);
+void setup_menu_deal(void);
+void query_menu_deal(void);
+void test_menu_deal(void);
+void speaker_menu_deal(void);
+void CLevel3_Sure(uint8 tmp)//具体设置层;

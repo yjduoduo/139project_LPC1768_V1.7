@@ -2682,6 +2682,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -2726,7 +2727,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -3816,7 +3817,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  

@@ -1,0 +1,39 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Hardware/UART/uart.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void ClrData3(void);
+void clr_tp(void);
+uint8 GetCom1Data0(uint8 row);
+void ClrCom1Data0(void);
+void AnnCounterInit(void);
+//汉字注释数据初始化
+void NoteData_Init(void);
+uint8 GetCom0Ann(uint8 row,uint8 cow);
+void SetConvertdataAll(void);
+void UART1_IRQHandler(void) ;
+uint8 GetAnnFlag(void);
+uint8 GetAnnRow(/*uint8 dep,*/uint8 comp);
+//中断处只能收数据，不能处理数据，因为数据会丢失
+void recv_note_info(void);
+void UART0_IRQHandler (void);
+//处理注释，UART0，在设置等页面中即可下载
+void HandleNote(void);
+void CSaveAnn(void);
+uint32 UARTInit( uint32 PortNum, uint32 baudrate );
+void UartIntEnd(void);
+void UartIntStart(void);
+void uart_all_disable(void);
+void uart_all_enable(void);
+void UARTSend( uint32 portNum, uint8 *Ptr, uint32 Length  );
+void UART0_SendString (uint8 *s);
+void UART1_SendString (uint8 *s);
+uint32 uart1GetByte (void);
+uint32 uart0GetByte (void);
+void uart1GetStr (uint32 *pucStr, uint32 ulNum);
+void uart0GetStr (uint32_t *pucStr, uint32_t ulNum);
+}  
+void puts__(char *s);
+void Debug(char *str,...);

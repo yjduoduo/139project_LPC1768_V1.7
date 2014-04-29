@@ -1,0 +1,34 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Board/lcd.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void DelayMs(uint32 Time)	            /*ÑÓÊ±1MS*/;
+void CheckState(void)		;
+void SendCommandToLCD(uint8 com);
+void SetLine(uint8 page)	;
+void SetStartLine(uint8 startline) 	   ;
+void SetColumn(uint8 column)	;
+void SetOnOff(uint8 onoff)	   ;
+void WriteByte(uint8 dat)	;
+void WriteDoubleByte(uint8 dat)	;
+void WriteBlackByte(uint8 dat)	;
+void SelectScreen(uint8 screen)	  ;
+void ClearScreen(uint8  screen)	  ;
+void Clear16Screen(uint8  screen);
+void delay(uint8  z)		;
+void delay_long (uint32 ulTime);
+void InitLCD(void) 	  ;
+void WriteBytedata(uint8 vdate);
+//ss:1·´Ñ¡
+void DisplayJBHZKBlack(uint8  ss,uint8  page,uint8  column,uint16 xHZcode);
+//ss:1 ¡ª¡ª×ó°ëÆÁ £¬2¡ª¡ªÓÒ°ëÆÁ
+void DisplayJBHZK(uint8  ss,uint8  page,uint8  column,uint16 xHZcode);
+void Display(uint8  ss,uint8  page,uint8  column,uint32  number);
+void DisplayBlack(uint8  ss,uint8  page,uint8  column,uint32  number);
+void Display1(uint8  ss,uint8  page,uint8  column,uint8  number);
+void DisplaynumberJBHZK(uint8  ss,uint8 page,uint8  column,uint8  number);
+void Displaynumber(uint8  ss,uint8 page,uint8  column,uint8  number);
+void DisplaynumberBlack(uint8  ss,uint8 page,uint8  column,uint8  number);
+void WriteBlue(uint8 screen,uint8 line,uint8 col,uint8 row);

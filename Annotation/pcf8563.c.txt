@@ -1,0 +1,17 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Board/pcf8563.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+uint8 PCF8563_Set(PCF8563_DATE *tp);
+uint8 PCF8563_Read(PCF8563_DATE *tp);
+void getcurrent_date(PCF8563_DATE *date);
+uint8 PCF8563_SS(uint8 cmd);
+uint8 PCF8563_Set_TD(uint8 cmd, uint16 TD);
+uint16 PCF8563_Get_TD(uint8 cmd);
+uint8 PCF8563_Set_ClkOut(uint8 cmd);
+uint8 PCF8563_Set_Alarm(uint8 cmd, uint8 tm);
+uint8 PCF8563_Set_Timer(uint8 cmd, uint8 cnt);
+uint8 PCF8563_INT_State(uint8 cmd);
+void PCF8563_Init(void);

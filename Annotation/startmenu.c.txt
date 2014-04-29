@@ -1,0 +1,9 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Menu/startmenu.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void show_date_time(PCF8563_DATE *timedata);
+void menu_head_title(void);
+void Start_Menu(void);

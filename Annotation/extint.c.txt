@@ -1,0 +1,25 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Hardware/Extint/extint.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void extint3_enable(void);
+void extint3_disable(void);
+void Eint_Dis(void);
+void Eint_En(void);
+void Eint_DisAll_Exuart(void);
+void Eint_EnAll_Exuart(void);
+void SetE1_flag(void);
+void ClrE1_flag(void);
+uint8 GetE1_flag(void);
+void SetE3_flag(void);
+void ClrE3_flag(void);
+uint8 GetE3_flag(void);
+void cExt3IntFlow(void);
+void cExt3IntRise(void);
+void cExt3IntClrFlow(void);
+void cExt3IntClrRise(void);
+void extint1_enable(void);
+void extint1_disable(void);
+void EINT1_IRQHandler (void);

@@ -684,7 +684,8 @@ void puts__(char *s)
     }
 }
 //ต๗สิ
-#define DEBUGFlag
+//#define DEBUGFlag
+#define DEBUGOnceFlag
 
 //void Uart0_printf(char *str,...)
 #ifdef DEBUGFlag
@@ -693,6 +694,18 @@ char  debugbuf[128];
 void Debug(char *str,...)
 {
 #ifdef DEBUGFlag
+    va_list ptr;
+    va_start(ptr,str);
+    vsprintf(debugbuf,str,ptr);
+    puts__(debugbuf);
+    va_end(ptr);
+#endif
+}
+
+void DebugOnce(char *str,...)
+{
+#ifdef DEBUGOnceFlag
+    char  debugbuf[128];
     va_list ptr;
     va_start(ptr,str);
     vsprintf(debugbuf,str,ptr);

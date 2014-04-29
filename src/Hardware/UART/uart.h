@@ -118,6 +118,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);

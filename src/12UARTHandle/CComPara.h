@@ -45,7 +45,7 @@ typedef union{
 #define POS_ALARM_BIT 0  //pos 0:intent for alarm(fire,fault,batt low)
 #define POS_INQUIRY_BIT 1 //pos 1:intent for uart inquiry data(uart 0)
 
-#define RCV_SIZE 20
+#define RCV_SIZE 10/*20*/
 
 #ifdef ComPara_C
 uint8 dataHeart[2]={0};

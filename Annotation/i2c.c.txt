@@ -1,0 +1,13 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Hardware/I2C/i2c.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void  I2C0_Init(uint32 ulFi2c);
+void i2c0_enable(void);
+void i2c0_disable(void);
+void I2CIntEnd(void);
+void I2CIntStart(void);
+uint8 I2C_ReadNByte (uint8 sla, uint32 suba_type, uint32 suba, uint8 *s, uint32 num);
+uint8 I2C_WriteNByte(uint8 sla, uint8 suba_type, uint32 suba, uint8 *s, uint32 num);

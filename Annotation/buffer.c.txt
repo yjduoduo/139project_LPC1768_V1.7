@@ -1,0 +1,11 @@
+//E:/139/gasproject_LPC1768_V1.7/src/common/buffer.c
+//2014/04/29 08:53:25
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+unsigned char BufferInit(TBuffer* pbuf,unsigned char* pdata,unsigned short len);
+unsigned char BufferReset(TBuffer* pbuf);
+unsigned char BufferWrite(TBuffer* pbuf ,unsigned char* pdata ,unsigned short len);
+unsigned char BufferRead(TBuffer* pbuf ,unsigned char* pdata ,unsigned short len ,unsigned char offset);
+unsigned char BufferClear(TBuffer* pbuf , unsigned short len);

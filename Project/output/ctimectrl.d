@@ -1,4 +1,5 @@
 .\output\ctimectrl.o: ..\src\CTimeCtrl\CTimeCtrl.c
+.\output\ctimectrl.o: f:\Keil\ARM\RV31\Inc\string.h
 .\output\ctimectrl.o: ..\src\CTimeCtrl\CTimeCtrl.h
 .\output\ctimectrl.o: ..\src\APP\Config.h
 .\output\ctimectrl.o: ..\src\Hardware\Timer\CTimeDef.h
@@ -66,3 +67,6 @@
 .\output\ctimectrl.o: ..\src\common\CFlash_ADDR_Def.h
 .\output\ctimectrl.o: ..\src\MenuCtrl\CKeyCounter.h
 .\output\ctimectrl.o: ..\src\12UARTHandle\CComHandle.h
+.\output\ctimectrl.o: ..\src\14Sand195\CSendTo195.h
+.\output\ctimectrl.o: ..\src\Menu\CModelFault.h
+.\output\ctimectrl.o: ..\src\12UARTHandle\CComPara.h

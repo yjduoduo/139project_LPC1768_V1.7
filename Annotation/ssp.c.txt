@@ -1,0 +1,23 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Hardware/CSSP/ssp.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void SSP_SSELToggle( uint32 portnum, uint32 toggle );
+void  SSP1_Init(void);
+uint8 SPI_FLASH_SendByte (uint8 tmp);
+void M25P80_CMD1B(uint8 cmd);
+uint16 M25P80_CMD1B_READ1B(uint16 cmd);
+void M25P80_Write_En(void);
+void M25P80_WP_En(void);
+uint8 M25P80_Busy(void);
+void M25P80_Section_Erase(uint32 addr);
+void M25P80_Bulk_Erase(void);
+void M25P80_Write_1Byte(uint32 addr , uint8 data);
+void M25P80_Write_Bytes(uint32 addr , uint8* wr_buf_p , uint16 no);
+uint8 M25P80_Read_1Byte(uint32 addr );
+void M25P80_Read_Bytes(uint32 addr , uint8* re_buf_p , uint16 no);
+void SSPSend( uint32 portnum, uint8 *buf, uint32 Length );
+void SSPReceive( uint32 portnum, uint8 *buf, uint32 Length );
+uint8 M25P80_ReadFast_1Byte(uint32 addr );

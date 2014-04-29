@@ -1,0 +1,33 @@
+//E:/139/gasproject_LPC1768_V1.7/src/MenuCtrl/CKeyCounter.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+//////////////keycounter//////////////
+void SetCounter1(uint8 tmp);
+void AddCounter1(void);
+void SubCounter1(void);
+uint8 GetCounter1(void);
+/////2////
+void SetCounter2(uint8 tmp);
+void AddCounter2(void);
+void SubCounter2(void);
+uint8 GetCounter2(void);
+//////3/////
+void SetCounter3(uint8 tmp);
+void AddCounter3(void);
+void SubCounter3(void);
+uint8 GetCounter3(void);
+//////////层次计数//////////////
+void SetGrapCount(uint8 tmp);
+void AddGrapCount(void);
+void SubGrapCount(void);
+void ClrGrapCount(void);
+uint8 GetGrapCount(void);
+////////////菜单标志///////////////
+void AddMenuFlag(void);
+void SubMenuFlag(void);
+uint8 GetMenuFlag(void);
+void SetMenuFlag(uint8 tmp);
+void SetPasswordFlag(uint8 tmp);

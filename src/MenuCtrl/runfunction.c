@@ -560,7 +560,7 @@ void SendHeart(void)//心跳发送
             Led_Fault_On();//故障灯
             Led_Wireless_On();//通讯灯
 
-            ClearScreen(0);
+
             menu_wirelessmod_fault();
             if(GetAlarmFlag(POS_ALARM_BIT) != ALARM_FIRE)
                 SetAlarmFlag(POS_ALARM_BIT,ALARM_FAULT);

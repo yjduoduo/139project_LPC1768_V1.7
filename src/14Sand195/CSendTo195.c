@@ -64,25 +64,46 @@ void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr)
 //    check_lp_running();
  	UARTSend(0,Send195,SEND195LEN);
 }
-//火警状态下给vh75探头的反馈
-void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
+//火警状态下给vh75探头的反馈使之停发
+void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
 {
     uint8 num;
     uint16 dat;
     dat = 0;
+//    Debug("send response:%d,%d,%d,%d\n",PSN3,PSN2,PSN1,PSN0);
 //0x82 0x40 psn3 psn2 psn1 psn0 status val cs
     SendVH75[0]=0x82;
     SendVH75[1]=0x40;
-    SendVH75[2]=PSN3;//HEADER
-    SendVH75[3]=PSN2;//CMD
+    SendVH75[2]=PSN3;
+    SendVH75[3]=PSN2;
     SendVH75[4]=PSN1;
     SendVH75[5]=PSN0;
-    SendVH75[6]=ATTR_FIRE;//DSTADDR
-    SendVH75[7]=ZEROVAL;//SRCADDR
-    for(num = 0; num < 8; num++)					//checksum calculate
+    SendVH75[6]=ATTR_FIRE;//
+    SendVH75[7]=0x00;//
+    for(num = 1; num < 8; num++)					//checksum calculate
         dat += SendVH75[num];
-    SendVH75[8]=(uint8)(dat&0x00ff);//CS
+    SendVH75[8]=(uint8)(dat&0xff);//CS
     UARTSend(1,SendVH75,SENDV75LEN);
 }
 
-
+//火警状态下给vh75探头的反馈消音
+void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
+{
+    uint8 num;
+    uint16 dat;
+    dat = 0;
+//    Debug("send response:%d,%d,%d,%d\n",PSN3,PSN2,PSN1,PSN0);
+//0x82 0x42 psn3 psn2 psn1 psn0 status val cs
+    SendVH75[0]=0x82;
+    SendVH75[1]=0x42;
+    SendVH75[2]=PSN3;
+    SendVH75[3]=PSN2;
+    SendVH75[4]=PSN1;
+    SendVH75[5]=PSN0;
+    SendVH75[6]=0x30;//
+    SendVH75[7]=0x00;//
+    for(num = 1; num < 8; num++)					//checksum calculate
+        dat += SendVH75[num];
+    SendVH75[8]=(uint8)(dat&0xff);//CS
+    UARTSend(1,SendVH75,SENDV75LEN);
+}

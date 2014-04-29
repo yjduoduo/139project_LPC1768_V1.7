@@ -21,8 +21,8 @@
 #define MENU_FAULTALARM (0x03)
 
 //wireless fault interface
-#define MENU_WIRELESS_FAULT (3)
-
+#define MENU_WIRELESS_FAULT (0x04)
+#define MENU_OFFLINE   (0x05)
 
 
 //报警类型定义

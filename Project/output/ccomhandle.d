@@ -75,3 +75,4 @@
 .\output\ccomhandle.o: ..\src\common\CGrapParam.h
 .\output\ccomhandle.o: ..\src\CTimeCtrl\CTimeCtrl.h
 .\output\ccomhandle.o: ..\src\Hardware\Timer\CTimeDef.h
+.\output\ccomhandle.o: ..\src\CRunCtrl\CRunCtrl.h

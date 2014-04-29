@@ -1,5 +1,5 @@
 //E:/139/gasproject_LPC1768_V1.7/src/CTimeCtrl/CTimeCtrl.c
-//2014/04/24 13:22:03
+//2014/04/29 08:53:23
 /*****************************************************************************
 *author:
 *time  :
@@ -20,4 +20,7 @@ void add_timer1_3h_counter(void);
 uint32 get_3h_counter(uint8 part);
 //清计时，重新计时
 void clr_3h_counter(uint8 part);
-uint8 judge_3h_over(uint8 part);
+//通讯时，判断时间是否在正常范围内，小于6个小时就可以清空
+void clr_faultnum_3h_(uint8 part);
+//主循环处理6小时故障
+void judge_3h_over(uint8 part);

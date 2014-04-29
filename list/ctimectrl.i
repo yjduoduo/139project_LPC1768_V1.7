@@ -11,6 +11,427 @@
 
 
  
+#line 1 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+ 
+ 
+ 
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+#line 37 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+
+
+  
+  typedef unsigned int size_t;
+
+
+
+
+
+
+
+
+extern __declspec(__nothrow) void *memcpy(void * __restrict  ,
+                    const void * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+ 
+extern __declspec(__nothrow) void *memmove(void *  ,
+                    const void *  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) char *strcpy(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+ 
+extern __declspec(__nothrow) char *strncpy(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) char *strcat(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+ 
+extern __declspec(__nothrow) char *strncat(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) int memcmp(const void *  , const void *  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int strcmp(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+ 
+extern __declspec(__nothrow) int strncmp(const char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int strcasecmp(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int strncasecmp(const char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int strcoll(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) size_t strxfrm(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 184 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+extern __declspec(__nothrow) void *memchr(const void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
+
+   
+
+
+
+
+
+ 
+
+#line 200 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+extern __declspec(__nothrow) char *strchr(const char *  , int  ) __attribute__((__nonnull__(1)));
+
+   
+
+
+
+
+ 
+
+extern __declspec(__nothrow) size_t strcspn(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+ 
+
+#line 223 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+extern __declspec(__nothrow) char *strpbrk(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+
+   
+
+
+
+
+ 
+
+#line 238 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+extern __declspec(__nothrow) char *strrchr(const char *  , int  ) __attribute__((__nonnull__(1)));
+
+   
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) size_t strspn(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+ 
+
+#line 261 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+extern __declspec(__nothrow) char *strstr(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+
+   
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) char *strtok(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(2)));
+extern __declspec(__nothrow) char *_strtok_r(char *  , const char *  , char **  ) __attribute__((__nonnull__(2,3)));
+
+extern __declspec(__nothrow) char *strtok_r(char *  , const char *  , char **  ) __attribute__((__nonnull__(2,3)));
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) void *memset(void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+extern __declspec(__nothrow) char *strerror(int  );
+   
+
+
+
+
+
+ 
+extern __declspec(__nothrow) size_t strlen(const char *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+
+extern __declspec(__nothrow) size_t strlcpy(char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) size_t strlcat(char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) void _membitcpybl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitcpybb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitcpyhl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitcpyhb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitcpywl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitcpywb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitmovebl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitmovebb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitmovehl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitmovehb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitmovewl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+extern __declspec(__nothrow) void _membitmovewb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+#line 493 "f:\\Keil\\ARM\\RV31\\Inc\\string.h"
+
+
+
+ 
+#line 14 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 
@@ -274,6 +695,8 @@ void Clr2msArrived(void);
 
  void add_timer1_3h_counter(void);
 
+void reset_timer1_3h_counter(void);
+
  uint32 get_3h_counter(uint8 part);
 
  void clr_3h_counter(uint8 part);
@@ -288,7 +711,7 @@ void clr_faultnum_3h_(uint8 part);
 
 
 
-#line 80 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 82 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 uint8    vRun1s;   
 
@@ -319,7 +742,7 @@ static  uint16  m_AnsDataTime[]={(2*(1000/100)),(2*(1000/100)),(9*(1000/100)),(9
 
 
 
-#line 15 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 16 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\CRunCtrl\\CSysRunFlag.h"
 
 
@@ -444,7 +867,7 @@ extern uint8 Get40ms_CSysRunFlag(void);
 
 
 
-#line 16 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 17 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\CLoopCtrl\\CLpCkCtrl.h"
 
 
@@ -577,7 +1000,7 @@ extern  uint8 Get1s_CLpCkCtrl(void);
 
 
 
-#line 17 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 18 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\CLoopCtrl\\CLpAnsCtrl.h"
 
 
@@ -735,7 +1158,7 @@ extern  void  OutState_CLpAnsCtrl(uint8 vId);
 
 
 
-#line 18 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 19 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\common\\CSetCurrent.h"
 
 
@@ -774,7 +1197,7 @@ void printbuf(uint8* buf,uint8 size);
 
 
 void clrbuf(uint8* buf,uint8 size);
-#line 19 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 20 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\CLoopCtrl\\CLpScanCtrl.h"
 
 
@@ -908,7 +1331,7 @@ extern  void  ClrReset_CLpScanCtrl(void);
 
 
 
-#line 20 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 21 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\Board\\CLED.h"
 
 
@@ -952,7 +1375,7 @@ void Led_Fire_Init(void);
 void Led_Fire_On(void);
 void Led_Fire_Off(void);
 
-#line 21 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 22 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\CNodeInfo\\CNodeInfo.h"
 
 
@@ -1072,7 +1495,7 @@ extern  void    ClrCkCyc_CNodeInfo(uint8 vAddr);
 
 
 
-#line 22 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 23 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\Hardware\\Timer\\CTime.h"
 
 
@@ -1151,7 +1574,7 @@ void timern_enable(uint8 timern);
 #line 87 "..\\src\\Hardware\\Timer\\CTime.h"
 
 
-#line 23 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 24 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\Hardware\\UART\\uart.h"
 
 
@@ -1266,6 +1689,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -1310,7 +1734,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -1722,7 +2146,7 @@ typedef struct{
 
 
  
-#line 24 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 25 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\13CirCon\\CAddressCount.h"
 
 
@@ -1765,7 +2189,7 @@ void add_weixialasignal(void);
 
 void clr_weixialasignal(void);
 void clr_xialasignal(void);
-#line 25 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 26 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -1933,7 +2357,7 @@ void getcurrent_date(PCF8563_DATE *date);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -2349,7 +2773,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 26 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 27 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\APP\\include.h"
 
 
@@ -4578,7 +5002,7 @@ void GPIOinit(void);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -5849,7 +6273,7 @@ void clr_xialasignal(void);
  
 
 
-#line 27 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 28 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\MenuCtrl\\CKeyCounter.h"
 
 
@@ -5903,7 +6327,7 @@ void SetMenuFlag(uint8 tmp);
 
 void SetPasswordFlag(uint8 tmp);
 uint8 GetPasswordFlag(void);
-#line 28 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 29 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 #line 1 "..\\src\\12UARTHandle\\CComHandle.h"
 
 
@@ -5976,7 +6400,20 @@ uint8 GetPasswordFlag(void);
 
 #line 97 "..\\src\\12UARTHandle\\CComHandle.h"
 
-#line 130 "..\\src\\12UARTHandle\\CComHandle.h"
+
+typedef struct response_atfire
+{
+    uint8 num;
+    uint8 psn3;
+    uint8 psn2;
+    uint8 psn1;
+    uint8 psn0;
+    uint8 anologval;
+}response_atfire;
+
+
+
+#line 143 "..\\src\\12UARTHandle\\CComHandle.h"
 void SetFirstAlarm_Flag(uint8 tmp);
 
 void SetDisplay_alarm_flag(uint8 tmp);
@@ -6021,7 +6458,174 @@ void menu_fault_deal(alarminfo* alarm_info);
  
 
 
-#line 29 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 30 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 1 "..\\src\\14Sand195\\CSendTo195.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+void SaveData195(uint8 col,uint8 tmp);
+uint8 GetData195(uint8 col);
+void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
+void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+
+
+#line 31 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 1 "..\\src\\Menu\\CModelFault.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+void menu_wirelessmod_fault(void);
+void menu_vh75_connect_fault(uint8 part);
+#line 32 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 1 "..\\src\\12UARTHandle\\CComPara.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 16 "..\\src\\12UARTHandle\\CComPara.h"
+
+
+
+
+#pragma pack(1)	
+typedef struct{
+	uint8 	header;	
+	uint8	  cmd;   
+	uint32  addr; 
+	uint8   attr;
+	uint8   detail;
+	uint8	cs;	
+}TdUartMsg,*PdUartMsg;
+typedef struct{
+	uint8 	header;	
+	uint8	  cmd;   
+	uint8 	addr[4]; 
+	uint8   attr;
+	uint8   detail;
+	uint8	cs;	
+}TdUartMsgDetail,*PdUartMsgDetail;
+#pragma pack()
+typedef union{
+	TdUartMsg	UartMsg;
+	TdUartMsgDetail	UartMsgDetail;
+	uint8	UartMsgArray[sizeof(TdUartMsg)];
+}TdUartMsgUnion,*PdUartMsgUnion;
+
+
+
+
+
+
+
+#line 77 "..\\src\\12UARTHandle\\CComPara.h"
+
+uint8 GetHeart(uint8 row);
+void ReadHeart(void);
+void data_from_data0(void);
+
+void ClrComData(uint8 row);
+
+PdUartMsgUnion GetComData(uint8 row);
+uint8 get_dataCount(void);
+void AddBattLowSum(void);
+uint32 GetBattLowSum(void);
+
+void AddBrokenSum(void);
+uint32 GetBrokenSum(void);
+
+
+
+void MergeData(void);
+void Com0DataUnzip(void);
+void Com0Handle(void);
+
+void SetHeartFaultFlag(void);
+void ClrHeartFaultFlag(void);
+uint8 GetHeartFaultFlag(void);
+
+void SetAlarmFlag(uint8 row,uint8 tmp);
+uint8 GetAlarmFlag(uint8 row);
+
+
+uint8 GetFirstAlarm_Addr(uint8 row);
+
+
+
+
+void AddAlarmInfoFlag(void);
+void SubAlarmInfoFlag(void);
+void SetAlarmInfoFlag(uint8 tmp);
+uint8 GetAlarmInfoFlag(void);
+
+
+void SetReleaseFlag(uint8 tmp);
+uint8 GetReleaseFlag(void);
+
+void SetFlag_195(void);
+void ClrFlag_195(void);
+uint8 GetFlag_195(void);
+
+void SetCirAddrCurrent(uint8 tmp);
+uint8 GetCirAddrCurrent(void);
+void CompareCirAddr(void);
+void Init_CirAddrInfo(void);
+void ClrCirAlarmData(void);
+
+
+void CirAlarmDataInit(void);
+
+void SetFlagLed(uint8 tmp);
+uint8 GetFlagLed(void);
+
+
+
+
+
+
+
+
+ 
+
+
+#line 33 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+
 
 
 void  Init_CTimeCtrl(void)
@@ -6169,7 +6773,7 @@ void  AnsCommT0_CTimeCtrl(void)
         if(vRunTime0 < m_AnsStatTime[GetComm_CLpScanCtrl()])
         {
 
-#line 208 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
+#line 213 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 
 
             
@@ -6272,10 +6876,7 @@ void set_speark_ss_time(uint16 startT,uint16 stopT)
 
 
  
-
-
-
-
+#line 324 "..\\src\\CTimeCtrl\\CTimeCtrl.c"
 
 typedef struct _CompNotExist
 {
@@ -6296,6 +6897,17 @@ void add_timer1_3h_counter(void)
     }
 }
 
+void reset_timer1_3h_counter(void)
+{
+    uint8 i=0;
+    for(i=1;i<=200;i++)
+    {
+        vTime1_3h_exist[i].faultnums = 0;
+        vTime1_3h_exist[i].vTime1_3h_counter =0;
+    }
+}
+
+
 uint32 get_3h_counter(uint8 part)
 {
     if(part>50)
@@ -6312,7 +6924,7 @@ void clr_3h_counter(uint8 part)
 
 void clr_faultnum_3h_(uint8 part)
 {
-    if(get_3h_counter(part) < 60*6/1UL )
+    if(get_3h_counter(part) < 1*6/1UL )
     {
         vTime1_3h_exist[part].faultnums = 0;
     }
@@ -6321,12 +6933,13 @@ void clr_faultnum_3h_(uint8 part)
 
 void judge_3h_over(uint8 part)
 {
-    lcd_printf("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
-    if(get_3h_counter(part) > 60*6/1UL + 5)
+
+    DebugOnce("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
+    if(get_3h_counter(part) > 1*6/1UL + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;
     }
-    else if(get_3h_counter(part) > 60*3/1UL + 5)
+    else if(get_3h_counter(part) > 1*3/1UL + 5)
     {
         vTime1_3h_exist[part].faultnums++;
     }
@@ -6336,7 +6949,8 @@ void judge_3h_over(uint8 part)
         
         
 
-        
+        menu_vh75_connect_fault(part);
+
 
     }
 }

@@ -1,0 +1,40 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Hardware/Timer/CTime.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void timern_enable(uint8 timern);
+void timern_disable(uint8 timern);
+void init_timer(uint8 timer_num, uint32 TimerInterval)  ;
+//time tick counter
+void SetTimeTickCounter(uint8 tmp);
+void AddTimeTickCounter(void);
+uint8 GetTimeTickCounter(void);
+//heart tick
+void SetHeartTick(uint32 tmp);
+void AddHeartTick(void);
+uint32 GetHeartTick(void);
+//speaker tick
+void AddSpeakerTick(void);
+void SetSpeakerTick(uint16 tmp);
+uint16 GetSpeakerTick(void);
+//回路处理的优先级最高，因此，处理期间，其它内容不作处理，关其它中断
+void  TIMER0_IRQHandler (void);
+//定时20ms
+void  TIMER1_IRQHandler (void);
+void  TIMER2_IRQHandler (void);
+void vAddLedFlag(void);
+void vClrLedFlag(void);
+uint32 vGetLedFlag(void);
+void vAddScreenMask(void);
+uint32 vGetScreenMask(void);
+void vClrScreenMask(void);
+void OffLcd(void);
+void OnLCD(void);
+void enable_timer( uint8 timer_num );
+void disable_timer( uint8 timer_num );
+void reset_timer( uint8 timer_num );
+//led灯显示，无线和运行灯
+void CLedShow(void);
+void CSpeakerPWM(void);

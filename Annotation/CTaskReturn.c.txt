@@ -1,0 +1,11 @@
+//E:/139/gasproject_LPC1768_V1.7/src/MenuCtrl/CTaskReturn.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void CLevel1_Return(void);
+void CLevel21_Return(void);
+void CLevel22_Return(void);
+void CLevel23_Return(void);
+void CLevel3_Return(void);

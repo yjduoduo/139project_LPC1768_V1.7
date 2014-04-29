@@ -1,0 +1,13 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Board/CRelay.c
+//2014/04/29 08:53:22
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+//（水灾，故障）报警输出
+void Relay_Init(void);
+//火警继电器触发的动作
+void Fire_Relay_On(void);
+void Fire_Relay_Off(void);
+void Fault_Relay_On(void);
+void Fault_Relay_Off(void);

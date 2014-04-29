@@ -1,0 +1,10 @@
+//E:/139/gasproject_LPC1768_V1.7/Project/lpc17xx_rtc.c
+//2014/04/29 08:53:21
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void LPC17xx_RTC_Init (void);
+void LPC17xx_RTC_Start( void ) ;
+void LPC17xx_RTC_SetTime( const RTCTime *rtc ) ;
+void LPC17xx_RTC_GetTime( RTCTime *rtc ) ;

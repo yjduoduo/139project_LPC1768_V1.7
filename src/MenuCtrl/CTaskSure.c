@@ -152,6 +152,9 @@ void reset_ok(void)
     clr_weixialasignal();
     clr_xialasignal();
 
+    //清离线检测
+    reset_timer1_3h_counter();
+
     Menu_complete();
     Eint_En();//开中断
     DelayMs(3000);

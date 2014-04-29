@@ -4592,6 +4592,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -4636,7 +4637,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -5726,7 +5727,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -6962,6 +6963,19 @@ void clr_xialasignal(void);
 #line 97 "..\\src\\12UARTHandle\\CComHandle.h"
 
 
+typedef struct response_atfire
+{
+    uint8 num;
+    uint8 psn3;
+    uint8 psn2;
+    uint8 psn1;
+    uint8 psn0;
+    uint8 anologval;
+}response_atfire;
+
+
+
+
 
 uint8 Convertdata[6] ={0};
 uint8 UartRxbuf[9];
@@ -7308,7 +7322,8 @@ uint8 GetPasswordFlag(void);
 void SaveData195(uint8 col,uint8 tmp);
 uint8 GetData195(uint8 col);
 void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
-void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
 
 
 #line 28 "..\\src\\12UARTHandle\\CComHandle.c"
@@ -8231,6 +8246,8 @@ extern   void   T1Int_CTimeCtrl(void);
 
 extern void add_timer1_3h_counter(void);
 
+void reset_timer1_3h_counter(void);
+
 extern uint32 get_3h_counter(uint8 part);
 
 extern void clr_3h_counter(uint8 part);
@@ -8241,9 +8258,66 @@ extern void judge_3h_over(uint8 part);
  
  
 
-#line 109 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 111 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 39 "..\\src\\12UARTHandle\\CComHandle.c"
+#line 1 "..\\src\\CRunCtrl\\CRunCtrl.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+#line 20 "..\\src\\CRunCtrl\\CRunCtrl.h"
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+extern   void   Init_CRunCtrl(void);    
+
+extern   void   Reset_CRunCtrl(void);    
+
+extern   void   do_CRunCtrl(void);    
+
+extern   void   LpCk_CRunCtrl(void); 
+ 
+extern   void check_response_atfire(void);
+ 
+ 
+ 
+
+#line 60 "..\\src\\CRunCtrl\\CRunCtrl.h"
+
+#line 40 "..\\src\\12UARTHandle\\CComHandle.c"
 
 
 
@@ -8873,6 +8947,8 @@ void normal_deal(uint8 num,uint8 cir_addr)
 
 alarminfo  alarm_info;
 
+response_atfire respfire_val={(0xff),(0xff),(0xff),(0xff),(0xff)};
+
  
 void HandleInfo_Uart1(void)
 {
@@ -8911,6 +8987,7 @@ void HandleInfo_Uart1(void)
         case	0x40:		
 
             lcd_printf("-->>CMD_ALARM!!!\n");
+            DebugOnce("-->>CMD_ALARM!!!\n");
             if(check_psn_all0xff())
             {
                 lcd_printf("psn all 0xff\n");
@@ -8922,21 +8999,28 @@ void HandleInfo_Uart1(void)
                     return;
                 OnLCD();
                 SetFlagLed(1);
-                uart1_cmd_reponse_atfire(get_comp_psn3(num),
-                                         get_comp_psn2(num),
-                                         get_comp_psn1(num),
-                                         get_comp_psn0(num));
 
 
                 clr_alarm_f_recvmess3h(num);
                 clr_3h_counter(num);
                 clr_faultnum_3h_(num);
 
+                respfire_val.num = num;
+                respfire_val.psn3 = get_comp_psn3(num);
+                respfire_val.psn2 = get_comp_psn2(num);
+                respfire_val.psn1 = get_comp_psn1(num);
+                respfire_val.psn0 = get_comp_psn0(num);
+
+                if((0x33) == alarm_info.attr)
+                {
+                    check_response_atfire();
+                }
 
                 
                 if(get_mask_info(num) == (0x01))
                 {
                     lcd_printf("num is masked:%d\n",num);
+                    DebugOnce("num is masked:%d\n",num);
 
                     break;
                 }
@@ -8945,6 +9029,7 @@ void HandleInfo_Uart1(void)
                     
     
                     lcd_printf("num:%d\n",num);
+                    DebugOnce("num:%d\n",num);
                     alarm_info.part = num;
                     alarm_info.ciraddr = get_comp_ciraddr(num);
                     alarm_info.type    = get_comp_devtype(num);
@@ -8956,7 +9041,13 @@ void HandleInfo_Uart1(void)
                     lcd_printf("alarm ciraddr:%d\n",alarm_info.ciraddr);
                     if((0x33) == alarm_info.attr)
                     {
+
                         
+
+
+
+
+
                         if((!judge_alarm_first())&&JudgeAlarmType())
                         {
                             lcd_printf("--->>>first alarm\n");
@@ -9061,7 +9152,7 @@ void HandleInfo_Uart1(void)
     
     ClrComData(com1Count);
     com1Count++;
-    if(com1Count== 20)
+    if(com1Count== 10)
         com1Count=0;
 
     if(UartClrflag == 0xA5)

@@ -66,3 +66,4 @@
 .\output\crunctrl.o: ..\src\componentinfo\store_addr.h
 .\output\crunctrl.o: ..\src\MenuCtrl\CKeyCounter.h
 .\output\crunctrl.o: ..\src\common\CSetCurrent.h
+.\output\crunctrl.o: ..\src\14Sand195\CSendTo195.h

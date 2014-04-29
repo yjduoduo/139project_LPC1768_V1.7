@@ -36,6 +36,7 @@
 #include  "CNodeInfo.h"
 #include  "CGrapParam.h"
 #include  "CTimeCtrl.h"
+#include  "CRunCtrl.h"
 
 
 //宏定义
@@ -88,7 +89,7 @@ PCF8563_DATE Getalarmtime(void)
 {
     return valarmtime;
 }
-
+//13601377913
 void SetSum(uint8 row,uint8 tmp)
 {
     AlarmSum[row]=tmp;
@@ -665,6 +666,8 @@ void normal_deal(uint8 num,uint8 cir_addr)
 
 alarminfo  alarm_info;
 
+response_atfire respfire_val={INITVAL,INITVAL,INITVAL,INITVAL,INITVAL};
+
 /*************接收处理******************/
 void HandleInfo_Uart1(void)//主循环中
 {
@@ -703,6 +706,7 @@ void HandleInfo_Uart1(void)//主循环中
         case	CMD_COMPENET:		//	  40报警
 
             Debug("-->>CMD_ALARM!!!\n");
+            DebugOnce("-->>CMD_ALARM!!!\n");
             if(check_psn_all0xff())
             {
                 Debug("psn all 0xff\n");
@@ -714,21 +718,28 @@ void HandleInfo_Uart1(void)//主循环中
                     return;
                 OnLCD();
                 SetFlagLed(1);
-                uart1_cmd_reponse_atfire(get_comp_psn3(num),
-                                         get_comp_psn2(num),
-                                         get_comp_psn1(num),
-                                         get_comp_psn0(num));
 //                UartBindSend(CMD_COMPENET,9);
 //3hour故障处理
                 clr_alarm_f_recvmess3h(num);
                 clr_3h_counter(num);
                 clr_faultnum_3h_(num);
 
+                respfire_val.num = num;
+                respfire_val.psn3 = get_comp_psn3(num);
+                respfire_val.psn2 = get_comp_psn2(num);
+                respfire_val.psn1 = get_comp_psn1(num);
+                respfire_val.psn0 = get_comp_psn0(num);
+
+                if(ATTR_FIRE == alarm_info.attr)//fire
+                {//is fire?
+                    check_response_atfire();
+                }
 
                 //屏蔽否？
                 if(get_mask_info(num) == OPSTYPE_STOP)//已经屏蔽了，不报警了
                 {
                     Debug("num is masked:%d\n",num);
+                    DebugOnce("num is masked:%d\n",num);
 
                     break;
                 }
@@ -737,6 +748,7 @@ void HandleInfo_Uart1(void)//主循环中
                     //通过PSN找到位置
     //                num = GetNum(COM_PSN(3),COM_PSN(2),COM_PSN(1),COM_PSN(0));//地址所在数组的序号
                     Debug("num:%d\n",num);
+                    DebugOnce("num:%d\n",num);
                     alarm_info.part = num;
                     alarm_info.ciraddr = get_comp_ciraddr(num);
                     alarm_info.type    = get_comp_devtype(num);
@@ -748,7 +760,13 @@ void HandleInfo_Uart1(void)//主循环中
                     Debug("alarm ciraddr:%d\n",alarm_info.ciraddr);
                     if(ATTR_FIRE == alarm_info.attr)//fire
                     {//is fire?
+//                        check_response_atfire();
                         //处理首警
+//                        Debug("at firer response num:%d\n",num);
+//                        uart1_stop_reponse_atfire(get_comp_psn3(num),
+//                                                 get_comp_psn2(num),
+//                                                 get_comp_psn1(num),
+//                                                 get_comp_psn0(num));
                         if((!judge_alarm_first())&&JudgeAlarmType())//首警
                         {
                             Debug("--->>>first alarm\n");

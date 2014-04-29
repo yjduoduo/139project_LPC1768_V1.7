@@ -1,0 +1,33 @@
+//E:/139/gasproject_LPC1768_V1.7/src/CLoopCtrl/CLpCkCtrl.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void  Init_CLpCkCtrl(void);
+//时钟中断处理
+void  SetExtint_CLpCkCtrl(uint8 vType);
+uint8  GetExtint_CLpCkCtrl(void);
+void  ClrExtint_CLpCkCtrl(void) ;
+ 
+void  SetPer_CLpCkCtrl(uint8 vType);
+uint8  GetPer_CLpCkCtrl(void);
+void  ClrPer_CLpCkCtrl(void) ;
+void  ClrReset_CLpCkCtrl(void) ;
+void  SetReset_CLpCkCtrl(void);
+uint8 GetReset_CLpCkCtrl(void);
+void  ClrAlarm_CLpCkCtrl(void) ;
+void  SetAlarm_CLpCkCtrl(void);
+uint8 GetAlarm_CLpCkCtrl(void);
+void  Clr50ms_CLpCkCtrl(void) ;
+void  Set50ms_CLpCkCtrl(void);
+uint8 Get50ms_CLpCkCtrl(void);
+void  Clr10ms_CLpCkCtrl(void) ;
+void  Set10ms_CLpCkCtrl(void);
+uint8 Get10ms_CLpCkCtrl(void);
+void  Clr1s_CLpCkCtrl(void) ;
+void  Set1s_CLpCkCtrl(void);
+uint8 Get1s_CLpCkCtrl(void);
+void  Clr5s_CLpCkCtrl(void) ;
+void  Set5s_CLpCkCtrl(void);
+uint8 Get5s_CLpCkCtrl(void);

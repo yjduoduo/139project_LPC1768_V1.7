@@ -141,6 +141,7 @@ typedef  unsigned long   ulong;
 
    void   LpCk_CRunCtrl(void); 
  
+   void check_response_atfire(void);
  
  
  
@@ -2915,6 +2916,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -2959,7 +2961,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -3971,7 +3973,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -5244,6 +5246,8 @@ extern   void   T1Int_CTimeCtrl(void);
 
 extern void add_timer1_3h_counter(void);
 
+void reset_timer1_3h_counter(void);
+
 extern uint32 get_3h_counter(uint8 part);
 
 extern void clr_3h_counter(uint8 part);
@@ -5254,7 +5258,7 @@ extern void judge_3h_over(uint8 part);
  
  
 
-#line 109 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 111 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 #line 22 "..\\src\\CRunCtrl\\CRunCtrl.c"
 #line 1 "..\\src\\common\\CFlashParam.h"
@@ -5386,7 +5390,20 @@ extern void judge_3h_over(uint8 part);
 
 #line 97 "..\\src\\12UARTHandle\\CComHandle.h"
 
-#line 130 "..\\src\\12UARTHandle\\CComHandle.h"
+
+typedef struct response_atfire
+{
+    uint8 num;
+    uint8 psn3;
+    uint8 psn2;
+    uint8 psn1;
+    uint8 psn0;
+    uint8 anologval;
+}response_atfire;
+
+
+
+#line 143 "..\\src\\12UARTHandle\\CComHandle.h"
 void SetFirstAlarm_Flag(uint8 tmp);
 
 void SetDisplay_alarm_flag(uint8 tmp);
@@ -5884,6 +5901,31 @@ void printbuf(uint8* buf,uint8 size);
 
 void clrbuf(uint8* buf,uint8 size);
 #line 31 "..\\src\\CRunCtrl\\CRunCtrl.c"
+#line 1 "..\\src\\14Sand195\\CSendTo195.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+void SaveData195(uint8 col,uint8 tmp);
+uint8 GetData195(uint8 col);
+void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
+void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+
+
+#line 32 "..\\src\\CRunCtrl\\CRunCtrl.c"
 
 
 void hardware_init(void)
@@ -5983,9 +6025,37 @@ void detect_online(void)
     }
 }
 
+
+extern response_atfire respfire_val;
+
+void check_response_atfire(void)
+{
+    if(!(((0xff) == respfire_val.psn3)
+         &&((0xff) == respfire_val.psn2)
+         &&((0xff) == respfire_val.psn1)
+         &&((0xff) == respfire_val.psn0)))
+    {
+        lcd_printf("at firer response num:%d\n",respfire_val.num);
+        
+
+        uart1_stop_reponse_atfire(respfire_val.psn3,
+                                  respfire_val.psn2,
+                                  respfire_val.psn1,
+                                  respfire_val.psn0);
+
+
+
+
+    }
+
+
+}
+
+
+
 void   do_CRunCtrl(void)
 {   
-
+    
 
     
     
@@ -6029,7 +6099,9 @@ void   do_CRunCtrl(void)
 
 
         
-        HandleInfo_Uart1();
+        
+        
+
 
         return;
     }
@@ -6037,12 +6109,16 @@ void   do_CRunCtrl(void)
     if(Get40ms_CSysRunFlag())
     {
         Clr40ms_CSysRunFlag();
-
-
-        
         
 
         
+        
+
+        
+
+
+
+
 
 
         return;
@@ -6059,9 +6135,15 @@ void   do_CRunCtrl(void)
 
         deal_speaker();
 
+        
+
+        
         return;
     }
-#line 270 "..\\src\\CRunCtrl\\CRunCtrl.c"
+
+    HandleInfo_Uart1();
+
+#line 311 "..\\src\\CRunCtrl\\CRunCtrl.c"
 }
 
 
@@ -6072,13 +6154,13 @@ void  RunLed_CRunCtrl(void)
     if(vRunLedCount&1)
     {
         Led_Run_On();
-        if(GetMenuFlag() != (3))
+        if(GetMenuFlag() != (0x04))
             Led_Wireless_Off();
     }
     else
     {
         Led_Run_Off();
-        if(GetMenuFlag() != (3))
+        if(GetMenuFlag() != (0x04))
             Led_Wireless_On();
     }
 }

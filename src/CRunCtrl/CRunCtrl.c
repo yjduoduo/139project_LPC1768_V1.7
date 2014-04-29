@@ -28,6 +28,7 @@
 #include  "store_addr.h"
 #include  "CKeyCounter.h"
 #include  "CSetCurrent.h"
+#include  "CSendTo195.h"
 
 
 void hardware_init(void)
@@ -127,9 +128,37 @@ void detect_online(void)
     }
 }
 
+
+extern response_atfire respfire_val;
+
+void check_response_atfire(void)
+{
+    if(!((INITVAL == respfire_val.psn3)
+         &&(INITVAL == respfire_val.psn2)
+         &&(INITVAL == respfire_val.psn1)
+         &&(INITVAL == respfire_val.psn0)))
+    {
+        Debug("at firer response num:%d\n",respfire_val.num);
+        //        DebugOnce("at firer response num:%d\n",respfire_val.num);
+
+        uart1_stop_reponse_atfire(respfire_val.psn3,
+                                  respfire_val.psn2,
+                                  respfire_val.psn1,
+                                  respfire_val.psn0);
+//        uart1_offsound_reponse_atfire(respfire_val.psn3,
+//                                      respfire_val.psn2,
+//                                      respfire_val.psn1,
+//                                      respfire_val.psn0);
+    }
+
+
+}
+
+
+
 void   do_CRunCtrl(void)
 {   
-//        pwm1_test_start_stop();
+    //        pwm1_test_start_stop();
 #if 1
     //    if(GetReset_CSysRunFlag())
     //    {
@@ -173,7 +202,9 @@ void   do_CRunCtrl(void)
 
 
         //        无线发送与接收，串口1
-        HandleInfo_Uart1();
+        //        check_response_atfire();
+        //        HandleInfo_Uart1();
+
 
         return;
     }
@@ -181,12 +212,16 @@ void   do_CRunCtrl(void)
     if(Get40ms_CSysRunFlag())
     {
         Clr40ms_CSysRunFlag();
-//        state_loopld_printf();
+        //        state_loopld_printf();
 
         //无线发送与接收，串口1
         //        HandleInfo_Uart1();
 
         //         info_loopldbuf();
+
+
+
+
 
 
         return;
@@ -203,8 +238,14 @@ void   do_CRunCtrl(void)
 
         deal_speaker();
 
+        //        HandleInfo_Uart1();
+
+        //        check_response_atfire();
         return;
     }
+
+    HandleInfo_Uart1();
+
 #else
     //    if(GetReset_CSysRunFlag())
     //    {

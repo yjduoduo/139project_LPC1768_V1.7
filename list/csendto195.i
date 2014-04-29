@@ -2478,6 +2478,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -2522,7 +2523,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -3612,7 +3613,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -4795,7 +4796,8 @@ void clr_xialasignal(void);
 void SaveData195(uint8 col,uint8 tmp);
 uint8 GetData195(uint8 col);
 void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
-void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
+void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
 
 
 #line 16 "..\\src\\14Sand195\\CSendTo195.c"
@@ -4871,7 +4873,20 @@ void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
 
 #line 97 "..\\src\\12UARTHandle\\CComHandle.h"
 
-#line 130 "..\\src\\12UARTHandle\\CComHandle.h"
+
+typedef struct response_atfire
+{
+    uint8 num;
+    uint8 psn3;
+    uint8 psn2;
+    uint8 psn1;
+    uint8 psn0;
+    uint8 anologval;
+}response_atfire;
+
+
+
+#line 143 "..\\src\\12UARTHandle\\CComHandle.h"
 void SetFirstAlarm_Flag(uint8 tmp);
 
 void SetDisplay_alarm_flag(uint8 tmp);
@@ -4968,11 +4983,12 @@ void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr)
  	UARTSend(0,Send195,15);
 }
 
-void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
+void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
 {
     uint8 num;
     uint16 dat;
     dat = 0;
+
 
     SendVH75[0]=0x82;
     SendVH75[1]=0x40;
@@ -4981,11 +4997,31 @@ void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
     SendVH75[4]=PSN1;
     SendVH75[5]=PSN0;
     SendVH75[6]=(0x33);
-    SendVH75[7]=(0x00);
-    for(num = 0; num < 8; num++)					
+    SendVH75[7]=0x00;
+    for(num = 1; num < 8; num++)					
         dat += SendVH75[num];
-    SendVH75[8]=(uint8)(dat&0x00ff);
+    SendVH75[8]=(uint8)(dat&0xff);
     UARTSend(1,SendVH75,9);
 }
 
 
+void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0)
+{
+    uint8 num;
+    uint16 dat;
+    dat = 0;
+
+
+    SendVH75[0]=0x82;
+    SendVH75[1]=0x42;
+    SendVH75[2]=PSN3;
+    SendVH75[3]=PSN2;
+    SendVH75[4]=PSN1;
+    SendVH75[5]=PSN0;
+    SendVH75[6]=0x30;
+    SendVH75[7]=0x00;
+    for(num = 1; num < 8; num++)					
+        dat += SendVH75[num];
+    SendVH75[8]=(uint8)(dat&0xff);
+    UARTSend(1,SendVH75,9);
+}

@@ -1,0 +1,20 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Menu/CCompReg.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void menu_reging(void);
+void menu_invalid_comp(void);
+void menu_compaddr(uint8 line);
+void menu_compstatus(void);
+void menu_comptype(void);
+void menu_overciraddr(void);
+void menu_compreged(void);
+void menu_devreged(void);
+void menu_overcompnums(void);
+void menu_regedsucc(void);
+void menu_compreg(uint8 flag);
+void menu_compreg_tips(void);
+//tm2-×¢²áµØÖ·
+void CompReg_menu(uint16 department,uint16 tmp,uint8 regf,uint8 tm2,uint8 rflag,uint8 sureflag);

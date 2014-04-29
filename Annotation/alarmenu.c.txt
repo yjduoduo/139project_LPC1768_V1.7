@@ -1,0 +1,9 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Menu/alarmenu.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+//addr0首地址,addr1报警地址,alarmsum报警总数,cnt报警类型 num 注释序号
+void Alarm_Menu(uint8 fisrtpart,uint8 otherpart,uint8 cirAddr,
+                uint16 alarmsum,uint8 type,PCF8563_DATE *timed);

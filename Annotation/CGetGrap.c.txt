@@ -1,0 +1,10 @@
+//E:/139/gasproject_LPC1768_V1.7/src/MenuCtrl/CGetGrap.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void GetMainGrap(uint8 tmp);
+void GetSetGrap(uint8 tmp);
+void GetCheckGrap(uint8 tmp);
+void GetTestGrap(uint8 tmp);

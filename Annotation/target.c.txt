@@ -1,0 +1,10 @@
+//E:/139/gasproject_LPC1768_V1.7/src/target.c
+//2014/04/29 08:53:25
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void TargetInit(void);
+void GPIOResetInit( void );
+void ConfigurePLL ( void );
+void TargetResetInit(void);

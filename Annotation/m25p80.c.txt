@@ -1,0 +1,12 @@
+//E:/139/gasproject_LPC1768_V1.7/m25p80.c
+//2014/04/29 08:53:25
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void MP25P80_WriteEnable(void);
+void MP25P80_WriteDis(void);
+void MP25P80_EraseSector(long Addr);
+void MP25P80_EraseBulk(void);
+uchar MP25P80_ReadReg(void);
+void MP25P80_Check(void);

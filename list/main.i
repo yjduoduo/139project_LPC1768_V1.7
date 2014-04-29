@@ -3462,6 +3462,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -3506,7 +3507,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -4596,7 +4597,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -5808,11 +5809,12 @@ extern   void   do_CRunCtrl(void);
 
 extern   void   LpCk_CRunCtrl(void); 
  
+extern   void check_response_atfire(void);
  
  
  
 
-#line 59 "..\\src\\CRunCtrl\\CRunCtrl.h"
+#line 60 "..\\src\\CRunCtrl\\CRunCtrl.h"
 
 #line 21 "..\\src\\APP\\main.c"
 
@@ -5823,7 +5825,8 @@ int main (void)
 {
     SystemClockUpdate();
     Init_CRunCtrl();
-    lcd_printf("=====hello 139 wireless mod==========\n");
+
+    DebugOnce("=====hello 139 wireless mod==========\n");
     while ( 1 )
     {
         do_CRunCtrl();

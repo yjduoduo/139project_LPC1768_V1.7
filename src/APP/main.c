@@ -26,7 +26,8 @@ int main (void)
 {
     SystemClockUpdate();
     Init_CRunCtrl();
-    Debug("=====hello 139 wireless mod==========\n");
+//    DebugOnce("-->>CMD_ALARM!!!\n");
+    DebugOnce("=====hello 139 wireless mod==========\n");
     while ( 1 )
     {
         do_CRunCtrl();

@@ -1,0 +1,7 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Menu/CDateMod.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void DateMod_Menu(uint16 year,uint8 month,uint8 day,uint8 hour,uint8 minute,uint8 second,uint8 tflag,uint8 sureflag);

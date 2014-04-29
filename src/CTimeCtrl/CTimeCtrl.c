@@ -10,6 +10,7 @@
 * Date : 2013-8-23
 *********************************************************************************************************
 */
+#include <string.h>
 #define   CTimeCtrl_C
 #include  "CTimeCtrl.h"
 #include  "CSysRunFlag.h"
@@ -26,6 +27,10 @@
 #include  "include.h"
 #include  "CKeyCounter.h"
 #include  "CComHandle.h"
+#include  "CSendTo195.h"
+#include  "CModelFault.h"
+#include  "CComPara.h"
+
 
 
 void  Init_CTimeCtrl(void)
@@ -307,10 +312,15 @@ void set_speark_ss_time(uint16 startT,uint16 stopT)
 /***********************************************************
 ********************[6小时检测部件是否存在]*********************
 **********************************************************/
-
+#if 0//normal
 #define vTimer1_Base 1UL  /*(1 minute)*/
 #define vTimer1_3H   60*3/vTimer1_Base
 #define vTimer1_6H   60*6/vTimer1_Base
+#else//test
+#define vTimer1_Base 1UL  /*(1 minute)*/
+#define vTimer1_3H   1*3/vTimer1_Base
+#define vTimer1_6H   1*6/vTimer1_Base
+#endif
 
 typedef struct _CompNotExist
 {
@@ -330,6 +340,17 @@ void add_timer1_3h_counter(void)
         vTime1_3h_exist[i].vTime1_3h_counter++;
     }
 }
+//复位计时
+void reset_timer1_3h_counter(void)
+{
+    uint8 i=0;
+    for(i=1;i<=MAX_LOOP;i++)
+    {
+        vTime1_3h_exist[i].faultnums = 0;
+        vTime1_3h_exist[i].vTime1_3h_counter =0;
+    }
+}
+
 //获取计时数
 uint32 get_3h_counter(uint8 part)
 {
@@ -356,7 +377,8 @@ void clr_faultnum_3h_(uint8 part)
 //主循环处理6小时故障
 void judge_3h_over(uint8 part)
 {
-    Debug("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
+//    Debug("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
+    DebugOnce("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
     if(get_3h_counter(part) > vTimer1_6H + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;
@@ -370,9 +392,10 @@ void judge_3h_over(uint8 part)
     {
         //        menu_fault_deal(&alarm_info);
         //故障菜单
-//         menu_fault_deal();
-        
-
+//        SetMenuFlag(MENU_OFFLINE);
+        menu_vh75_connect_fault(part);
+//        if(GetAlarmFlag(POS_ALARM_BIT) != ALARM_FIRE)
+//            SetAlarmFlag(POS_ALARM_BIT,ALARM_FAULT);
     }
 }
 

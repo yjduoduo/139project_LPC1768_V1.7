@@ -1,0 +1,37 @@
+//E:/139/gasproject_LPC1768_V1.7/src/CRunCtrl/CSysRunFlag.c
+//2014/04/29 08:53:23
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void  InitC_CSysRunFlag(void);
+void  ClrReset_CSysRunFlag(void) ;
+void  SetReset_CSysRunFlag(void);
+uint8 GetReset_CSysRunFlag(void);
+void  ClrAlarm_CSysRunFlag(void) ;
+void  SetAlarm_CSysRunFlag(void);
+uint8 GetAlarm_CSysRunFlag(void);
+void  Clr50ms_CSysRunFlag(void) ;
+void  Set50ms_CSysRunFlag(void);
+uint8 Get50ms_CSysRunFlag(void);
+void  Clr20ms_CSysRunFlag(void) ;
+void  Set20ms_CSysRunFlag(void);
+uint8 Get20ms_CSysRunFlag(void);
+void  Clr1s_CSysRunFlag(void) ;
+void  Set1s_CSysRunFlag(void);
+uint8 Get1s_CSysRunFlag(void);
+void  Clr5s_CSysRunFlag(void) ;
+void  Set5s_CSysRunFlag(void);
+uint8 Get5s_CSysRunFlag(void);
+void  ClrDisHis_CSysRunFlag(void) ;
+void  SetDisHis_CSysRunFlag(void);
+uint8 GetDisHis_CSysRunFlag(void);
+void  Clr1m_CSysRunFlag(void);
+void  Set1m_CSysRunFlag(void);
+uint8 Get1m_CSysRunFlag(void);
+void  Clr100ms_CSysRunFlag(void);
+void  Set100ms_CSysRunFlag(void);
+uint8 Get100ms_CSysRunFlag(void);
+//40ms
+void  Clr40ms_CSysRunFlag(void);
+void  Set40ms_CSysRunFlag(void);

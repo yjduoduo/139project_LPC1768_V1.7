@@ -1,0 +1,52 @@
+//E:/139/gasproject_LPC1768_V1.7/src/12UARTHandle/CComPara.c
+//2014/04/29 08:53:22
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+uint8 GetHeart(uint8 row);
+void ReadHeart(void);
+//拷贝数据从data0到data数组
+void data_from_data0(void);
+void ClrComData(uint8 row)//;
+//缓冲位置
+PdUartMsgUnion GetComData(uint8 row);
+PdUartMsgUnion GetComData(void);
+uint8 get_dataCount(void);
+void AddBattLowSum(void);
+uint32 GetBattLowSum(void);
+void AddBrokenSum(void);
+uint32 GetBrokenSum(void);
+void MergeData(void);
+//解压
+void Com0DataUnzip(void);
+void Com0Handle(void);
+void AddHeartFaultFlag(void);
+void SetHeartFaultFlag(void);
+void ClrHeartFaultFlag(void);
+uint8 GetHeartFaultFlag(void);
+void SetAlarmFlag(uint8 row,uint8 tmp);
+//POS_ALARM_BIT :for alarm flag
+uint8 GetAlarmFlag(uint8 row);
+//}
+uint8 GetFirstAlarm_Addr(uint8 row);
+//}
+void AddAlarmInfoFlag(void);
+void SubAlarmInfoFlag(void);
+void SetAlarmInfoFlag(uint8 tmp);
+uint8 GetAlarmInfoFlag(void);
+void SetReleaseFlag(uint8 tmp);
+uint8 GetReleaseFlag(void);
+//195火警标志
+void SetFlag_195(void);
+void ClrFlag_195(void);
+uint8 GetFlag_195(void);
+void SetCirAddrCurrent(uint8 tmp);
+uint8 GetCirAddrCurrent(void);
+void CompareCirAddr(void);
+void Init_CirAddrInfo(void);
+void ClrCirAlarmData(void);
+//}
+void CirAlarmDataInit(void);
+void SetFlagLed(uint8 tmp);
+uint8 GetFlagLed(void);

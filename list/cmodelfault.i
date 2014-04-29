@@ -2478,6 +2478,7 @@ void HandleNote(void);
 void SaveAnnFun(void);
 void puts__(char *s);
 void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
 
 void uart_all_disable(void);
 void uart_all_enable(void);
@@ -2522,7 +2523,7 @@ void print_note_buf(void);
 
  
 
-#line 172 "..\\src\\Hardware\\UART\\uart.h"
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
 
 
 
@@ -3612,7 +3613,7 @@ void Delay1Ms(uint32 t);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-#line 580 "..\\src\\Hardware\\UART\\uart.h"
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -4793,12 +4794,13 @@ void clr_xialasignal(void);
 
 
 void menu_wirelessmod_fault(void);
-
+void menu_vh75_connect_fault(uint8 part);
 #line 16 "..\\src\\Menu\\CModelFault.c"
 
 void menu_wirelessmod_fault(void)
 {
 	uint8 hz[]="无线模块故障";
+    ClearScreen(0);
 	
 	DisplayJBHZK(1,3,0,((hz[0]<<8)+hz[1]));
 	DisplayJBHZK(1,3,16,((hz[2]<<8)+hz[3]));
@@ -4808,6 +4810,25 @@ void menu_wirelessmod_fault(void)
 	DisplayJBHZK(2,3,16,((hz[10]<<8)+hz[11]));
 	
 		
+
+
+}
+
+void menu_vh75_connect_fault(uint8 part)
+{
+    uint8 hz[]="部件连接故障";
+    ClearScreen(0);
+    DebugOnce("menu_vh75_connect_fault:%d\n",part);
+    Displaynumber(1,3,0,part/10);
+    Displaynumber(1,3,8,part%10);
+    DisplayJBHZK(1,3,16,((hz[0]<<8)+hz[1]));
+    DisplayJBHZK(1,3,32,((hz[2]<<8)+hz[3]));
+    DisplayJBHZK(1,3,48,((hz[4]<<8)+hz[5]));
+    DisplayJBHZK(2,3,0,((hz[6]<<8)+hz[7]));
+    DisplayJBHZK(2,3,16,((hz[8]<<8)+hz[9]));
+    DisplayJBHZK(2,3,32,((hz[10]<<8)+hz[11]));
+
+        
 
 
 }

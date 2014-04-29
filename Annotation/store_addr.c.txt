@@ -1,0 +1,17 @@
+//E:/139/gasproject_LPC1768_V1.7/src/componentinfo/store_addr.c
+//2014/04/29 08:53:25
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+//get null address
+uint32 get_storepos(void);
+uint32 get_comp_ciraddr_zp(uint8 inzone,uint8 partnumber);
+//查找此回路上探头的总量
+uint8 inqury_ciraddr(uint8 item);
+//clr
+void clr_store_comp_info(uint8 item);
+//judge
+uint8 judge_store_new(uint8 item);
+//初始化位置，初始化时将各个数据缓存中
+void init_store(void);

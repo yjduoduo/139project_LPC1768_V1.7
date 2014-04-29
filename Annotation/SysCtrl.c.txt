@@ -1,0 +1,38 @@
+//E:/139/gasproject_LPC1768_V1.7/src/timesharectrl/SysCtrl.c
+//2014/04/29 08:53:25
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void  Init_CSysRunFlag(void);
+//100us
+void  Set_CSys100usFlag(void);
+void  Clr_CSys100usFlag(void);
+uint8 Get_CSys100usFlag(void);
+//20ms
+void   Set_CSys20msFlag(void);
+void  Clr_CSys20msFlag(void);
+uint8 Get_CSys20msFlag(void);
+//100ms
+Ex_CSysRunFlag  void  Set_CSys100msFlag(void);
+Ex_CSysRunFlag  void  Clr_CSys100msFlag(void);
+Ex_CSysRunFlag  uint8 Get_CSys100msFlag(void);
+//500ms
+void   Set_CSys500msFlag(void);
+void  Clr_CSys500msFlag(void);
+uint8 Get_CSys500msFlag(void);
+void  Set_CSys1SFlag(void);
+void  Clr_CSys1SFlag(void);
+uint8 Get_CSys1SFlag(void);
+//2s
+void  Set_CSys2SFlag(void);
+void  Clr_CSys2SFlag(void);
+uint8 Get_CSys2SFlag(void);
+//5s
+void  Set_CSys5SFlag(void);
+void  Clr_CSys5SFlag(void);
+uint8 Get_CSys5SFlag(void);
+//1m
+void  Set_CSys1MFlag(void);
+void  Clr_CSys1MFlag(void);
+uint8 Get_CSys1MFlag(void);

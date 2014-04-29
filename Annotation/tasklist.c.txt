@@ -1,0 +1,19 @@
+//E:/139/gasproject_LPC1768_V1.7/src/MenuCtrl/tasklist.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void menu_setup_localaddr_tab(void);
+void menu_comp_reg_tab(void);
+void menu_setup_comp_tab(void);
+void back_task_setup_datetime(void);
+void back_task_save(void);
+void back_task_comp_state(void);
+//tab键处理
+void Back_Task(void);
+void Up_Task(void);
+void Down_Task(void);
+void Sure_Task(void)//确认键处理;
+void Return_Task(void);
+void Silence_Task(void);

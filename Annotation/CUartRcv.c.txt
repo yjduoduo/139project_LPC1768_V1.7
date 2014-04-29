@@ -1,0 +1,24 @@
+//E:/139/gasproject_LPC1768_V1.7/src/12UARTHandle/CUartRcv.c
+//2014/04/29 08:53:22
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void   ClrBuff_CUartRcv(void)  ;
+void   Add_CUartRcv(uint8 vRcvData);
+ 
+void   Read_CUartRcv(void);
+uint8  UartRcvCkFlag_CUartRcv(void) ;
+uint8  UartAddr_CUartRcv(uint8 vId);
+//同时反馈给计算机
+void  SetPro_CUartRcv(void);
+void   ChkPro_CUartRcv(void);
+//计算机设置注释信息
+void   BatChkNote_CUartRcv(void);
+void   SetNote_CUartRcv(void);
+void   ChkNote_CUartRcv(void);
+//计算机设置总线盘对应关系
+void   SetBusPro_CUartRcv(void);
+void   ChkBusPro_CUartRcv(void);
+void   RcvAct_CUartRcv(void)   ;
+void   RcvInsul_CUartRcv(void)   ;

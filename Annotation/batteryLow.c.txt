@@ -1,0 +1,7 @@
+//E:/139/gasproject_LPC1768_V1.7/src/Menu/batteryLow.c
+//2014/04/29 08:53:24
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void Battery_Low(uint8 inzone,uint8 partnumber,uint16 sum,uint8 type,PCF8563_DATE timed);

@@ -95,6 +95,19 @@ opstype:
 #define	WAIT_REPLY	WaitReply.Wait
 #define	WAIT_SEND	WaitSend.Wait
 
+
+typedef struct response_atfire
+{
+    uint8 num;
+    uint8 psn3;
+    uint8 psn2;
+    uint8 psn1;
+    uint8 psn0;
+    uint8 anologval;//模拟量
+}response_atfire;
+
+
+
 #ifdef COMHANDLE_C
 
 uint8 Convertdata[6] ={0};//转换数组

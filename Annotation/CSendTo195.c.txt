@@ -1,0 +1,12 @@
+//E:/139/gasproject_LPC1768_V1.7/src/14Sand195/CSendTo195.c
+//2014/04/29 08:53:22
+/*****************************************************************************
+*author:
+*time  :
+*****************************************************************************/
+void SaveData195(uint8 col,uint8 tmp);
+uint8 GetData195(uint8 col);
+//串口0查询命令后回复
+void Query_ByUart0(uint8 data3,uint8 data9,uint8 ciraddr);
+//火警状态下给vh75探头的反馈
+void uart1_cmd_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);

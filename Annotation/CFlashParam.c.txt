@@ -1,5 +1,5 @@
-//E:/139/2/LPC1768_V1.7/src/common/CFlashParam.c
-//2014/04/04 10:56:59
+//E:/139/gasproject_LPC1768_V1.7/src/common/CFlashParam.c
+//2014/04/29 08:53:25
 /*****************************************************************************
 *author:
 *time  :
@@ -25,6 +25,7 @@ uint8 getHistFullFlag(void);
 uint8 getHistFull(void);
 static void init_record(Flash_Record * flash_record);
 static void save_record(Flash_Record * flash_record);
+static void clr_record(Flash_Record * flash_record);
 //设置存储缓存
 static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 //获取存储缓存
@@ -90,7 +91,7 @@ uint8 get_mask_info(uint32 row)/*CGetMaskPSN*/;
 void init_alarm_info(void);
 //保存报警信息
 void save_alarm_info(void)/**/;
-static void set_alarm(uint32 row,uint32 col, uint8 tmp);
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
 static uint8 get_alarm_info(uint32 row,uint32 col)/**/;
 //获取报警属性
 uint8 get_alarm_attr(uint32 row);
@@ -108,11 +109,19 @@ void set_alarm_alarmsum(uint32 item, uint8 tmp);
 void set_alarm_type(uint32 item, uint8 tmp);
 void set_alarm_alarmed(uint32 item, uint8 tmp);
 void set_alarm_firstalarm(uint32 item, uint8 tmp);
+//获取报警属性
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
 void set_alarm_allinfo(uint32 item,alarminfo *info);
+//清除报警信息
+void clr_alarm_allinfo(void);
 void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
 uint8 get_alarm_part(uint32 item);
 uint8 get_alarm_ciraddr(uint32 item);
 uint8 get_alarm_type(uint32 item);
+//3hour recved message flag?
+uint8 get_alarm_f_recvmess3h(uint32 item);
 void get_alarm_allinfo(uint32 item, alarminfo *info);
 //设置首警
 void set_alarm_first(alarminfo *info);
@@ -124,8 +133,9 @@ uint8 get_alarm_firstflag(void);
 uint8 get_alarm_first_part(void);
 //火警个数
 uint8 get_firealarm_nums(void);
+void clr_firealarm(void);
 //通过部件号查找位置
-uint8 get_alarm_item_bypart(uint part);
+uint8 get_alarm_item_bypart(uint8 part);
 //故障个数
 uint8 get_faultalarm_nums(void);
 //是否为首警
@@ -134,6 +144,20 @@ void init_node_info(void)/*Com0Data_Init*/;
 void save_node_info(void);
 //设置部件缓存变量
 void set_node_info(uint32 row,uint32 col,uint8 tmp);
+void set_node_frame1(uint32 row,uint8 tmp);
+void set_node_frame2(uint32 row,uint8 tmp);
+void set_node_frame3(uint32 row,uint8 tmp);
+void set_node_cmd1(uint32 row,uint8 tmp);
+void set_node_cmd_rw(uint32 row,uint8 tmp);
+void set_node_devtype(uint32 row,uint8 tmp);
+void set_node_targetaddr(uint32 row,uint8 tmp);
+void set_node_controllernum(uint32 row,uint8 tmp);
+void set_node_datalen(uint32 row,uint8 tmp);
+void set_node_loop(uint32 row,uint8 tmp);
+void set_node_addr(uint32 row,uint8 tmp);
+void set_node_hz(uint32 row,uint8* tmp);
+void set_node_cs(uint32 row,uint8* tmp);
+void set_node_all_info(uint32 row,note_info_t *info);
 //获取部件缓存变量
 uint8 get_node_info(uint32 row,uint32 col);
 //}
