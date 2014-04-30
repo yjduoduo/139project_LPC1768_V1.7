@@ -312,7 +312,7 @@ void set_speark_ss_time(uint16 startT,uint16 stopT)
 /***********************************************************
 ********************[6小时检测部件是否存在]*********************
 **********************************************************/
-#if 0//normal
+#if 1//normal
 #define vTimer1_Base 1UL  /*(1 minute)*/
 #define vTimer1_3H   60*3/vTimer1_Base
 #define vTimer1_6H   60*6/vTimer1_Base
