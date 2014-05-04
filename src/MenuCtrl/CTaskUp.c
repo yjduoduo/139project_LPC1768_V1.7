@@ -74,7 +74,7 @@ void Level3_Up(void)
     default:break;
     }
 }
-void setup_localaddr_up(void)
+static void setup_localaddr_up(void)
 {
 //    Debug("setup_localaddr_up\n");
     switch(GetLocalParaSel())
@@ -109,7 +109,7 @@ void setup_localaddr_up(void)
 
 
 }
-void setup_compreg_up(void)
+static void setup_compreg_up(void)
 {
     switch(GetCompRegParaSel())
     {
@@ -135,7 +135,7 @@ void setup_compreg_up(void)
     }
     CompReg_menu(GetCompRegDep(),GetCompRegNum(),0,GetCompRegAddr(),GetCompRegParaSel(),0);
 }
-void setup_setcomp_up(void)
+static void setup_setcomp_up(void)
 {
     switch(GetComSet_seltab())
     {
@@ -165,7 +165,7 @@ void setup_setcomp_up(void)
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),MENU_COMPSET_TIPS);
 
 }
-void setup_datetime_up(void)
+static void setup_datetime_up(void)
 {
     switch(GetSelTime())
     {
@@ -246,7 +246,7 @@ void setup_Up(void)
         break;
     }
 }
-void query_system_up(void)
+static void query_system_up(void)
 {
     AddSysCheckDep();
     if(GetSysCheckDep()>=get_basic_zones())
@@ -255,7 +255,7 @@ void query_system_up(void)
     SysCheck_Menu(get_basic_zones(),get_basic_nums(),GetSysCheckDep(),0);
 
 }
-void query_compstatus_up(void)
+static void query_compstatus_up(void)
 {
     //    switch(GetStatusFlag())
     //    {
@@ -272,7 +272,7 @@ void query_compstatus_up(void)
     //    }
     query_compstatus_ok();
 }
-void query_hist_up(void)
+static void query_hist_up(void)
 {
     extern uint32 vHisCountDown;
     int32 tmp_num;
@@ -331,7 +331,7 @@ void query_Up(void)
     }
 }
 
-void test_sigStrlength_up(void)
+static void test_sigStrlength_up(void)
 {
     switch(GetIntenFlag())
     {

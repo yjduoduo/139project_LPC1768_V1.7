@@ -3,14 +3,16 @@
 ;*                                                
 ;*                            对象: runfunction
 ;*
-;*                        (c) Copyright 2013-2023, 尹海星
+;*                        (c) Copyright 2013-2023, xiaoweilai
 ;*                              All Rights Reserved
 ;*                                    Ver1.0
 ;* File : runfunction.c
-;* By   : 尹海星
+;* By   : xiaoweilai
 ;* 时间 : 2013-06-8
 ;*********************************************************************************************************
 ;*/
+#ifndef __RUNFUNCTION__H
+#define __RUNFUNCTION__H
 //#include  "runfunction.h"
 #include  "CFlashParam.h"
 
@@ -70,4 +72,6 @@ uint8 get_alarm_loop_show(void);
 //心跳时间设置
 static uint8 time_sendheart;
 volatile uint8 loopflag=0; //火警时界面轮显循环显示
+#endif
+
 #endif

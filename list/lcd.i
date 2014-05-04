@@ -1079,7 +1079,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -10827,17 +10828,17 @@ void WriteByte(uint8 dat)
     (*(volatile unsigned long *)(0x2009C000 + 0x38)) |= 1<<20;
     (*(volatile unsigned long *)(0x2009C000 + 0x3C)) |= 1<<20;
 }
-void WriteDoubleByte(uint8 dat)	
-{
-    CheckState();
-    (*(volatile unsigned long *)(0x2009C000 + 0x38)) |= 1<<18; 
-    (*(volatile unsigned long *)(0x2009C000 + 0x3C)) |= 1<<19 ;;
-    
-    
-    
-    (*(volatile unsigned long *)(0x2009C000 + 0x38)) |= 1<<20;
-    (*(volatile unsigned long *)(0x2009C000 + 0x3C)) |= 1<<20;
-}
+
+
+
+
+
+
+
+
+
+
+
 void WriteBlackByte(uint8 dat)	
 {
     CheckState();
@@ -10936,10 +10937,10 @@ void InitLCD(void)
     ClearScreen(0);
     SetStartLine(0); 
 }
-void WriteBytedata(uint8 vdate)
-{
 
-}
+
+
+
 
 
 
@@ -11150,10 +11151,10 @@ void Display1(uint8  ss,uint8  page,uint8  column,uint8  number)
     {WriteByte(Hzk1[i+16*number+8]);}
 }
 
-void DisplaynumberJBHZK(uint8  ss,uint8 page,uint8  column,uint8  number)
-{
 
-}
+
+
+
 void Displaynumber(uint8  ss,uint8 page,uint8  column,uint8  number)
 {
     uint32 i;	

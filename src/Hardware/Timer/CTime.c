@@ -135,10 +135,10 @@ void SetTimeTickCounter(uint8 tmp)
 {
     vTimeTickCounter =tmp;
 }
-void AddTimeTickCounter(void)
-{
-    vTimeTickCounter++;
-}
+// static void AddTimeTickCounter(void)
+// {
+//     vTimeTickCounter++;
+// }
 uint8 GetTimeTickCounter(void)
 {
     return vTimeTickCounter;
@@ -224,7 +224,7 @@ uint32 vGetScreenMask(void)
 {
     return vScreenMaskFlag;
 }
-void vClrScreenMask(void)
+static void vClrScreenMask(void)
 {
     vScreenMaskFlag=0;
 }

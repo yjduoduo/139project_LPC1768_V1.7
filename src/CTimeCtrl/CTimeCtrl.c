@@ -146,8 +146,8 @@ void  SaveComm_CTimeCtrl(uint8 vComm)
         SetData_CLpAnsCtrl(vSendData);
     }
 }
-uint8 bufcounter=0;
-uint8 loopldbuf[10] = {0,};
+static volatile uint8 bufcounter=0;
+// static uint8 loopldbuf[10] = {0,};
 
 
 //槽脉宽段处理
@@ -293,7 +293,7 @@ void   T0Int_CTimeCtrl(void)
         AnsCommT0_CTimeCtrl();
     }
 }
-void set_speark_ss_time(uint16 startT,uint16 stopT)
+static void set_speark_ss_time(uint16 startT,uint16 stopT)
 {
     vPWM1Time++;
     if((vPWM1Time >= startT) && !vPWM1StopFlag)
@@ -313,9 +313,9 @@ void set_speark_ss_time(uint16 startT,uint16 stopT)
 ********************[6小时检测部件是否存在]*********************
 **********************************************************/
 #if 1//normal
-#define vTimer1_Base 1UL  /*(1 minute)*/
-#define vTimer1_3H   60*3/vTimer1_Base
-#define vTimer1_6H   60*6/vTimer1_Base
+#define vTimer1_Base (1UL)  /*(1 minute)*/
+#define vTimer1_3H   ((60*3)/vTimer1_Base)
+#define vTimer1_6H   ((60*6)/vTimer1_Base)
 #else//test
 #define vTimer1_Base 1UL  /*(1 minute)*/
 #define vTimer1_3H   1*3/vTimer1_Base
@@ -330,7 +330,7 @@ typedef struct _CompNotExist
 }CompNotExist;
 
 
-CompNotExist vTime1_3h_exist[MAX_COMP+1]={0,};
+static CompNotExist vTime1_3h_exist[MAX_COMP+1]={0,};
 //每分钟为每个部件添加一次
 void add_timer1_3h_counter(void)
 {

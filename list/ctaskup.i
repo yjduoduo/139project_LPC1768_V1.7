@@ -1098,7 +1098,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3512,6 +3513,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -3827,12 +3830,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4030,7 +4033,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4076,6 +4079,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -5204,7 +5209,7 @@ void Level3_Up(void)
     default:break;
     }
 }
-void setup_localaddr_up(void)
+static void setup_localaddr_up(void)
 {
 
     switch(GetLocalParaSel())
@@ -5239,7 +5244,7 @@ void setup_localaddr_up(void)
 
 
 }
-void setup_compreg_up(void)
+static void setup_compreg_up(void)
 {
     switch(GetCompRegParaSel())
     {
@@ -5265,7 +5270,7 @@ void setup_compreg_up(void)
     }
     CompReg_menu(GetCompRegDep(),GetCompRegNum(),0,GetCompRegAddr(),GetCompRegParaSel(),0);
 }
-void setup_setcomp_up(void)
+static void setup_setcomp_up(void)
 {
     switch(GetComSet_seltab())
     {
@@ -5295,7 +5300,7 @@ void setup_setcomp_up(void)
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),0x10);
 
 }
-void setup_datetime_up(void)
+static void setup_datetime_up(void)
 {
     switch(GetSelTime())
     {
@@ -5376,7 +5381,7 @@ void setup_Up(void)
         break;
     }
 }
-void query_system_up(void)
+static void query_system_up(void)
 {
     AddSysCheckDep();
     if(GetSysCheckDep()>=get_basic_zones())
@@ -5385,7 +5390,7 @@ void query_system_up(void)
     SysCheck_Menu(get_basic_zones(),get_basic_nums(),GetSysCheckDep(),0);
 
 }
-void query_compstatus_up(void)
+static void query_compstatus_up(void)
 {
     
     
@@ -5402,7 +5407,7 @@ void query_compstatus_up(void)
     
     query_compstatus_ok();
 }
-void query_hist_up(void)
+static void query_hist_up(void)
 {
     extern uint32 vHisCountDown;
     int32 tmp_num;
@@ -5461,7 +5466,7 @@ void query_Up(void)
     }
 }
 
-void test_sigStrlength_up(void)
+static void test_sigStrlength_up(void)
 {
     switch(GetIntenFlag())
     {

@@ -33,15 +33,15 @@
 
 
 
-volatile uint32 RisingCount=0;//记录上升沿的时长数量
-volatile uint32 circuit_counter=0;//回路地址计数
-volatile uint8 vCirAddrv=0;//回路地址
-volatile uint8 syn_flag=0;
-volatile uint8 fireflag[2]={0};
-volatile uint8 Reset_Flag[50]={0};
-volatile uint8 Reset_Flag1[50]={0};
-volatile uint8 Reset_Counter[50]={0};
-volatile uint8 alarm_circuit_flag=0;
+// static volatile uint32 RisingCount=0;//记录上升沿的时长数量
+static volatile uint32 circuit_counter=0;//回路地址计数
+// static volatile uint8 vCirAddrv=0;//回路地址
+static volatile uint8 syn_flag=0;
+// static volatile uint8 fireflag[2]={0};
+// volatile uint8 Reset_Flag[50]={0};
+// volatile uint8 Reset_Flag1[50]={0};
+// volatile uint8 Reset_Counter[50]={0};
+static volatile uint8 alarm_circuit_flag=0;
 void SetAlarm_Circuit_Flag(uint8 tmp)
 {
     alarm_circuit_flag=tmp;
@@ -408,7 +408,7 @@ void ClrSync(void)
 //        }
 //    }
 //}
-uint8 xialasignal =0;
+static uint8 xialasignal =0;
 void addxialasignal(void)
 {
     xialasignal++;
@@ -424,14 +424,14 @@ void clr_xialasignal(void)
     xialasignal=0;
 }
 
-uint8 weixialasignal =0;
+static uint8 weixialasignal =0;
 void add_weixialasignal(void)
 {
     weixialasignal++;
     if(weixialasignal>200)
         weixialasignal=200;
 }
-uint8 get_weixialasignal(void)
+static uint8 get_weixialasignal(void)
 {
     return weixialasignal;
 }

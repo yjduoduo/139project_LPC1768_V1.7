@@ -1300,7 +1300,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             

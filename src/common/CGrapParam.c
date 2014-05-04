@@ -15,7 +15,7 @@
 #define GrapParam_c
 
 #include  "CGrapParam.h"
-#include  "Config.h"
+// #include  "Config.h"
 #include  "CMaDefine.h"
 #include  "CTaskSure.h"
 

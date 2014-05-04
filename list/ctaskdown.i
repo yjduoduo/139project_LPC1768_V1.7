@@ -1098,7 +1098,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3512,6 +3513,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -3827,12 +3830,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4030,7 +4033,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4076,6 +4079,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -4886,30 +4891,7 @@ void GetTestGrap(uint8 tmp);
 
 
 #line 19 "..\\src\\MenuCtrl\\CTaskDown.c"
-#line 1 "..\\src\\common\\CFlashParam.h"
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 16 "..\\src\\common\\CFlashParam.h"
-
-#line 479 "..\\src\\common\\CFlashParam.h"
-
-
- 
-
-
-#line 20 "..\\src\\MenuCtrl\\CTaskDown.c"
 #line 1 "..\\src\\common\\CGetCompSum.h"
 
 
@@ -5126,119 +5108,13 @@ extern void add_store_comp_nums(void);
 
 extern void sub_store_comp_nums(void);
 #line 24 "..\\src\\MenuCtrl\\CTaskDown.c"
-#line 1 "..\\src\\MenuCtrl\\CTaskSure.h"
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 42 "..\\src\\MenuCtrl\\CTaskSure.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void SetZjFlag(uint8 tmp);
-uint8 GetZjFlag(void);
-void Set_Note_Flag(void);
-void Clr_Note_Flag(void);
-uint8 Get_Note_Flag(void);
-
-
-
-
-void CLevel1_Sure(uint8 tmp);
-void setup_Sure(uint8 tmp);
-void query_Sure(uint8 tmp);
-void test_Sure(uint8 tmp);
-void CLevel24_Sure(uint8 tmp);
-void CLevel27_Sure(void);
-void CLevel3_Sure(uint8 tmp);
-void menu_press_ok_complete(uint8 line);
-void menu_setup_done(void);
-void menu_press_ok_save(void);
-void SetSpeaker_ON(void);
-void SetSpeaker_OFF(void);
-uint8 GetSpeaker_Flag(void);
-void menu_ops_done(void);
-
-uint16 local_addr_value(void);
-
-void query_compstatus_ok(void);
-void menu_compset(void);
-void menu_comp_masked(void);
-void menu_comp_started(void);
-void menu_opsing(void);
-
-
-void set_enter_flag(void);
-uint8 get_enter_falg(void);
-void clr_enter_flag(void);
-void menu_deling(void);
-void menu_comp_noreg(void);
-
-
-void set_entry_localaddr_flag(void);
-uint8 get_entry_localaddr_flag(void);
-void clr_entry_localaddr_flag(void);
-void reset_ok(void);
-#line 25 "..\\src\\MenuCtrl\\CTaskDown.c"
 
 
 extern tFlashinfoDef  FlashInfo;
 extern PCF8563_DATE    timedate;
 uint32 vHisCountDown=0;
-uint32 vHistCount=0;
+static volatile uint32 vHistCount=0;
 
 
 
@@ -5249,7 +5125,7 @@ void ClrHisCountDown(void)
     vHisCountDown=0;
 }
 void ClrHistCount(void)
-{
+{ 
     vHistCount=0;
 }
 void Level2_Down(void)
@@ -5300,7 +5176,7 @@ void Level3_Down(void)
     default:break;
     }
 }
-void setup_localaddr_down(void)
+static void setup_localaddr_down(void)
 {
     switch(GetLocalParaSel())
     {
@@ -5337,7 +5213,7 @@ void setup_localaddr_down(void)
 
     }
 }
-void setup_compreg_down(void)
+static void setup_compreg_down(void)
 {
     switch(GetCompRegParaSel() )
     {
@@ -5360,7 +5236,7 @@ void setup_compreg_down(void)
     CompReg_menu(GetCompRegDep(),GetCompRegNum(),0,GetCompRegAddr(),GetCompRegParaSel(),0);
 
 }
-void setup_setcomp_down(void)
+static void setup_setcomp_down(void)
 {
     switch(GetComSet_seltab())
     {
@@ -5391,7 +5267,7 @@ void setup_setcomp_down(void)
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),0x10);
 
 }
-void setup_timedate_down(void)
+static void setup_timedate_down(void)
 {
     switch(GetSelTime())
     {

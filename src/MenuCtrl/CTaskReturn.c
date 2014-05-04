@@ -18,7 +18,7 @@
 #include  "CGetGrap.h"
 #include  "tasklist.h"
 #include  "CKeyCounter.h"
-#include "CLED.h"
+// #include "CLED.h"
 #include  "CTaskDown.h"
 #include  "CTaskSure.h"
 #include  "CComPara.h"
@@ -103,7 +103,7 @@ void CLevel22_Return(void)
         ClearScreen(0);
         Check_Menu(2);
         ClrHisCountDown();
-        ClrHistCount();
+//         ClrHistCount();
         break;
     case 3:
         ClearScreen(0);

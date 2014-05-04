@@ -16,7 +16,7 @@
 #include  "CFlashParam.h"
 #include  "CComHandle.h"
 
-void menu_batlow(void)
+static void menu_batlow(void)
 {
     uint8 hz[]="Ƿѹ";
     DisplayJBHZK(2,2,32,HZ_SHOW(hz,0));

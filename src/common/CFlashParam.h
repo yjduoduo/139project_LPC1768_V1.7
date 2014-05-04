@@ -278,12 +278,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 //获取历史记录是否为满
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 //设置存储缓存
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 //获取存储缓存
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);

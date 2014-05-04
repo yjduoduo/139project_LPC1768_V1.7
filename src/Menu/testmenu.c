@@ -41,7 +41,7 @@ void Test_Menu(uint8 tmp)//
 
 }
 
-void Test_Menu1(void)
+static void Test_Menu1(void)
 {
 	 //вт╪Л
 	 Displaynumber(1,0,10,1);//display 1

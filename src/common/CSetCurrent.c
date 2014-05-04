@@ -42,11 +42,11 @@ void State_20mA(void)
 }
 #endif
 //计数，共计10次
-uint8 loop_LD_counter = 0;
+static uint8 loop_LD_counter = 0;
 //采样次数
 #define SAMPLE_TIMES 10
 //保存状态
-uint8 state_loopLD[SAMPLE_TIMES];
+static uint8 state_loopLD[SAMPLE_TIMES];
 //loop ld 的buffer
 //uint8 bufcounter=0;
 //uint8 loopldbuf[10]={0,};
@@ -115,12 +115,12 @@ void clr_loop_LD_counter(void)
         state_loopLD[i] = INITVAL;
     }
 }
-uint8 get_loop_LD_counter(void)
+static uint8 get_loop_LD_counter(void)
 {
     return loop_LD_counter;
 }
 
-void add_loop_LD_counter(void)
+static void add_loop_LD_counter(void)
 {
     loop_LD_counter++;
 }
@@ -136,16 +136,16 @@ void loop_LD_state(void)
     }
 }
 //是否打印标志
-uint8 printflag=0;
+static uint8 printflag=0;
 void set_print(void)
 {
     printflag=1;
 }
-uint8 get_print(void)
+static uint8 get_print(void)
 {
     return printflag;
 }
-void clr_print(void)
+static void clr_print(void)
 {
     printflag=0;
 }

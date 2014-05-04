@@ -46,21 +46,21 @@
 #define NOPRINT  0x00
 
 
-uint8 testann[NODE_BUFSIZE]={0,};
-uint8 testann1[10]={0};
-uint16 tp3=0;
-uint16 tp4=0;
-uint8 Save_Ann_flag=0;
+static uint8 testann[NODE_BUFSIZE]={0,};
+static uint8 testann1[10]={0};
+static uint16 tp3=0;
+static uint16 tp4=0;
+static uint8 Save_Ann_flag=0;
 
 
-uint8 data0[9]={0};
-uint8 data2[MAX_COMP+1][55]={0};//汉字注释接收缓存
-uint8 data3[12]={0};//存储上位机发送过来的数据
-uint8 tp = 0;
-uint8 tp1 = 0;
-uint8 tp2 = 0;
+static uint8 data0[9]={0};
+static uint8 data2[MAX_COMP+1][55]={0};//汉字注释接收缓存
+static uint8 data3[12]={0};//存储上位机发送过来的数据
+static uint8 tp = 0;
+static uint8 tp1 = 0;
+static uint8 tp2 = 0;
 // uint8 UartTxbuf[9];
-uint16 hanzi;
+// static uint16 hanzi;
 uint8 vAnnCounter=0;
 
 
@@ -225,7 +225,7 @@ uint8 GetAnnRow(/*uint8 dep,*/uint8 comp)
 }
 
 //中断处只能收数据，不能处理数据，因为数据会丢失
-void recv_note_info(void)
+static void recv_note_info(void)
 {
 
 
@@ -619,14 +619,14 @@ uint32 uart1GetByte (void)
     ucRcvData = U1RBR;                                                  /* 读取数据                     */
     return (ucRcvData);
 }
-uint32 uart0GetByte (void)
-{
-    uint32 ucRcvData;
-    
-    while ((U0LSR & 0x01) == 0);                                        /* 等待接收标志置位             */
-    ucRcvData = U0RBR;                                                  /* 读取数据                     */
-    return (ucRcvData);
-}
+// static uint32 uart0GetByte (void)
+// {
+//     uint32 ucRcvData;
+//     
+//     while ((U0LSR & 0x01) == 0);                                        /* 等待接收标志置位             */
+//     ucRcvData = U0RBR;                                                  /* 读取数据                     */
+//     return (ucRcvData);
+// }
 /*********************************************************************************************************
 ** Function name:	    uart1GetStr
 ** Descriptions:	    串口接收字符串
@@ -641,12 +641,12 @@ void uart1GetStr (uint32 *pucStr, uint32 ulNum)
         *pucStr++ =  uart1GetByte();
     }
 }
-void uart0GetStr (uint32_t *pucStr, uint32_t ulNum)
-{
-    for (; ulNum > 0; ulNum--){
-        *pucStr++ =  uart0GetByte();
-    }
-}
+// void uart0GetStr (uint32_t *pucStr, uint32_t ulNum)
+// {
+//     for (; ulNum > 0; ulNum--){
+//         *pucStr++ =  uart0GetByte();
+//     }
+// }
 
 
 /********************************************************************************  

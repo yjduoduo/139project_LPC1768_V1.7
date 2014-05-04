@@ -27,7 +27,7 @@
 #include  "CComPara.h"
 
 
-void menu_setup_localaddr_tab(void)
+static void menu_setup_localaddr_tab(void)
 {
     if(get_entry_localaddr_flag()){
         AddLocalParaSel();
@@ -43,7 +43,7 @@ void menu_setup_localaddr_tab(void)
 
     }
 }
-void menu_comp_reg_tab(void)
+static void menu_comp_reg_tab(void)
 {
     //    AddCompRegParaSel();
     //    if(GetCompRegParaSel() > 2)
@@ -51,7 +51,7 @@ void menu_comp_reg_tab(void)
     CompReg_menu(GetCompRegDep(),GetCompRegNum(),0,GetCompRegAddr(),GetCompRegParaSel(),0);
 
 }
-void menu_setup_comp_tab(void)
+static void menu_setup_comp_tab(void)
 {
     AddComSet_seltab();
     if(GetComSet_seltab() > 3)
@@ -59,7 +59,7 @@ void menu_setup_comp_tab(void)
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),0);
 
 }
-void back_task_setup_datetime(void)
+static void back_task_setup_datetime(void)
 {
     AddSelTime();
     if(GetSelTime() > 6)
@@ -68,7 +68,7 @@ void back_task_setup_datetime(void)
     DateMod_Menu(GetYear(),GetMonth(),GetDay(),GetHour(),GetMintue(),GetSecond(),GetSelTime(),0);
 
 }
-void back_task_save(void)
+static void back_task_save(void)
 {
     AddAnnSel();
     if(GetAnnSel() > 2)
@@ -76,7 +76,7 @@ void back_task_save(void)
     ClearScreen(0);
     Annotate_Menu(GetAnnDep(),GetAnnCompNum(),GetAnnSel());
 }
-void back_task_comp_state(void)
+static void back_task_comp_state(void)
 {
     //    AddStatusFlag();
     //    if(GetStatusFlag() > 2)

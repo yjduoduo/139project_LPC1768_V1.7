@@ -17,14 +17,14 @@
 
 static uint8 hz[]="设置查询测试复位恢复出厂设置蜂鸣器";
 
-void set_menu_setup(void)
+static void set_menu_setup(void)
 {
     Displaynumber(1,0,10,1);//display 1
     Displaynumber(1,0,18,0x0A);
     DisplayJBHZK(1,0,32,((hz[0]<<8)+hz[1]));
     DisplayJBHZK(1,0,48,((hz[2]<<8)+hz[3]));
 }
-void set_menu_query(void)
+static void set_menu_query(void)
 {
     //查询
     Displaynumber(1,2,10,2);//display 2
@@ -32,7 +32,7 @@ void set_menu_query(void)
     DisplayJBHZK(1,2,32,((hz[4]<<8)+hz[5]));
     DisplayJBHZK(1,2,48,((hz[6]<<8)+hz[7]));
 }
-void set_menu_test(void)
+static void set_menu_test(void)
 {
     //测试
     Displaynumber(1,4,10,3);//display 3
@@ -41,7 +41,7 @@ void set_menu_test(void)
     DisplayJBHZK(1,4,48,((hz[10]<<8)+hz[11]));
 
 }
-void set_menu_reset(void)
+static void set_menu_reset(void)
 {
     //复位：清除所有报警信息
     Displaynumber(1,2,10,6);//display 6
@@ -49,7 +49,7 @@ void set_menu_reset(void)
     DisplayJBHZK(1,2,32,((hz[12]<<8)+hz[13]));
     DisplayJBHZK(1,2,48,((hz[14]<<8)+hz[15]));
 }
-void set_menu_backtodefault(void)
+static void set_menu_backtodefault(void)
 {
     //恢复出厂设置
     Displaynumber(1,6,10,4);//display 4
@@ -61,7 +61,7 @@ void set_menu_backtodefault(void)
     DisplayJBHZK(2,6,32,((hz[24]<<8)+hz[25]));
     DisplayJBHZK(2,6,48,((hz[26]<<8)+hz[27]));
 }
-void set_menu_speaker_setup(void)
+static void set_menu_speaker_setup(void)
 {
     //设置蜂鸣器
     Displaynumber(1,0,10,5);//display 5

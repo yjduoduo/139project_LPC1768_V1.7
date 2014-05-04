@@ -19,7 +19,7 @@
 // #include <stdio.h> 
 // #include <math.h> 
 
-void menu_comp_notreged(void)
+static void menu_comp_notreged(void)
 {
     uint8 nullhz[]="未注册部件";
     DisplayJBHZK(1,4,48,((nullhz[0]<<8)+nullhz[1]));
@@ -28,7 +28,7 @@ void menu_comp_notreged(void)
     DisplayJBHZK(2,4,32,((nullhz[6]<<8)+nullhz[7]));
     DisplayJBHZK(2,4,48,((nullhz[8]<<8)+nullhz[9]));
 }
-void menu_comp_sigstrength(void)
+static void menu_comp_sigstrength(void)
 {
     uint8 hz[]="部件信号强度";
     //部件信号强度
@@ -40,7 +40,7 @@ void menu_comp_sigstrength(void)
     DisplayJBHZK(2,0,32,((hz[10]<<8)+hz[11]));
 }
 
-uint8 vInten_Flag=0;
+static uint8 vInten_Flag=0;
 //主循环显示部件信号强度
 void CompInten_Menu(uint8 inzone,uint8 compent,uint8 type,int8 inten)
 {

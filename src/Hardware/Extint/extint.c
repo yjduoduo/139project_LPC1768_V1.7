@@ -20,11 +20,11 @@
 #include  "CLpCkCtrl.h"
 
 
-uint8 Extint1_flag=0;
-uint8 Extint3_flag=0;
+static uint8 Extint1_flag=0;
+static uint8 Extint3_flag=0;
 
-volatile uint32_t fallingcount=0;
-volatile uint32_t vriseingcount=0;
+static volatile uint32_t fallingcount=0;
+// volatile uint32_t vriseingcount=0;
 
 void extint3_enable(void)
 {

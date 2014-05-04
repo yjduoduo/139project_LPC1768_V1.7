@@ -54,9 +54,7 @@
 .\output\ctaskdown.o: ..\src\MenuCtrl\CTaskDown.h
 .\output\ctaskdown.o: ..\src\MenuCtrl\CKeyCounter.h
 .\output\ctaskdown.o: ..\src\MenuCtrl\CGetGrap.h
-.\output\ctaskdown.o: ..\src\common\CFlashParam.h
 .\output\ctaskdown.o: ..\src\common\CGetCompSum.h
 .\output\ctaskdown.o: ..\src\common\CSendToFlash.h
 .\output\ctaskdown.o: ..\src\MenuCtrl\CTaskSure.h
 .\output\ctaskdown.o: ..\src\componentinfo\store_addr.h
-.\output\ctaskdown.o: ..\src\MenuCtrl\CTaskSure.h

@@ -54,8 +54,6 @@
 .\output\ctime.o: ..\src\common\CFlash_ADDR_Def.h
 .\output\ctime.o: ..\src\Board\key.h
 .\output\ctime.o: ..\src\13CirCon\CAddressCount.h
-.\output\ctime.o: ..\src\MenuCtrl\runfunction.h
-.\output\ctime.o: ..\src\common\CFlashParam.h
 .\output\ctime.o: ..\src\Board\CLED.h
 .\output\ctime.o: ..\src\12UARTHandle\CComPara.h
 .\output\ctime.o: ..\src\MenuCtrl\CTaskSure.h

@@ -1124,7 +1124,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3538,6 +3539,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -3877,12 +3880,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4080,7 +4083,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4126,6 +4129,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -5531,7 +5536,7 @@ void SetHistConter(uint16 tmp)
 
 
 
-uint8 vHistSufixInfo[(10)][(1)]={0,};
+static uint8 vHistSufixInfo[(10)][(1)]={0,};
 
 
 
@@ -5563,7 +5568,7 @@ uint8 getHistFull(void)
 
 
 
-uint8 BaseInfoF[256][(1)]={0,};
+static uint8 BaseInfoF[256][(1)]={0,};
 
 
 
@@ -5577,7 +5582,7 @@ uint8 BaseInfoF[256][(1)]={0,};
 
 
 
-uint8 vSendPSNToFlash[50 +1][(8)]={0,};
+static uint8 vSendPSNToFlash[50 +1][(8)]={0,};
 
 
 
@@ -5591,7 +5596,7 @@ uint8 vSendPSNToFlash[50 +1][(8)]={0,};
 
 
 
-uint8 vMaskPSN[50 +1][(1)] = {0,};
+static uint8 vMaskPSN[50 +1][(1)] = {0,};
 
 
 
@@ -5608,7 +5613,7 @@ uint8 vMaskPSN[50 +1][(1)] = {0,};
 
 
 
-uint8 AlarmInfo[(50 +1) + 1][(18)]={(0xff),};
+static uint8 AlarmInfo[(50 +1) + 1][(18)]={(0xff),};
 
 
 
@@ -5618,7 +5623,7 @@ uint8 AlarmInfo[(50 +1) + 1][(18)]={(0xff),};
  
  
 #line 256 "..\\src\\common\\CFlashParam.c"
-uint8 data_note[1][(2)]={0,};
+static uint8 data_note[1][(2)]={0,};
 
 
  
@@ -5643,7 +5648,7 @@ static uint8 vAnnCounter[(1)][(1)]={0,};
 
 
 
-uint8 vHisList[(1000+1)][(17)]={0,};
+static uint8 vHisList[(1000+1)][(17)]={0,};
 
 
 
@@ -5655,7 +5660,7 @@ uint8 vHisList[(1000+1)][(17)]={0,};
  
 
 
-uint8 vHisC[3][(1)] = {0,};
+static uint8 vHisC[3][(1)] = {0,};
 
 
 
@@ -5666,7 +5671,7 @@ uint8 vHisC[3][(1)] = {0,};
  
  
 
-Flash_Record flash_record[]={
+static const Flash_Record flash_record[]={
     {(0x00000), BaseInfoF ,0,             0,         0,      0, 256,      (1),},
     {(0x10000), 0,        vSendPSNToFlash,0,         0,      0, 50 +1,      (8), },
     {(0x20000), vMaskPSN, 0,              0,         0,      0, 50 +1,      (1), },
@@ -5679,19 +5684,19 @@ Flash_Record flash_record[]={
     {0,}
 };
 
-Flash_Record * basic_record = &flash_record[0];
-Flash_Record * comp_record = &flash_record[1];
-Flash_Record * mask_record = &flash_record[2];
-Flash_Record * alarm_record = &flash_record[3];
-Flash_Record * node_record = &flash_record[4];
-Flash_Record * nodenums_record = &flash_record[5];
-Flash_Record * hist_record = &flash_record[6];
-Flash_Record * histnums_record = &flash_record[7];
-Flash_Record * histsufix_record = &flash_record[8];
+const static Flash_Record * basic_record = &flash_record[0];
+const static Flash_Record * comp_record = &flash_record[1];
+const static Flash_Record * mask_record = &flash_record[2];
+const static Flash_Record * alarm_record = &flash_record[3];
+const static Flash_Record * node_record = &flash_record[4];
+const static Flash_Record * nodenums_record = &flash_record[5];
+const static Flash_Record * hist_record = &flash_record[6];
+const static Flash_Record * histnums_record = &flash_record[7];
+const static Flash_Record * histsufix_record = &flash_record[8];
 
 
 
-static void init_record(Flash_Record * flash_record)
+static void init_record(const Flash_Record * flash_record)
 {
     uint16 i;
     uint16 j;
@@ -5758,7 +5763,7 @@ static void init_record(Flash_Record * flash_record)
     }
 
 }
-static void save_record(Flash_Record * flash_record)
+static void save_record(const Flash_Record * flash_record)
 {
     uint16 i;
     uint16 j;
@@ -5820,7 +5825,7 @@ static void save_record(Flash_Record * flash_record)
     }
 
 }
-static void clr_record(Flash_Record * flash_record)
+static void clr_record(const Flash_Record * flash_record)
 {
     uint16 i;
     uint16 j;
@@ -5860,7 +5865,7 @@ static void clr_record(Flash_Record * flash_record)
 }
 
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp)
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp)
 {
     uint32 rowact;
     uint32 rlen = flash_record->rlen;
@@ -5885,7 +5890,7 @@ static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tm
         flash_record->histbuf[rowact][col] = tmp;
 }
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col)
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col)
 {
     uint32 rowact;
     uint32 rlen = flash_record->rlen;
@@ -6575,51 +6580,51 @@ void set_node_info(uint32 row,uint32 col,uint8 tmp)
 {
     set_array(node_record,row,col,tmp);
 }
-void set_node_frame1(uint32 row,uint8 tmp)
+static void set_node_frame1(uint32 row,uint8 tmp)
 {
     set_node_info(row,1,tmp);
 }
-void set_node_frame2(uint32 row,uint8 tmp)
+static void set_node_frame2(uint32 row,uint8 tmp)
 {
     set_node_info(row,2,tmp);
 }
-void set_node_frame3(uint32 row,uint8 tmp)
+static void set_node_frame3(uint32 row,uint8 tmp)
 {
     set_node_info(row,3,tmp);
 }
-void set_node_cmd1(uint32 row,uint8 tmp)
+static void set_node_cmd1(uint32 row,uint8 tmp)
 {
     set_node_info(row,4,tmp);
 }
-void set_node_cmd_rw(uint32 row,uint8 tmp)
+static void set_node_cmd_rw(uint32 row,uint8 tmp)
 {
     set_node_info(row,5,tmp);
 }
-void set_node_devtype(uint32 row,uint8 tmp)
+static void set_node_devtype(uint32 row,uint8 tmp)
 {
     set_node_info(row,6,tmp);
 }
-void set_node_targetaddr(uint32 row,uint8 tmp)
+static void set_node_targetaddr(uint32 row,uint8 tmp)
 {
     set_node_info(row,7,tmp);
 }
-void set_node_controllernum(uint32 row,uint8 tmp)
+static void set_node_controllernum(uint32 row,uint8 tmp)
 {
     set_node_info(row,8,tmp);
 }
-void set_node_datalen(uint32 row,uint8 tmp)
+static void set_node_datalen(uint32 row,uint8 tmp)
 {
     set_node_info(row,9,tmp);
 }
-void set_node_loop(uint32 row,uint8 tmp)
+static void set_node_loop(uint32 row,uint8 tmp)
 {
     set_node_info(row,10,tmp);
 }
-void set_node_addr(uint32 row,uint8 tmp)
+static void set_node_addr(uint32 row,uint8 tmp)
 {
     set_node_info(row,11,tmp);
 }
-void set_node_hz(uint32 row,uint8* tmp)
+static void set_node_hz(uint32 row,uint8* tmp)
 {
     uint8 i;
     for(i=0;i<32;i++)
@@ -6627,7 +6632,7 @@ void set_node_hz(uint32 row,uint8* tmp)
         set_node_info(row,12+i,tmp[i]);
     }
 }
-void set_node_cs(uint32 row,uint8* tmp)
+static void set_node_cs(uint32 row,uint8* tmp)
 {
     uint8 i;
     for(i=0;i<2;i++)

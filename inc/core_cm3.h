@@ -1300,7 +1300,8 @@ static __INLINE void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  */
 static __INLINE uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > SYSTICK_MAXCOUNT)  return (1);                                             /* Reload value impossible */
+  if (ticks > SYSTICK_MAXCOUNT)  
+    return (1);                                             /* Reload value impossible */
 
   SysTick->LOAD  =  (ticks & SYSTICK_MAXCOUNT) - 1;                                      /* set reload register */
   NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);                            /* set Priority for Cortex-M0 System Interrupts */

@@ -12,33 +12,42 @@
 ;*********************************************************************************************************
 ;*/
 
-#include  "include.h"
-#include  "key.h"
+
 #define _VAR_RUNFUNCTION
 #include  "runfunction.h"
+#include  "include.h"
+#include  "key.h"
 #include  "tasklist.h"
 #include  "CKeyCounter.h"
 #include  "CComHandle.h"
-#include  "CAddressCount.h"
+// #include  "CAddressCount.h"
 #include  "CComPara.h"
-#include "CLED.h"
-#include  "CTime.h"
+// #include "CLED.h"
+// #include  "CTime.h"
 #include  "CModelFault.h"
 #include  "CSendTo195.h"
-#include  "CFlashParam.h"
+// #include  "CFlashParam.h"
 #include "SysCtrl.h"
 #include "CTimeDef.h"
 #include "CTaskSure.h"
 
-extern volatile uint32 match_counter1;
-uint8 vCounterLed=0;
-uint8 HeartTaskFlag=1;
-uint8 csflag=0;
-uint8 TickCounter=0;
+
+// #define UPKey_Flag (0)
+// #define DownKey_Flag (1)
+// #define Time100ms (100)
+// #define Time3s    (3000/(Time100ms))
+
+
+
+extern uint32 match_counter1;
+// uint8 vCounterLed=0;
+// uint8 HeartTaskFlag=1;
+// uint8 csflag=0;
+// uint8 TickCounter=0;
 //uint8 ShuaFlag=0;//刷新标志
-uint8 vHeartLostFlag=0;
-uint8 vMaskScreen=0;//屏蔽屏幕
-uint8 alarm_display_counter=1;
+static uint8 vHeartLostFlag=0;
+// uint8 vMaskScreen=0;//屏蔽屏幕
+// uint8 alarm_display_counter=1;
 //uint32 faultTick=0;
 
 //void CSaveHist(void)
@@ -70,38 +79,37 @@ void show_head_menu(void)
         }
     }
 }
-#define UPKey_Flag 0
-#define DownKey_Flag 1
-//keyflag:0-向上按键，1-向下按键
-void gethistory_show_pos(uint8 keyflag,uint16 *curpos)
-{
-    int i;
-    uint16 his_nums=GetHistConter();//history total nums
-    if(!keyflag){//向上按键
-        for(i=*curpos;i<his_nums;i++)//向最新的记录查询
-            if(gethistory_isfirealarm(i))
-            {
-                *curpos=i;
-                break;
-            }
-        Debug("up key! curpos:%d\n",*curpos);
-    }
 
-    if(keyflag){//向下按键
-        for(i=*curpos;i>=0;i--)//向旧的历史记录查询
-            if(gethistory_isfirealarm(i))
-            {
-                *curpos=i;
-                break;
-            }
-        Debug("down key! curpos:%d\n",*curpos);
-    }
-}
-uint16 his_pos;//save pos for menu show at alarm
-void set_history_alarm_pos(uint16 pos)
-{
-    his_pos=pos;
-}
+// //keyflag:0-向上按键，1-向下按键
+// void gethistory_show_pos(uint8 keyflag,uint16 *curpos)
+// {
+//     int i;
+//     uint16 his_nums=GetHistConter();//history total nums
+//     if(!keyflag){//向上按键
+//         for(i=*curpos;i<his_nums;i++)//向最新的记录查询
+//             if(gethistory_isfirealarm(i))
+//             {
+//                 *curpos=i;
+//                 break;
+//             }
+//         Debug("up key! curpos:%d\n",*curpos);
+//     }
+
+//     if(keyflag){//向下按键
+//         for(i=*curpos;i>=0;i--)//向旧的历史记录查询
+//             if(gethistory_isfirealarm(i))
+//             {
+//                 *curpos=i;
+//                 break;
+//             }
+//         Debug("down key! curpos:%d\n",*curpos);
+//     }
+// }
+// uint16 his_pos;//save pos for menu show at alarm
+// void set_history_alarm_pos(uint16 pos)
+// {
+//     his_pos=pos;
+// }
 //void get_history_alarm_pos(void)
 //{
 //    return his_pos;
@@ -109,7 +117,7 @@ void set_history_alarm_pos(uint16 pos)
 //报警页面
 
 
-alarminfo menu_alarm_info;
+static alarminfo menu_alarm_info;
 void set_menu_alarm_info(alarminfo alarm_info)
 {
     //    menu_alarm_info.ciraddr  =alarm_info.ciraddr;
@@ -125,32 +133,32 @@ void set_menu_alarm_info(alarminfo alarm_info)
     Debug("attr:  %d\n",menu_alarm_info.attr);
     Debug("vAnnRow:  %d\n",menu_alarm_info.vAnnRow);
 }
-alarminfo* get_menu_alarm_info(void)
+static alarminfo* get_menu_alarm_info(void)
 {
     return &menu_alarm_info;
 }
 //记录报警部件
-uint8 record_alarmnum=0; //记录保存信息的最大位置
-static uint8 record_showalarm=0; //记录上下按键显示的位置
+static uint8 record_alarmnum=0; //记录保存信息的最大位置
+volatile static uint8 record_showalarm=0; //记录上下按键显示的位置
 
-uint8 alarmpart[MAX_COMP+1]={0,};//此中保存的是part值
-uint8 alarm_newest_pos =0;
-void set_alarm_newest_pos(uint8 row)
-{
-    alarm_newest_pos = row;
-}
-uint8 get_alarm_newest_pos(void)
-{
-    return alarm_newest_pos;
-}
+static uint8 alarmpart[MAX_COMP+1]={0,};//此中保存的是part值
+// uint8 alarm_newest_pos =0;
+// static void set_alarm_newest_pos(uint8 row)
+// {
+//     alarm_newest_pos = row;
+// }
+// static uint8 get_alarm_newest_pos(void)
+// {
+//     return alarm_newest_pos;
+// }
 
-uint8 get_alarmpart(uint8 row)
-{
-    return alarmpart[row-1];
-}
+// static uint8 get_alarmpart(uint8 row)
+// {
+//     return alarmpart[row-1];
+// }
 
 //自加报警数
-void add_alarmnums(uint8 part)
+static void add_alarmnums(uint8 part)
 {
     alarmpart[record_alarmnum] = part;
     record_alarmnum++;
@@ -160,51 +168,51 @@ void add_alarmnums(uint8 part)
     }
 }
 //报警数目
-uint8 get_record_alarmnum(void)
+static uint8 get_record_alarmnum(void)
 {
     return record_alarmnum;
 }
-/*********************************************
-  *********显示的位置**************************
-  ******************************************/
-void set_record_showalarm(uint8 pos)
+// /*********************************************
+//   *********显示的位置**************************
+//   ******************************************/
+static void set_record_showalarm(uint8 pos)
 {
     record_showalarm = pos;
 }
-uint8 get_record_showalarm(void)
-{
-    return record_showalarm;
-}
-//通过上下按键来调用
-void sub_record_showalarm(void)
-{
-    record_showalarm--;
-}
-void add_record_showalarm(void)
-{
-    record_showalarm++;
-}
-//获取当前存储的part值
-uint8 get_cur_alarmpart(void)
-{
-    return alarmpart[get_record_showalarm()];
-}
+// static uint8 get_record_showalarm(void)
+// {
+//     return record_showalarm;
+// }
+// //通过上下按键来调用
+// static void sub_record_showalarm(void)
+// {
+//     record_showalarm--;
+// }
+// static void add_record_showalarm(void)
+// {
+//     record_showalarm++;
+// }
+// //获取当前存储的part值
+// static uint8 get_cur_alarmpart(void)
+// {
+//     return alarmpart[get_record_showalarm()];
+// }
 
-//获取最新的报警数
-uint8 get_alarm_newest_nums()
-{
-    uint32 i=0;
-    uint8 num=0;
-    for(i=COMP_START;i<= MAX_COMP;i++)
-    {
-        if(get_alarmpart(i) != 0)
-        {
-            set_alarm_newest_pos(i);
-            num++;
-        }
-    }
-    return num;
-}
+// //获取最新的报警数
+// static uint8 get_alarm_newest_nums()
+// {
+//     uint32 i=0;
+//     uint8 num=0;
+//     for(i=COMP_START;i<= MAX_COMP;i++)
+//     {
+//         if(get_alarmpart(i) != 0)
+//         {
+//             set_alarm_newest_pos(i);
+//             num++;
+//         }
+//     }
+//     return num;
+// }
 //火警时界面轮显循环显示
 
 void clr_alarm_loop_show(void)
@@ -221,9 +229,9 @@ uint8 get_alarm_loop_show(void)
 }
 
 //界面轮显
-alarminfo alarm_info_loop;
+static alarminfo alarm_info_loop;
 static uint8 pos;
-void menu_alarm_fire(void)
+static void menu_alarm_fire(void)
 {
     //获取最新的报警部件
     static uint8 current_alarmpart = INITVAL;
@@ -333,7 +341,7 @@ void menu_alarm_fire(void)
 //                Getdisplay_alarm(4),
 //                Getalarmtime());
 //}
-void menu_alarm_fault(void)
+static void menu_alarm_fault(void)
 {
     //非自检且打开时
     if(GetSpeaker_Flag()&&!GetZjFlag()){
@@ -346,8 +354,6 @@ void menu_alarm_fault(void)
               get_menu_alarm_info()->type,
               &get_menu_alarm_info()->dateyear);
 }
-#define Time100ms (100)
-#define Time3s    (3000/Time100ms)
 
 ////after 30s return to alarm page if have alarm info,so reset will clear
 //void have_alarm_backafter30s()
@@ -491,23 +497,23 @@ void Systemp_Task(void)//主工作任务
 }
 
 
-//set
-void set_time_sendheart(uint8 n)
-{
-    time_sendheart = n;
-}
+// //set
+// static void set_time_sendheart(uint8 n)
+// {
+//     time_sendheart = n;
+// }
 //add
-void add_time_sendheart()
+static void add_time_sendheart()
 {
     time_sendheart++;
 }
 //get
-uint8 get_time_sendheart(void)
+static uint8 get_time_sendheart(void)
 {
     return time_sendheart;
 }
 //clr
-void clr_time_sendheart(void)
+static void clr_time_sendheart(void)
 {
     time_sendheart=0;
 }

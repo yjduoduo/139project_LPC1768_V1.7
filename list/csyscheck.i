@@ -1196,7 +1196,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3028,12 +3029,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -3233,7 +3234,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
 
 #line 19 "..\\src\\Menu\\CSysCheck.c"
 
-void menu_system_query(void)
+static void menu_system_query(void)
 {
     uint8 hz[]="系统查询";
     uint8 offset = 16;
@@ -3243,7 +3244,7 @@ void menu_system_query(void)
     DisplayJBHZK(2,0,0,((hz[6]<<8)+hz[7]));
 
 }
-void menu_system_query_compnums(void)
+static void menu_system_query_compnums(void)
 {
     uint8 t2 = get_basic_nums();
     uint8 hz[]="注册部件数个";

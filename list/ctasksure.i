@@ -1099,7 +1099,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3513,6 +3514,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -3828,12 +3831,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4031,7 +4034,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4077,6 +4080,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -5001,30 +5006,7 @@ void SetMenuFlag(uint8 tmp);
 void SetPasswordFlag(uint8 tmp);
 uint8 GetPasswordFlag(void);
 #line 21 "..\\src\\MenuCtrl\\CTaskSure.c"
-#line 1 "..\\src\\common\\CFlashParam.h"
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 16 "..\\src\\common\\CFlashParam.h"
-
-#line 479 "..\\src\\common\\CFlashParam.h"
-
-
- 
-
-
-#line 22 "..\\src\\MenuCtrl\\CTaskSure.c"
 #line 1 "..\\src\\12UARTHandle\\CComHandle.h"
 
 
@@ -5189,50 +5171,7 @@ void menu_fault_deal(alarminfo* alarm_info);
 
 
 #line 24 "..\\src\\MenuCtrl\\CTaskSure.c"
-#line 1 "..\\src\\Board\\CLED.h"
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-void Led_Init(void);
-void Led_ALL_On(void);
-void Led_Off(void);
-
-void Led_Run_Init(void);
-void Led_Run_On(void);
-void Led_Run_Off(void);
-
-void Led_Silence_Init(void);
-void Led_Silence_On(void);
-void Led_Silence_Off(void);
-
-void Led_Wireless_Init(void);
-void Led_Wireless_On(void);
-void Led_Wireless_Off(void);
-
-
-void Led_Fault_Init(void);
-void Led_Fault_On(void);
-void Led_Fault_Off(void);
-
-
-void Led_Fire_Init(void);
-void Led_Fire_On(void);
-void Led_Fire_Off(void);
-
-#line 25 "..\\src\\MenuCtrl\\CTaskSure.c"
 #line 1 "..\\src\\common\\CGetCompSum.h"
 
 
@@ -5256,64 +5195,8 @@ void Led_Fire_Off(void);
 
 
 #line 26 "..\\src\\MenuCtrl\\CTaskSure.c"
-#line 1 "..\\src\\common\\CMaDefine.h"
 
 
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 35 "..\\src\\common\\CMaDefine.h"
-
-
-
-
-#line 27 "..\\src\\MenuCtrl\\CTaskSure.c"
-#line 1 "..\\src\\12UARTHandle\\CComHandle.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 16 "..\\src\\12UARTHandle\\CComHandle.h"
-#line 182 "..\\src\\12UARTHandle\\CComHandle.h"
-
-
- 
-
-
-#line 28 "..\\src\\MenuCtrl\\CTaskSure.c"
 #line 1 "..\\src\\12UARTHandle\\CComPara.h"
 
 
@@ -6078,6 +5961,7 @@ uint8 get_ok_tkeyflag(void);
 
 
 #line 39 "..\\src\\MenuCtrl\\CTaskSure.c"
+#line 1 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
 
 
 
@@ -6085,16 +5969,212 @@ uint8 get_ok_tkeyflag(void);
 
 
 
-uint8 menu_in_setuplocaladdr =0 ;
+
+
+
+
+
+ 
+
+
+
+
+
+#line 20 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+#line 1 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+#line 19 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+ 
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 60 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+
+
+
+
+
+
+#line 78 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+ 
+ 
+  
+typedef union type_WaitToRun{
+    uint32 Word;
+    struct
+    {
+        volatile uint32 b2ms:1;
+        uint32 b20ms:1;
+        uint32 b100ms:1;
+        uint32 b500ms:1;
+    }Flag;
+
+
+}WaitToRun;
+ 
+ 	
+
+ 
+ 
+ 
+
+  
+extern  uint32   Get_CTime0Def(void);
+extern  void     Set_CTime0Def(uint32 vTimeId); 
+extern  uint32   Sel_CTime0Def(uint8 vTimer);
+extern  uint32   Get_Timer_100us(void);
+extern  uint32   Get_Timer_200us(void);
+extern  uint32   Get_Timer_600us(void);
+extern  uint32   Get_Timer_2ms(void);
+extern  uint32   Get_Timer_5ms(void);
+extern  uint32   Get_Timer_8ms(void);
+extern  uint32   Get_Timer_10ms(void);
+extern  uint32   Get_Timer_20ms(void);
+
+void AddTwoFallEdgeCounter(void);
+void ClrTwoFallEdgeCounter(void);
+uint32 GetTwoFallEdgeCounter(void);
+
+void AddRisedgeCounter(void);
+void ClrRisedgeCounter(void);
+uint32 GetRisedgeCounter(void);
+
+void AddWait2msCounter(void);
+void ClrWait2msCounter(void);
+uint32 GetWait2msCounter(void);
+uint8 Is2msArrived(void);
+void Enable2ms(void);
+void Disable2ms(void);
+uint8 Get2msState(void);
+
+
+
+void Set2msArrived(void);
+uint32 Get2msArrived(void);
+void Clr2msArrived(void);
+
+
+  
+ 
+ 
+
+
+#line 154 "..\\src\\Hardware\\Timer\\CTimeDef.h"
+
+
+#line 21 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+extern   void   Init_CTimeCtrl(void);    
+
+extern   void   T0Int_CTimeCtrl(void);    
+
+extern   void   T1Int_CTimeCtrl(void);
+ 
+ 
+
+
+extern void add_timer1_3h_counter(void);
+
+extern void reset_timer1_3h_counter(void);
+
+extern uint32 get_3h_counter(uint8 part);
+
+extern void clr_3h_counter(uint8 part);
+
+void clr_faultnum_3h_(uint8 part);
+extern void judge_3h_over(uint8 part);
+ 
+ 
+ 
+
+#line 111 "..\\src\\CTimeCtrl\\CTimeCtrl.h"
+
+#line 40 "..\\src\\MenuCtrl\\CTaskSure.c"
+
+
+
+
+
+
+
+static uint8 menu_in_setuplocaladdr =0 ;
 
 extern tFlashinfoDef  FlashInfo;
 PCF8563_DATE    timedate;
 extern uint8 vMaskPSN[50];
-uint8 vMaskCount=0;
-uint8 vmaskflag = 0;
-uint8 vAnnUartFlag=0;
-uint8 vZjFlag=0;
-uint8 vSpeaker_Counter=1; 
+volatile static uint8 vMaskCount=0;
+volatile static uint8 vmaskflag = 0;
+static uint8 vAnnUartFlag=0;
+static uint8 vZjFlag=0;
+static uint8 vSpeaker_Counter=1; 
 void SetZjFlag(uint8 tmp)
 {
     vZjFlag=tmp;
@@ -6145,16 +6225,16 @@ uint8 Get_Note_Flag(void)
 
 
 
-void setup_ok(void)
+static void setup_ok(void)
 {
     GetSetGrap(GetCounter2());
     Set_Note_Flag();
 }
-void query_ok(void)
+static void query_ok(void)
 {
     GetCheckGrap(GetCounter2());
 }
-void test_ok(void)
+static void test_ok(void)
 {
     GetTestGrap(GetCounter2());
 }
@@ -6202,7 +6282,7 @@ void reset_ok(void)
     DelayMs(3000);
 }
 
-void factory_ok(void)
+static void factory_ok(void)
 {
     uint32 delflag=1;
 
@@ -6283,7 +6363,7 @@ void factory_ok(void)
     }
 
 }
-void speaker_ok(void)
+static void speaker_ok(void)
 {
     CLevel27_Sure();
 }
@@ -6336,7 +6416,7 @@ void CLevel1_Sure(uint8 tmp)
         break;
     }
 }
-void get_local_addr(void)
+static void get_local_addr(void)
 {
     if(0xff == get_basic_localaddr()){
         set_basic_localaddr((150));
@@ -6348,7 +6428,7 @@ void get_local_addr(void)
 }
 
 
-void detect_circuirt(void)
+static void detect_circuirt(void)
 {
     if(local_addr_value() > 200)
     {
@@ -6377,7 +6457,7 @@ void clr_entry_localaddr_flag(void)
 {
     menu_in_setuplocaladdr =0;
 }
-void menu_setup_localaddr_ok(void)
+static void menu_setup_localaddr_ok(void)
 {
     set_entry_localaddr_flag();
     get_local_addr();
@@ -6386,7 +6466,7 @@ void menu_setup_localaddr_ok(void)
                Get_zone_bit(1),Get_zone_bit(2),1,0x00);
 
 }
-void menu_setup_compreg_ok(void)
+static void menu_setup_compreg_ok(void)
 {
     if(GetCompRegNum()>50)
         SetCompRegDep(0);
@@ -6395,12 +6475,12 @@ void menu_setup_compreg_ok(void)
     
 
 }
-void menu_setup_setcomp_ok(void)
+static void menu_setup_setcomp_ok(void)
 {
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),0);
 
 }
-void menu_setup_datetime_ok(void)
+static void menu_setup_datetime_ok(void)
 {
     PCF8563_DATE    timeAndDate;
 
@@ -6472,7 +6552,7 @@ void setup_Sure(uint8 tmp)
     }
 }
 
-uint8 enter_flag=0;
+static uint8 enter_flag=0;
 void set_enter_flag(void)
 {
     enter_flag = 1;
@@ -6489,7 +6569,7 @@ void clr_enter_flag(void)
 
 
 
-void query_system_ok(void)
+static void query_system_ok(void)
 {
     set_enter_flag();
     ClearScreen(0);
@@ -6517,7 +6597,7 @@ void query_compstatus_ok(void)
     
 }
 
-void query_historyrecord_ok(void)
+static void query_historyrecord_ok(void)
 {
     int32 row;
     history_st histinfo;
@@ -6591,7 +6671,7 @@ void query_Sure(uint8 tmp)
     }
 }
 
-void selftest_ok(void)
+static void selftest_ok(void)
 {
     ClearScreen(0);
     UartBindSend(0x38,2);	   
@@ -6612,7 +6692,7 @@ void selftest_ok(void)
     Return_Task();
 
 }
-void sigstrength_ok(void)
+static void sigstrength_ok(void)
 {
     CompInten_Menu(0,0,0,0);
     CSetIntenFlag(1);
@@ -6686,7 +6766,7 @@ uint16 local_addr_value(void)
 
 
 
-void menu_set_localaddr_ok(void)
+static void menu_set_localaddr_ok(void)
 {
     if(local_addr_value() > 200)
     {
@@ -6807,10 +6887,10 @@ void menu_comp_started(void)
     DisplayJBHZK(2,line,0, HZ_SHOW(hz,8));
 }
 
-void menu_colon(void)
-{
-    Displaynumber(2,0,16,0x0A);
-}
+
+
+
+
 void menu_compset(void)
 {
     uint8 hz[]="≤øº˛…Ë÷√";
@@ -6822,14 +6902,14 @@ void menu_compset(void)
 }
 
 
-uint8 opstype_deleted(void)
+static uint8 opstype_deleted(void)
 {
     return (GetComSetSelSet()==(0x02));
 }
 
-history_st setupinfo;
+static history_st setupinfo;
 
-void setup_menu_deal(void)
+static void setup_menu_deal(void)
 {
     int16 row;
     uint8  j=1;
@@ -7000,7 +7080,7 @@ void setup_menu_deal(void)
     }
 }
 
-void query_menu_deal(void)
+static void query_menu_deal(void)
 {
 
     switch(GetCounter2())
@@ -7036,7 +7116,7 @@ void query_menu_deal(void)
 
 }
 
-void test_menu_deal(void)
+static void test_menu_deal(void)
 {
     switch(GetCounter2())
     {
@@ -7053,7 +7133,7 @@ void test_menu_deal(void)
 
 }
 
-void speaker_menu_deal(void)
+static void speaker_menu_deal(void)
 {
 
 }

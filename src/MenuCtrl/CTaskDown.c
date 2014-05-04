@@ -16,18 +16,18 @@
 #include  "CTaskDown.h"
 #include  "CKeyCounter.h"
 #include  "CGetGrap.h"
-#include  "CFlashParam.h"
+// #include  "CFlashParam.h"
 #include  "CGetCompSum.h"
 #include  "CSendToFlash.h"
 #include  "CTaskSure.h"
 #include  "store_addr.h"
-#include  "CTaskSure.h"
+// #include  "CTaskSure.h"
 
 
 extern tFlashinfoDef  FlashInfo;
 extern PCF8563_DATE    timedate;
 uint32 vHisCountDown=0;//历史记录计数
-uint32 vHistCount=0;//历史记录计数
+static volatile uint32 vHistCount=0;//历史记录计数
 
 
 
@@ -38,7 +38,7 @@ void ClrHisCountDown(void)
     vHisCountDown=0;
 }
 void ClrHistCount(void)
-{
+{ 
     vHistCount=0;
 }
 void Level2_Down(void)//第二层
@@ -89,7 +89,7 @@ void Level3_Down(void)
     default:break;
     }
 }
-void setup_localaddr_down(void)
+static void setup_localaddr_down(void)
 {
     switch(GetLocalParaSel())
     {
@@ -126,7 +126,7 @@ void setup_localaddr_down(void)
 
     }
 }
-void setup_compreg_down(void)
+static void setup_compreg_down(void)
 {
     switch(GetCompRegParaSel() )
     {
@@ -149,7 +149,7 @@ void setup_compreg_down(void)
     CompReg_menu(GetCompRegDep(),GetCompRegNum(),0,GetCompRegAddr(),GetCompRegParaSel(),0);
 
 }
-void setup_setcomp_down(void)
+static void setup_setcomp_down(void)
 {
     switch(GetComSet_seltab())
     {
@@ -180,7 +180,7 @@ void setup_setcomp_down(void)
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),MENU_COMPSET_TIPS);
 
 }
-void setup_timedate_down(void)
+static void setup_timedate_down(void)
 {
     switch(GetSelTime())
     {

@@ -1097,7 +1097,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3511,6 +3512,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -3826,12 +3829,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4029,7 +4032,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4075,6 +4078,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -4854,14 +4859,14 @@ void DisplayJBHZKBlack(uint8  ss,uint8  page,uint8  column,uint16 xHZcode);
 
 static uint8 hz[]="ÉèÖÃ²éÑ¯²âÊÔ¸´Î»»Ö¸´³ö³§ÉèÖÃ·äÃùÆ÷";
 
-void set_menu_setup(void)
+static void set_menu_setup(void)
 {
     Displaynumber(1,0,10,1);
     Displaynumber(1,0,18,0x0A);
     DisplayJBHZK(1,0,32,((hz[0]<<8)+hz[1]));
     DisplayJBHZK(1,0,48,((hz[2]<<8)+hz[3]));
 }
-void set_menu_query(void)
+static void set_menu_query(void)
 {
     
     Displaynumber(1,2,10,2);
@@ -4869,7 +4874,7 @@ void set_menu_query(void)
     DisplayJBHZK(1,2,32,((hz[4]<<8)+hz[5]));
     DisplayJBHZK(1,2,48,((hz[6]<<8)+hz[7]));
 }
-void set_menu_test(void)
+static void set_menu_test(void)
 {
     
     Displaynumber(1,4,10,3);
@@ -4878,7 +4883,7 @@ void set_menu_test(void)
     DisplayJBHZK(1,4,48,((hz[10]<<8)+hz[11]));
 
 }
-void set_menu_reset(void)
+static void set_menu_reset(void)
 {
     
     Displaynumber(1,2,10,6);
@@ -4886,7 +4891,7 @@ void set_menu_reset(void)
     DisplayJBHZK(1,2,32,((hz[12]<<8)+hz[13]));
     DisplayJBHZK(1,2,48,((hz[14]<<8)+hz[15]));
 }
-void set_menu_backtodefault(void)
+static void set_menu_backtodefault(void)
 {
     
     Displaynumber(1,6,10,4);
@@ -4898,7 +4903,7 @@ void set_menu_backtodefault(void)
     DisplayJBHZK(2,6,32,((hz[24]<<8)+hz[25]));
     DisplayJBHZK(2,6,48,((hz[26]<<8)+hz[27]));
 }
-void set_menu_speaker_setup(void)
+static void set_menu_speaker_setup(void)
 {
     
     Displaynumber(1,0,10,5);

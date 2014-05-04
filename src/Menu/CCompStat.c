@@ -19,20 +19,20 @@
 #include  "CComHandle.h"
 #include  "CTaskSure.h"
 
-void menu_devtype(uint8 *hz,uint8 startnum)
+static void menu_devtype(uint8 *hz,uint8 startnum)
 {
     //类型：感烟
     DisplayJBHZK(1,2,48,  HZ_SHOW(hz,startnum));
     DisplayJBHZK(2,2,0, HZ_SHOW(hz,startnum+2));
 }
-void menu_mask_start(void)
+static void menu_mask_start(void)
 {
     uint8 hz[]="启用";
     uint8 startnum =0;
     DisplayJBHZK(2,2,32,  HZ_SHOW(hz,startnum));
     DisplayJBHZK(2,2,48, HZ_SHOW(hz,startnum+2));
 }
-void menu_mask_stop(void)
+static void menu_mask_stop(void)
 {
     uint8 hz[]="屏蔽";
     uint8 startnum =0;

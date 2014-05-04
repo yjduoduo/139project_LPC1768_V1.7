@@ -136,17 +136,17 @@ void WriteByte(uint8 dat)
     LCD_EH();// EN=1;//EN下降沿
     LCD_EL();// EN=0;
 }
-void WriteDoubleByte(uint8 dat)	
-{
-    CheckState();//状态检查，LCD是否忙
-    LCD_DE(); //RS=0写指令，RS=1写数据
-    LCD_WE() ;;////R/W=“L” ，E=“H→L”数据被写到 IR 或 DR
-    //LPC_GPIO1->FIOPIN=dat;//dat:显示数据
-    //	dat=~dat;
-    // 	DATAout_V(dat);
-    LCD_EH();// EN=1;//EN下降沿
-    LCD_EL();// EN=0;
-}
+// static void WriteDoubleByte(uint8 dat)	
+// {
+//     CheckState();//状态检查，LCD是否忙
+//     LCD_DE(); //RS=0写指令，RS=1写数据
+//     LCD_WE() ;;////R/W=“L” ，E=“H→L”数据被写到 IR 或 DR
+//     //LPC_GPIO1->FIOPIN=dat;//dat:显示数据
+//     //	dat=~dat;
+//     // 	DATAout_V(dat);
+//     LCD_EH();// EN=1;//EN下降沿
+//     LCD_EL();// EN=0;
+// }
 void WriteBlackByte(uint8 dat)	
 {
     CheckState();//状态检查，LCD是否忙
@@ -245,10 +245,10 @@ void InitLCD(void)
     ClearScreen(0);//清屏
     SetStartLine(0); //开始行:0
 }
-void WriteBytedata(uint8 vdate)
-{
+// static void WriteBytedata(uint8 vdate)
+// {
 
-}
+// }
 // uint8 ChangeZIMO(uint16 xHZcode)
 // {
 // 	
@@ -459,10 +459,10 @@ void Display1(uint8  ss,uint8  page,uint8  column,uint8  number)
     {WriteByte(Hzk1[i+16*number+8]);}//i+16*number+8汉字的后16个数据输出
 }
 
-void DisplaynumberJBHZK(uint8  ss,uint8 page,uint8  column,uint8  number)
-{
+// void DisplaynumberJBHZK(uint8  ss,uint8 page,uint8  column,uint8  number)
+// {
 
-}
+// }
 void Displaynumber(uint8  ss,uint8 page,uint8  column,uint8  number)
 {
     uint32 i;	//选屏参数，page选页参数，column选列参数，number选第几汉字输出

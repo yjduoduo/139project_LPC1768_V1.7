@@ -15,33 +15,33 @@
 #include "ssp.h"
 #include "config.h"
 
-/*****************************************************************************
-** Function name:		SSP0_SSELToggle
-**
-** Descriptions:		SSP0 CS manual set
-**				
-** parameters:			port num, toggle(1 is high, 0 is low)
-** Returned value:		None
-** 
-*****************************************************************************/
-void SSP_SSELToggle( uint32 portnum, uint32 toggle )
-{
-  if ( portnum == 0 )
-  {
-    if ( !toggle )
-	  FIO0CLR |= (0x1<<16);
-    else
-	  FIO0SET |= (0x1<<16);	  
-  }
-  else if ( portnum == 1 )
-  {
-    if ( !toggle )
-	  FIO0CLR |= (0x1<<6);
-    else
-	  FIO0SET |= (0x1<<6);	  
-  }
-  return;
-}
+// /*****************************************************************************
+// ** Function name:		SSP0_SSELToggle
+// **
+// ** Descriptions:		SSP0 CS manual set
+// **				
+// ** parameters:			port num, toggle(1 is high, 0 is low)
+// ** Returned value:		None
+// ** 
+// *****************************************************************************/
+// void SSP_SSELToggle( uint32 portnum, uint32 toggle )
+// {
+//   if ( portnum == 0 )
+//   {
+//     if ( !toggle )
+// 	  FIO0CLR |= (0x1<<16);
+//     else
+// 	  FIO0SET |= (0x1<<16);	  
+//   }
+//   else if ( portnum == 1 )
+//   {
+//     if ( !toggle )
+// 	  FIO0CLR |= (0x1<<6);
+//     else
+// 	  FIO0SET |= (0x1<<6);	  
+//   }
+//   return;
+// }
 
 /*****************************************************************************
 ** Function name:		SSP1Init
@@ -118,7 +118,7 @@ uint8 SPI_FLASH_SendByte (uint8 tmp)
 * Output         : None
 * Return         : Byte Read from the SPI Flash.
 *******************************************************************************/
-void M25P80_CMD1B(uint8 cmd)
+static void M25P80_CMD1B(uint8 cmd)
 {
 	SPI_CS_LOW();
 	SPI_FLASH_SendByte(cmd);
@@ -137,7 +137,7 @@ void M25P80_CMD1B(uint8 cmd)
 * Return         : Byte Read from the SPI Flash.
 RDSR Read Status Register
 *******************************************************************************/
-uint16 M25P80_CMD1B_READ1B(uint16 cmd)
+static uint16 M25P80_CMD1B_READ1B(uint16 cmd)
 {
 	uint16 tmp;
 	SPI_CS_LOW();
@@ -154,7 +154,7 @@ uint16 M25P80_CMD1B_READ1B(uint16 cmd)
 * Output         : None
 * Return         : Byte Read from the SPI Flash.
 *******************************************************************************/
-void M25P80_CMD1B_S1B(uint16 cmd , uint16 data)
+static void M25P80_CMD1B_S1B(uint16 cmd , uint16 data)
 {	
 	SPI_CS_LOW();
 	SPI_FLASH_SendByte(cmd);
@@ -170,7 +170,7 @@ void M25P80_CMD1B_S1B(uint16 cmd , uint16 data)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void M25P80_Write_En(void)
+static void M25P80_Write_En(void)
 {
 	uint16 tmp;
 	//清除 Block Protect位：PB0，PB1，PB2，即取消所有区域保护
@@ -207,7 +207,7 @@ void M25P80_WP_En(void)
 * Output         : None
 * Return         : return (sta & 0x01);
 *******************************************************************************/
-uint8 M25P80_Busy(void)
+static uint8 M25P80_Busy(void)
 {
 	uint8 tmp,tmp1;
 	tmp1=5;

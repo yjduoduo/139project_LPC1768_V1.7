@@ -32,7 +32,7 @@
 //    }
 // }
 
-volatile uint32 msTicks;                            /* counts 1ms timeTicks */  
+static volatile uint32 msTicks;                            /* counts 1ms timeTicks */  
 /*----------------------------------------------------------------------------  
   SysTick_Handler  
  *----------------------------------------------------------------------------*/  
@@ -63,7 +63,7 @@ void SysTick_Handler(void)
     volatile uint32 dl;
 //     for(dl=0; dl<7500000; dl++);
 }
- void DelayUs2x(unsigned char t)
+static  void DelayUs2x(unsigned char t)
  {
      while(--t);
  }

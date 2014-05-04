@@ -51,4 +51,3 @@
 .\output\cspeaker.o: ..\src\Board\CLED.h
 .\output\cspeaker.o: ..\src\13CirCon\CAddressCount.h
 .\output\cspeaker.o: ..\src\common\CFlash_ADDR_Def.h
-.\output\cspeaker.o: ..\src\common\CSpeaker.h

@@ -17,12 +17,12 @@
 
 #define	CONVERT195(X)	((X&0x00ff)*256+(X&0xff00)/256)//高低位转换
 #define  SEND195LEN   15
-uint8 Send195[15]={0};
+static uint8 Send195[15]={0};
 
 /******************************
   ******反馈给模块**************/
 #define  SENDV75LEN   9
-uint8 SendVH75[SENDV75LEN]={0};
+static uint8 SendVH75[SENDV75LEN]={0};
 
 
 

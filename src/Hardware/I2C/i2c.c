@@ -30,14 +30,14 @@
 
                                                                         /* 定义用于和I2C中断传递信息的  */
                                                                         /* 全局变量                     */
-volatile uint8     I2C_sla;                                             /* I2C器件从地址                */
-volatile uint32    I2C_suba;                                            /* I2C器件内部子地址            */
-volatile uint8     I2C_suba_num;                                        /* I2C子地址字节数              */
-volatile uint8     *I2C_buf;                                            /* 数据缓冲区指针               */
-volatile uint32    I2C_num;                                             /* 要读取/写入的数据个数        */
-volatile uint8     I2C_end;                                             /* I2C总线结束标志：结束总线是  */
+static volatile uint8     I2C_sla;                                             /* I2C器件从地址                */
+static volatile uint32    I2C_suba;                                            /* I2C器件内部子地址            */
+static volatile uint8     I2C_suba_num;                                        /* I2C子地址字节数              */
+static volatile uint8     *I2C_buf;                                            /* 数据缓冲区指针               */
+static volatile uint32    I2C_num;                                             /* 要读取/写入的数据个数        */
+static volatile uint8     I2C_end;                                             /* I2C总线结束标志：结束总线是  */
                                                                         /* 置1                          */
-volatile uint8     I2C_suba_en;         /*  子地址控制。
+static volatile uint8     I2C_suba_en;         /*  子地址控制。
                                                0--子地址已经处理或者不需要子地址
                                                1--读取操作
                                                2--写操作
@@ -52,7 +52,7 @@ volatile uint8     I2C_suba_en;         /*  子地址控制。
 ** Output parameters:       NONE
 ** Returned value:          NONE
 *********************************************************************************************************/
-uint8  Wait_I2c_End(uint32  dly)
+static uint8  Wait_I2c_End(uint32  dly)
 {  uint32  i;
 
     if( I2C_end==1 ) return (1);

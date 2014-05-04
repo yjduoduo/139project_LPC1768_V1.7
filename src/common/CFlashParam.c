@@ -160,7 +160,7 @@ void SetHistConter(uint16 tmp)
 
 #define MAX_HIST_SUFIX_LLEN (10) //定义的历史附加信息存储最大数
 #define MAX_HIST_SUFIX_RLEN ONESIZE
-uint8 vHistSufixInfo[MAX_HIST_SUFIX_LLEN][MAX_HIST_SUFIX_RLEN]={0,};
+static uint8 vHistSufixInfo[MAX_HIST_SUFIX_LLEN][MAX_HIST_SUFIX_RLEN]={0,};
 //历史记录满标志各种状态
 #define DHISTFULLFLAG    (1)
 #define DHISTNOTFULLFLAG (0)
@@ -192,7 +192,7 @@ uint8 getHistFull(void)
 #define BASE_LLEN 256/*203*/
 #define BASE_RLEN ONESIZE
 
-uint8 BaseInfoF[BASE_LLEN][BASE_RLEN]={0,};//基本设置参数缓存
+static uint8 BaseInfoF[BASE_LLEN][BASE_RLEN]={0,};//基本设置参数缓存
 
 
 
@@ -206,7 +206,7 @@ uint8 BaseInfoF[BASE_LLEN][BASE_RLEN]={0,};//基本设置参数缓存
 
 #define COMP_SINGLESIZE 8
 #ifdef _VAR_CFLASH
-uint8 vSendPSNToFlash[COMP_LLEN][COMP_RLEN]={0,};
+static uint8 vSendPSNToFlash[COMP_LLEN][COMP_RLEN]={0,};
 #endif
 
 
@@ -220,7 +220,7 @@ uint8 vSendPSNToFlash[COMP_LLEN][COMP_RLEN]={0,};
 //屏蔽数组
 #define  MASK_LLEN MAX_ROW
 #define  MASK_RLEN ONESIZE
-uint8 vMaskPSN[MASK_LLEN][MASK_RLEN] = {0,};
+static uint8 vMaskPSN[MASK_LLEN][MASK_RLEN] = {0,};
 
 
 
@@ -237,7 +237,7 @@ uint8 vMaskPSN[MASK_LLEN][MASK_RLEN] = {0,};
 //#define ALARM_LLEN MAXALARM
 //#define ALARM_RLEN ALARMSIZE
 
-uint8 AlarmInfo[ALARM_LLEN][ALARM_RLEN]={INITVAL,};
+static uint8 AlarmInfo[ALARM_LLEN][ALARM_RLEN]={INITVAL,};
 
 
 
@@ -253,7 +253,7 @@ uint8 AlarmInfo[ALARM_LLEN][ALARM_RLEN]={INITVAL,};
 #define NODE_LLEN 1
 #define NODE_RLEN NODESIZE
 #endif
-uint8 data_note[NODE_LLEN][NODE_RLEN]={0,};
+static uint8 data_note[NODE_LLEN][NODE_RLEN]={0,};
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -278,7 +278,7 @@ static uint8 vAnnCounter[NODENUMS_LLEN][NODENUMS_RLEN]={0,};
 //#define HIST_LLEN MAX_HIST_NUMS
 //#define HIST_RLEN HISTSIZE
 
-uint8 vHisList[HIST_LLEN][HIST_RLEN]={0,};//存储历史记录
+static uint8 vHisList[HIST_LLEN][HIST_RLEN]={0,};//存储历史记录
 
 
 
@@ -290,7 +290,7 @@ uint8 vHisList[HIST_LLEN][HIST_RLEN]={0,};//存储历史记录
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #define HISTNUMS_LLEN 3
 #define HISTNUMS_RLEN ONESIZE
-uint8 vHisC[HISTNUMS_LLEN][HISTNUMS_RLEN] = {0,};
+static uint8 vHisC[HISTNUMS_LLEN][HISTNUMS_RLEN] = {0,};
 
 
 
@@ -301,7 +301,7 @@ uint8 vHisC[HISTNUMS_LLEN][HISTNUMS_RLEN] = {0,};
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-Flash_Record flash_record[]={
+static const Flash_Record flash_record[]={
     {FLS_BASEINFO_ADR, BaseInfoF ,0,             0,         0,      0, BASE_LLEN,      BASE_RLEN,},
     {FLS_COMPINFO_ADR, 0,        vSendPSNToFlash,0,         0,      0, COMP_LLEN,      COMP_RLEN, },
     {FLS_MASKINFO_ADR, vMaskPSN, 0,              0,         0,      0, MASK_LLEN,      MASK_RLEN, },
@@ -314,19 +314,19 @@ Flash_Record flash_record[]={
     {0,}
 };
 
-Flash_Record * basic_record = &flash_record[0];
-Flash_Record * comp_record = &flash_record[1];
-Flash_Record * mask_record = &flash_record[2];
-Flash_Record * alarm_record = &flash_record[3];
-Flash_Record * node_record = &flash_record[4];
-Flash_Record * nodenums_record = &flash_record[5];
-Flash_Record * hist_record = &flash_record[6];
-Flash_Record * histnums_record = &flash_record[7];
-Flash_Record * histsufix_record = &flash_record[8];
+const static Flash_Record * basic_record = &flash_record[0];
+const static Flash_Record * comp_record = &flash_record[1];
+const static Flash_Record * mask_record = &flash_record[2];
+const static Flash_Record * alarm_record = &flash_record[3];
+const static Flash_Record * node_record = &flash_record[4];
+const static Flash_Record * nodenums_record = &flash_record[5];
+const static Flash_Record * hist_record = &flash_record[6];
+const static Flash_Record * histnums_record = &flash_record[7];
+const static Flash_Record * histsufix_record = &flash_record[8];
 
 
 
-static void init_record(Flash_Record * flash_record)
+static void init_record(const Flash_Record * flash_record)
 {
     uint16 i;
     uint16 j;
@@ -393,7 +393,7 @@ static void init_record(Flash_Record * flash_record)
     }
 
 }
-static void save_record(Flash_Record * flash_record)
+static void save_record(const Flash_Record * flash_record)
 {
     uint16 i;
     uint16 j;
@@ -465,7 +465,7 @@ static void save_record(Flash_Record * flash_record)
     }
 
 }
-static void clr_record(Flash_Record * flash_record)
+static void clr_record(const Flash_Record * flash_record)
 {
     uint16 i;
     uint16 j;
@@ -541,7 +541,7 @@ static void clr_record(Flash_Record * flash_record)
 }
 
 //设置存储缓存
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp)
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp)
 {
     uint32 rowact;//底层映射，防止在上层重复修改
     uint32 rlen = flash_record->rlen;
@@ -566,7 +566,7 @@ static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tm
         flash_record->histbuf[rowact][col] = tmp;
 }
 //获取存储缓存
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col)
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col)
 {
     uint32 rowact;//底层映射，防止在上层重复修改
     uint32 rlen = flash_record->rlen;
@@ -1256,51 +1256,51 @@ void set_node_info(uint32 row,uint32 col,uint8 tmp)
 {
     set_array(node_record,row,col,tmp);
 }
-void set_node_frame1(uint32 row,uint8 tmp)
+static void set_node_frame1(uint32 row,uint8 tmp)
 {
     set_node_info(row,1,tmp);
 }
-void set_node_frame2(uint32 row,uint8 tmp)
+static void set_node_frame2(uint32 row,uint8 tmp)
 {
     set_node_info(row,2,tmp);
 }
-void set_node_frame3(uint32 row,uint8 tmp)
+static void set_node_frame3(uint32 row,uint8 tmp)
 {
     set_node_info(row,3,tmp);
 }
-void set_node_cmd1(uint32 row,uint8 tmp)
+static void set_node_cmd1(uint32 row,uint8 tmp)
 {
     set_node_info(row,4,tmp);
 }
-void set_node_cmd_rw(uint32 row,uint8 tmp)
+static void set_node_cmd_rw(uint32 row,uint8 tmp)
 {
     set_node_info(row,5,tmp);
 }
-void set_node_devtype(uint32 row,uint8 tmp)
+static void set_node_devtype(uint32 row,uint8 tmp)
 {
     set_node_info(row,6,tmp);
 }
-void set_node_targetaddr(uint32 row,uint8 tmp)
+static void set_node_targetaddr(uint32 row,uint8 tmp)
 {
     set_node_info(row,7,tmp);
 }
-void set_node_controllernum(uint32 row,uint8 tmp)
+static void set_node_controllernum(uint32 row,uint8 tmp)
 {
     set_node_info(row,8,tmp);
 }
-void set_node_datalen(uint32 row,uint8 tmp)
+static void set_node_datalen(uint32 row,uint8 tmp)
 {
     set_node_info(row,9,tmp);
 }
-void set_node_loop(uint32 row,uint8 tmp)
+static void set_node_loop(uint32 row,uint8 tmp)
 {
     set_node_info(row,10,tmp);
 }
-void set_node_addr(uint32 row,uint8 tmp)
+static void set_node_addr(uint32 row,uint8 tmp)
 {
     set_node_info(row,11,tmp);
 }
-void set_node_hz(uint32 row,uint8* tmp)
+static void set_node_hz(uint32 row,uint8* tmp)
 {
     uint8 i;
     for(i=0;i<32;i++)
@@ -1308,7 +1308,7 @@ void set_node_hz(uint32 row,uint8* tmp)
         set_node_info(row,12+i,tmp[i]);
     }
 }
-void set_node_cs(uint32 row,uint8* tmp)
+static void set_node_cs(uint32 row,uint8* tmp)
 {
     uint8 i;
     for(i=0;i<2;i++)

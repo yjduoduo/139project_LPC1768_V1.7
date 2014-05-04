@@ -3211,7 +3211,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -5625,6 +5626,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -5940,12 +5943,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -6143,7 +6146,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -6189,6 +6192,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -8246,7 +8251,7 @@ extern   void   T1Int_CTimeCtrl(void);
 
 extern void add_timer1_3h_counter(void);
 
-void reset_timer1_3h_counter(void);
+extern void reset_timer1_3h_counter(void);
 
 extern uint32 get_3h_counter(uint8 part);
 
@@ -8330,15 +8335,15 @@ extern   void check_response_atfire(void);
 
 
 extern PCF8563_DATE    timedate;
-PdUartMsgUnion pdUartSend;
+static PdUartMsgUnion pdUartSend;
 
-PdUartMsgUnion pdUartRcv;
+static PdUartMsgUnion pdUartRcv;
 tFlashinfoDef  FlashInfo;
 
 
 history_st  histinfo;
 
-compent  compreg;
+static compent  compreg;
 
 void AddHeartFaultFlag(void);
 
@@ -8461,7 +8466,7 @@ uint8 wireless_data_check(void)
 }
  
 
-uint8 find_zone_comp(uint8 inzone,uint8 partnumber)
+static uint8 find_zone_comp(uint8 inzone,uint8 partnumber)
 {
     uint8 i;
 
@@ -8475,15 +8480,15 @@ uint8 find_zone_comp(uint8 inzone,uint8 partnumber)
     return 0;
 }
 
-void printf_zone_comp_info(void)
-{
-    uint8 i;
-    for(i=(1);i<=50;i++)
-        lcd_printf("->info::%d:inzone:%d,partnumber:%d\n",i,get_comp_inzone(i),get_comp_partnumber(i));
 
-}
 
-void autoadd_compreg(void)
+
+
+
+
+
+
+static void autoadd_compreg(void)
 {
     AddCompRegNum();
     if(GetCompRegNum() >50)
@@ -8492,7 +8497,7 @@ void autoadd_compreg(void)
 
 
  
-void comp_reg_deal(void)
+static void comp_reg_deal(void)
 {
     uint16 ciraddr,partnumber,total_nums;
     int16 com_num=-1;
@@ -8634,7 +8639,7 @@ END:
 }
 
  
-void inquiry_signal_strength(void)
+static void inquiry_signal_strength(void)
 {
     int16 com_num=-1;
     int8 ret;
@@ -8653,7 +8658,7 @@ void inquiry_signal_strength(void)
         CompInten_Menu(0,0,(0xff),0);
     }
 }
-uint8 is_0xff(uint8 psn)
+static uint8 is_0xff(uint8 psn)
 {
     return ((0xff) == psn);
 }
@@ -8671,7 +8676,7 @@ uint8 check_psn_all0xff(void)
 }
 
  
-uint8 is_my_psn(int16* com_num)
+static uint8 is_my_psn(int16* com_num)
 {
     *com_num=-1;
     if(0 == CompareAddr(pdUartRcv->UartMsgDetail . addr[3],pdUartRcv->UartMsgDetail . addr[2],pdUartRcv->UartMsgDetail . addr[1],pdUartRcv->UartMsgDetail . addr[0],com_num))
@@ -8680,7 +8685,7 @@ uint8 is_my_psn(int16* com_num)
         return (0);
 
 }
-void led_relay_deal(void)
+static void led_relay_deal(void)
 {
     Fire_Relay_On();
     Led_Fire_On();
@@ -8715,7 +8720,7 @@ void set_normalalarm_ciraddr(uint8 cir_addr)
 
 
  
-void menu_firealarm_face(alarminfo* alarm1_info)
+static void menu_firealarm_face(alarminfo* alarm1_info)
 {
     memset(&histinfo,0,sizeof(history_st));
 
@@ -8916,9 +8921,9 @@ void menu_fault_deal(alarminfo* alarm_info)
     set_hist_allinfo(GetHistConter(),&histinfo);
     save_hist_all();
 }
-const uint8 fault_restore_cfg[2]={0x0b,0x01};
+static const uint8 fault_restore_cfg[2]={0x0b,0x01};
 
-void normal_deal(uint8 num,uint8 cir_addr)
+static void normal_deal(uint8 num,uint8 cir_addr)
 {
     lcd_printf("normal,ciraddr:%d\n",cir_addr);
     if(Flag195)
@@ -8945,7 +8950,7 @@ void normal_deal(uint8 num,uint8 cir_addr)
     }
 }
 
-alarminfo  alarm_info;
+static alarminfo  alarm_info;
 
 response_atfire respfire_val={(0xff),(0xff),(0xff),(0xff),(0xff)};
 

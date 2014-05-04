@@ -19,7 +19,7 @@ extern PCF8563_DATE    TimeAndDate;
 // 	Display12by12(1,2,12,3);
 // }
 
-void show_date_time(PCF8563_DATE *timedata)
+static void show_date_time(PCF8563_DATE *timedata)
 {
 //    Debug("year:%0x,%4d\n",timedata->year,timedata->year);
     Displaynumber(1,4,16,(timedata->year/1000));
@@ -42,7 +42,7 @@ void show_date_time(PCF8563_DATE *timedata)
     Displaynumber(2,6,0,(timedata->second/10));
     Displaynumber(2,6,8,(timedata->second%10));
 }
-void menu_head_title(void)
+static void menu_head_title(void)
 {
     uint8 hz[16]="北大青鸟环宇消防";
     // "北大青鸟环宇消防"

@@ -1079,7 +1079,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -2097,25 +2098,25 @@ void SSP_Busy(void);
 
 
 
- 
-void SSP_SSELToggle( uint32 portnum, uint32 toggle )
-{
-  if ( portnum == 0 )
-  {
-    if ( !toggle )
-	  (*(volatile unsigned long *)(0x2009C000 + 0x1C)) |= (0x1<<16);
-    else
-	  (*(volatile unsigned long *)(0x2009C000 + 0x18)) |= (0x1<<16);	  
-  }
-  else if ( portnum == 1 )
-  {
-    if ( !toggle )
-	  (*(volatile unsigned long *)(0x2009C000 + 0x1C)) |= (0x1<<6);
-    else
-	  (*(volatile unsigned long *)(0x2009C000 + 0x18)) |= (0x1<<6);	  
-  }
-  return;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2192,7 +2193,7 @@ uint8 SPI_FLASH_SendByte (uint8 tmp)
 
 
  
-void M25P80_CMD1B(uint8 cmd)
+static void M25P80_CMD1B(uint8 cmd)
 {
 	(*(volatile unsigned long *)(0x2009C000 + 0x1C)) |= 1<<6;
 	SPI_FLASH_SendByte(cmd);
@@ -2211,7 +2212,7 @@ void M25P80_CMD1B(uint8 cmd)
 
 
  
-uint16 M25P80_CMD1B_READ1B(uint16 cmd)
+static uint16 M25P80_CMD1B_READ1B(uint16 cmd)
 {
 	uint16 tmp;
 	(*(volatile unsigned long *)(0x2009C000 + 0x1C)) |= 1<<6;
@@ -2228,7 +2229,7 @@ uint16 M25P80_CMD1B_READ1B(uint16 cmd)
 
 
  
-void M25P80_CMD1B_S1B(uint16 cmd , uint16 data)
+static void M25P80_CMD1B_S1B(uint16 cmd , uint16 data)
 {	
 	(*(volatile unsigned long *)(0x2009C000 + 0x1C)) |= 1<<6;
 	SPI_FLASH_SendByte(cmd);
@@ -2244,7 +2245,7 @@ void M25P80_CMD1B_S1B(uint16 cmd , uint16 data)
 
 
  
-void M25P80_Write_En(void)
+static void M25P80_Write_En(void)
 {
 	uint16 tmp;
 	
@@ -2281,7 +2282,7 @@ void M25P80_WP_En(void)
 
 
  
-uint8 M25P80_Busy(void)
+static uint8 M25P80_Busy(void)
 {
 	uint8 tmp,tmp1;
 	tmp1=5;

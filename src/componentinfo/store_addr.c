@@ -137,7 +137,7 @@ uint32 get_comp_ciraddr_zp(uint8 inzone,uint8 partnumber)
     return 0;
 }
 //查找此回路上探头的总量
-uint8 inqury_ciraddr(uint8 item)
+static uint8 inqury_ciraddr(uint8 item)
 {
     uint8 i;
     uint8 sum=0;

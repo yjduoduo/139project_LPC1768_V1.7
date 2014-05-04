@@ -1197,7 +1197,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3715,6 +3716,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -4030,12 +4033,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4233,7 +4236,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4279,6 +4282,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -4984,7 +4989,7 @@ void clr_xialasignal(void);
 
 static uint8 hz[]="本机设置本机地址防区总数";
 
-void menu_haved_saved(void)
+static void menu_haved_saved(void)
 {
     uint8 hz[]="保存完成";
     DisplayJBHZK(1,6,0,HZ_SHOW(hz,0));
@@ -4992,7 +4997,7 @@ void menu_haved_saved(void)
     DisplayJBHZK(1,6,32,HZ_SHOW(hz,4));
     DisplayJBHZK(1,6,48,HZ_SHOW(hz,6));
 }
-void menu_saving(void)
+static void menu_saving(void)
 {
     static uint8 hz[]="正在保存";
     DisplayJBHZK(1,6,0,HZ_SHOW(hz,0));
@@ -5001,7 +5006,7 @@ void menu_saving(void)
     DisplayJBHZK(1,6,48,HZ_SHOW(hz,6));
 
 }
-void menu_savetips(void)
+static void menu_savetips(void)
 {
     static uint8 hz[]="请按确定键保存";
     DisplayJBHZK(1,6,0,HZ_SHOW(hz,0));
@@ -5012,7 +5017,7 @@ void menu_savetips(void)
     DisplayJBHZK(2,6,16,HZ_SHOW(hz,10));
     DisplayJBHZK(2,6,32,HZ_SHOW(hz,12));
 }
-void menu_localaddr_nochange(void)
+static void menu_localaddr_nochange(void)
 {
 
 
@@ -5024,7 +5029,7 @@ void menu_localaddr_nochange(void)
 
 }
 
-void display_or_reverse(uint8 selflag,uint8  ss,uint8 page,uint8  column,uint8  number)
+static void display_or_reverse(uint8 selflag,uint8  ss,uint8 page,uint8  column,uint8  number)
 {
     if(selflag)
         DisplaynumberBlack(ss,page,column,number);

@@ -3197,7 +3197,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -5706,6 +5707,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -6021,12 +6024,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -6224,7 +6227,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -6270,6 +6273,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -7572,21 +7577,21 @@ extern  void  ClrReset_CLpScanCtrl(void);
 
 
 
-uint8 testann[2000]={0,};
-uint8 testann1[10]={0};
-uint16 tp3=0;
-uint16 tp4=0;
-uint8 Save_Ann_flag=0;
+static uint8 testann[2000]={0,};
+static uint8 testann1[10]={0};
+static uint16 tp3=0;
+static uint16 tp4=0;
+static uint8 Save_Ann_flag=0;
 
 
-uint8 data0[9]={0};
-uint8 data2[50+1][55]={0};
-uint8 data3[12]={0};
-uint8 tp = 0;
-uint8 tp1 = 0;
-uint8 tp2 = 0;
+static uint8 data0[9]={0};
+static uint8 data2[50+1][55]={0};
+static uint8 data3[12]={0};
+static uint8 tp = 0;
+static uint8 tp1 = 0;
+static uint8 tp2 = 0;
 
-uint16 hanzi;
+
 uint8 vAnnCounter=0;
 
 
@@ -7751,7 +7756,7 @@ uint8 GetAnnRow( uint8 comp)
 }
 
 
-void recv_note_info(void)
+static void recv_note_info(void)
 {
 
 
@@ -8145,14 +8150,14 @@ uint32 uart1GetByte (void)
     ucRcvData = (*(volatile unsigned long *)(0x40010000 + 0x00));                                                   
     return (ucRcvData);
 }
-uint32 uart0GetByte (void)
-{
-    uint32 ucRcvData;
-    
-    while (((*(volatile unsigned long *)(0x4000C000 + 0x14)) & 0x01) == 0);                                         
-    ucRcvData = (*(volatile unsigned long *)(0x4000C000 + 0x00));                                                   
-    return (ucRcvData);
-}
+
+
+
+
+
+
+
+
 
 
 
@@ -8167,12 +8172,12 @@ void uart1GetStr (uint32 *pucStr, uint32 ulNum)
         *pucStr++ =  uart1GetByte();
     }
 }
-void uart0GetStr (uint32_t *pucStr, uint32_t ulNum)
-{
-    for (; ulNum > 0; ulNum--){
-        *pucStr++ =  uart0GetByte();
-    }
-}
+
+
+
+
+
+
 
 
 

@@ -17,7 +17,7 @@
 #include  "CGetCompSum.h"
 #include  "CFlashParam.h"
 
-void menu_system_query(void)
+static void menu_system_query(void)
 {
     uint8 hz[]="系统查询";
     uint8 offset = 16;
@@ -27,7 +27,7 @@ void menu_system_query(void)
     DisplayJBHZK(2,0,0,((hz[6]<<8)+hz[7]));
 
 }
-void menu_system_query_compnums(void)
+static void menu_system_query_compnums(void)
 {
     uint8 t2 = get_basic_nums();
     uint8 hz[]="注册部件数个";

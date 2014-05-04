@@ -1616,7 +1616,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3871,6 +3872,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -4186,12 +4189,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4389,7 +4392,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4435,6 +4438,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -5246,7 +5251,7 @@ extern   void   T1Int_CTimeCtrl(void);
 
 extern void add_timer1_3h_counter(void);
 
-void reset_timer1_3h_counter(void);
+extern void reset_timer1_3h_counter(void);
 
 extern uint32 get_3h_counter(uint8 part);
 
@@ -5928,7 +5933,7 @@ void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
 #line 32 "..\\src\\CRunCtrl\\CRunCtrl.c"
 
 
-void hardware_init(void)
+static void hardware_init(void)
 {
     GPIOinit();
     InitC_CSysRunFlag();
@@ -5985,37 +5990,37 @@ void  Reset_CRunCtrl(void)
     Init_CTimeCtrl();
     Led_Init();
 }  
-void deal_lcd(void)
+static void deal_lcd(void)
 {
     if(vGetScreenMask()>3000)
     {
         OffLcd();
     }
 }
-void deal_speaker(void)
+static void deal_speaker(void)
 {
     
     if(GetSpeaker_Flag()&&!GetZjFlag())
         CSpeakerPWM();
 }
-void deal_all_led(void)
+static void deal_all_led(void)
 {
     if(!GetZjFlag())
         RunLed_CRunCtrl();
 }
 
-void pwm1_test_start_stop()
-{
-    static uint8 startflag = 1;
-    if(startflag)
-    {
-        PWM1_Start();
-        set_PWM1_Started();
-        startflag = 0;
-    }
-}
 
-void detect_online(void)
+
+
+
+
+
+
+
+
+
+
+static void detect_online(void)
 {
     uint8 i;
     for(i =(1);i<=50;i++)

@@ -55,13 +55,9 @@
 .\output\ctasksure.o: ..\src\MenuCtrl\CGetGrap.h
 .\output\ctasksure.o: ..\src\MenuCtrl\tasklist.h
 .\output\ctasksure.o: ..\src\MenuCtrl\CKeyCounter.h
-.\output\ctasksure.o: ..\src\common\CFlashParam.h
 .\output\ctasksure.o: ..\src\12UARTHandle\CComHandle.h
 .\output\ctasksure.o: ..\src\common\CSendToFlash.h
-.\output\ctasksure.o: ..\src\Board\CLED.h
 .\output\ctasksure.o: ..\src\common\CGetCompSum.h
-.\output\ctasksure.o: ..\src\common\CMaDefine.h
-.\output\ctasksure.o: ..\src\12UARTHandle\CComHandle.h
 .\output\ctasksure.o: ..\src\12UARTHandle\CComPara.h
 .\output\ctasksure.o: ..\src\Menu\CSysReset.h
 .\output\ctasksure.o: ..\src\MenuCtrl\CTaskDown.h
@@ -73,3 +69,5 @@
 .\output\ctasksure.o: ..\src\MenuCtrl\CTaskReturn.h
 .\output\ctasksure.o: ..\src\CNodeInfo\CNodeInfo.h
 .\output\ctasksure.o: ..\src\Board\key.h
+.\output\ctasksure.o: ..\src\CTimeCtrl\CTimeCtrl.h
+.\output\ctasksure.o: ..\src\Hardware\Timer\CTimeDef.h

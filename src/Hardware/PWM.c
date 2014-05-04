@@ -33,14 +33,14 @@ volatile uint32 match_counter1;
 #define BEEPON()    FIO2DIR |= BEEP; FIO2CLR = BEEP                     /* ¡¤??¨´?¡Â?a                     */
 
 
-void  beepReverse (void)
-{
-    if ((FIO0PIN & BEEP)!=0) {
-        BEEPON();
-    } else {
-        BEEPOFF();
-    }
-}
+// static void  beepReverse (void)
+// {
+//     if ((FIO0PIN & BEEP)!=0) {
+//         BEEPON();
+//     } else {
+//         BEEPOFF();
+//     }
+// }
 
 
 /******************************************************************************
@@ -205,7 +205,7 @@ void PWM1_Start( void )
 	PWM1TCR = TCR_CNT_EN | TCR_PWM_EN;	/* counter enable, PWM enable */
   
 }
-uint8 pwm1startflag=0;
+static uint8 pwm1startflag=0;
 uint8 get_PWM1_Started(void)
 {
   return pwm1startflag;

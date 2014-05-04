@@ -31,7 +31,7 @@
 #include  "CSendTo195.h"
 
 
-void hardware_init(void)
+static void hardware_init(void)
 {
     GPIOinit();
     InitC_CSysRunFlag();
@@ -88,37 +88,37 @@ void  Reset_CRunCtrl(void)
     Init_CTimeCtrl();
     Led_Init();
 }  
-void deal_lcd(void)
+static void deal_lcd(void)
 {
     if(vGetScreenMask()>3000)
     {
         OffLcd();
     }
 }
-void deal_speaker(void)
+static void deal_speaker(void)
 {
     //非自检且打开时
     if(GetSpeaker_Flag()&&!GetZjFlag())
         CSpeakerPWM();
 }
-void deal_all_led(void)
+static void deal_all_led(void)
 {
     if(!GetZjFlag())
         RunLed_CRunCtrl();
 }
-//测试消音功能
-void pwm1_test_start_stop()
-{
-    static uint8 startflag = 1;
-    if(startflag)
-    {
-        PWM1_Start();
-        set_PWM1_Started();
-        startflag = 0;
-    }
-}
+// //测试消音功能
+// static void pwm1_test_start_stop()
+// {
+//     static uint8 startflag = 1;
+//     if(startflag)
+//     {
+//         PWM1_Start();
+//         set_PWM1_Started();
+//         startflag = 0;
+//     }
+// }
 //检测是否在线
-void detect_online(void)
+static void detect_online(void)
 {
     uint8 i;
     for(i =COMP_START;i<=MAX_COMP;i++)

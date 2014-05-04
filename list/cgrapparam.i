@@ -325,7 +325,7 @@ uint8 GetIntenFlag(void);
 
 
 #line 18 "..\\src\\common\\CGrapParam.c"
-#line 19 "..\\src\\common\\CGrapParam.c"
+
 #line 1 "..\\src\\common\\CMaDefine.h"
 
 

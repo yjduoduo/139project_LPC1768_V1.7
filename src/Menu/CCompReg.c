@@ -16,7 +16,7 @@
 #include "lcd.h"
 #include  "include.h"
 
-void menu_reging(void)
+static void menu_reging(void)
 {
     uint8 hz[]="正在注册";
     DisplayJBHZK(1,4,48,((hz[0]<<8)+hz[1]));
@@ -24,7 +24,7 @@ void menu_reging(void)
     DisplayJBHZK(2,4,16,((hz[4]<<8)+hz[5]));
     DisplayJBHZK(2,4,32,((hz[6]<<8)+hz[7]));
 }
-void menu_invalid_comp(void)
+static void menu_invalid_comp(void)
 {
     uint8 hz[]="非法部件";
     DisplayJBHZK(1,4,48,((hz[0]<<8)+hz[1]));
@@ -61,7 +61,7 @@ void menu_comptype(void)
     DisplayJBHZK(1,line,16+offset,HZ_SHOW(hz,2));
     Displaynumber(1,line,32,0x0A);
 }
-void menu_overciraddr(void)
+static void menu_overciraddr(void)
 {
     uint8 hz[]="超回路范围";
     uint8 line =4;
@@ -73,7 +73,7 @@ void menu_overciraddr(void)
     DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
 
 }
-void menu_compreged(void)
+static void menu_compreged(void)
 {
     uint8 hz[]="部件已注册";
     uint8 line =4;
@@ -85,7 +85,7 @@ void menu_compreged(void)
     DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
 
 }
-void menu_devreged(void)
+static void menu_devreged(void)
 {
     uint8 hz[]="设备已注册";
     uint8 line =4;
@@ -97,7 +97,7 @@ void menu_devreged(void)
     DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
 
 }
-void menu_overcompnums(void)
+static void menu_overcompnums(void)
 {
     uint8 hz[]="部件已超量";
     uint8 line =4;
@@ -109,7 +109,7 @@ void menu_overcompnums(void)
     DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
 
 }
-void menu_regedsucc(void)
+static void menu_regedsucc(void)
 {
     uint8 hz[]="注册成功";
     uint8 line =4;
@@ -120,7 +120,7 @@ void menu_regedsucc(void)
     DisplayJBHZK(2,line,32,HZ_SHOW(hz,6));
 
 }
-void menu_compreg(uint8 flag)
+static void menu_compreg(uint8 flag)
 {
     uint8 hz[]="部件注册";
     uint8 line =4;
@@ -141,7 +141,7 @@ void menu_compreg(uint8 flag)
 
 }
 
-void menu_compreg_tips(void)
+static void menu_compreg_tips(void)
 {
     uint8 hz[]="请按确认键注册";
     uint8 line =6;

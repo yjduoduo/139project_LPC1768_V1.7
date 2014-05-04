@@ -39,7 +39,7 @@ void menu_history_over(void)
     DisplayJBHZK(2,2,0,((hz1[4]<<8)+hz1[5]));
     DisplayJBHZK(2,2,16,((hz1[6]<<8)+hz1[7]));
 }
-void menu_ciraddr(uint8 address)
+static void menu_ciraddr(uint8 address)
 {
     uint8 hz[]="»ØÂ·µØÖ·";
     DisplayJBHZK(1,0,0,((hz[0]<<8)+hz[1]));
@@ -51,38 +51,38 @@ void menu_ciraddr(uint8 address)
     Displaynumber(2,0,8,(address%100/10));
     Displaynumber(2,0,16,(address%10));
 }
-void menu_status(void)
+static void menu_status(void)
 {
     uint8 hz[]="×´Ì¬";
     DisplayJBHZK(1,2,0,HZ_SHOW(hz,0));
     DisplayJBHZK(1,2,16,HZ_SHOW(hz,2));
     Displaynumber(1,2,32,0x0A);
 }
-void menu_start(void)
+static void menu_start(void)
 {
     uint8 hz[]="ÆôÓÃ";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));
     DisplayJBHZK(2,2,16,HZ_SHOW(hz,2));
 }
-void menu_stop(void)
+static void menu_stop(void)
 {
     uint8 hz[]="ÆÁ±Î";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));
     DisplayJBHZK(2,2,16,HZ_SHOW(hz,2));
 }
-void menu_del(void)
+static void menu_del(void)
 {
     uint8 hz[]="É¾³ý";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));
     DisplayJBHZK(2,2,16,HZ_SHOW(hz,2));
 }
-void menu_normal(void)
+static void menu_normal(void)
 {
     uint8 hz[]="Õý³£";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));
     DisplayJBHZK(2,2,16,HZ_SHOW(hz,2));
 }
-void menu_lowvolatage(void)
+static void menu_lowvolatage(void)
 {
     uint8 hz[]="µç³ØÇ·Ñ¹";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));
@@ -90,13 +90,13 @@ void menu_lowvolatage(void)
     DisplayJBHZK(2,2,32,HZ_SHOW(hz,4));
     DisplayJBHZK(2,2,48,HZ_SHOW(hz,6));
 }
-void menu_fault(void)
+static void menu_fault(void)
 {
     uint8 hz[]="¹ÊÕÏ";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));
     DisplayJBHZK(2,2,16,HZ_SHOW(hz,2));
 }
-void menu_fire(void)
+static void menu_fire(void)
 {
     uint8 hz[]="»ð¾¯";
     DisplayJBHZK(2,2,0,HZ_SHOW(hz,0));

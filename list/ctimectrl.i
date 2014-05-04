@@ -695,7 +695,7 @@ void Clr2msArrived(void);
 
  void add_timer1_3h_counter(void);
 
-void reset_timer1_3h_counter(void);
+ void reset_timer1_3h_counter(void);
 
  uint32 get_3h_counter(uint8 part);
 
@@ -2570,12 +2570,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -3859,7 +3859,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -5504,6 +5505,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -5527,7 +5530,7 @@ void Delay1Ms(uint32 t);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -5573,6 +5576,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -6741,8 +6746,8 @@ void  SaveComm_CTimeCtrl(uint8 vComm)
         SetData_CLpAnsCtrl(vSendData);
     }
 }
-uint8 bufcounter=0;
-uint8 loopldbuf[10] = {0,};
+static volatile uint8 bufcounter=0;
+
 
 
 
@@ -6857,7 +6862,7 @@ void   T0Int_CTimeCtrl(void)
         AnsCommT0_CTimeCtrl();
     }
 }
-void set_speark_ss_time(uint16 startT,uint16 stopT)
+static void set_speark_ss_time(uint16 startT,uint16 stopT)
 {
     vPWM1Time++;
     if((vPWM1Time >= startT) && !vPWM1StopFlag)
@@ -6886,7 +6891,7 @@ typedef struct _CompNotExist
 }CompNotExist;
 
 
-CompNotExist vTime1_3h_exist[50+1]={0,};
+static CompNotExist vTime1_3h_exist[50+1]={0,};
 
 void add_timer1_3h_counter(void)
 {
@@ -6924,7 +6929,7 @@ void clr_3h_counter(uint8 part)
 
 void clr_faultnum_3h_(uint8 part)
 {
-    if(get_3h_counter(part) < 1*6/1UL )
+    if(get_3h_counter(part) < ((60*6)/(1UL)) )
     {
         vTime1_3h_exist[part].faultnums = 0;
     }
@@ -6935,11 +6940,11 @@ void judge_3h_over(uint8 part)
 {
 
     DebugOnce("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
-    if(get_3h_counter(part) > 1*6/1UL + 5)
+    if(get_3h_counter(part) > ((60*6)/(1UL)) + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;
     }
-    else if(get_3h_counter(part) > 1*3/1UL + 5)
+    else if(get_3h_counter(part) > ((60*3)/(1UL)) + 5)
     {
         vTime1_3h_exist[part].faultnums++;
     }

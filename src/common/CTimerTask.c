@@ -14,8 +14,8 @@
 
 #define   CTimerTick_C   
 #include  "include.h"  
-#include  "CTimerTask.h"
-#include  "CTime.h"
+// #include  "CTimerTask.h"
+// #include  "CTime.h"
 
 /*================= 常数 ============================================*/
 #define FORBID  0
@@ -32,14 +32,14 @@ typedef struct //TTaskTimer_str
 }TTaskTimer_st; 
 #pragma pack()
 /*================= 公有结构变量声明 ================================*/
-TTaskTimer_st stTaskTimer[MAX_TICK_TASK_NUM]; 
+static TTaskTimer_st stTaskTimer[MAX_TICK_TASK_NUM]; 
 /*================= 私有结构变量声明 ================================*/
 //uint32 d5msTimer;
-uint32 d10msTimer;
+static uint32 d10msTimer;
 uint32 d100msTimer;
-uint32 dN00msTimer;
+static uint32 dN00msTimer;
 uint32 d1sTimer;
-uint32 dNsTimer;
+static uint32 dNsTimer;
 
 /*================= 公有函数声明 ====================================*/
 
@@ -94,7 +94,7 @@ tBoolean GetTickTaskStatus (uint8 taskID)
 
 tBoolean GetTickTaskStaNoClr (uint8 taskID)
 {
-tBoolean succ;
+    tBoolean succ;
     if(taskID >= MAX_TICK_TASK_NUM)
         return FALSE;
 //     timerTickInterrupt(FORBID);
@@ -219,8 +219,8 @@ tBoolean KillTickTask (uint8 taskID)
 *  OUT:
 * 
 ******************************************************************************/
-#define U_TIMERTICK_R_MAX  0x10000 //需要防止超出类型范围
-#define U_TIMERTICK_R_MASK  (U_TIMERTICK_R_MAX - 1) //需要防止超出类型范围
+// #define U_TIMERTICK_R_MAX  0x10000 //需要防止超出类型范围
+// #define U_TIMERTICK_R_MASK  (U_TIMERTICK_R_MAX - 1) //需要防止超出类型范围
 
 
 //void TickTaskWork (void)   //系统事件定时

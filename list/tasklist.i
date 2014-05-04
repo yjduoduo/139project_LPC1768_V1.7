@@ -1099,7 +1099,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -3513,6 +3514,8 @@ void Delay1Ms(uint32 t);
 
  
 
+
+
 #line 1 "..\\src\\common\\CFlashParam.h"
 
 
@@ -3828,12 +3831,12 @@ void setHistFullFlag(uint8 flag);
 uint8 getHistFullFlag(void);
 
 uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
 
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
 
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
 void init_basic_info(void);
 void set_basic_info(uint32 row,uint8 tmp);
 uint8 get_basic_info(uint32 row);
@@ -4031,7 +4034,7 @@ void set_node_all_info(uint32 row,note_info_t *info);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
 
 
 
@@ -4077,6 +4080,8 @@ void set_menu_alarm_info(alarminfo alarm_info);
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
 uint8 get_alarm_loop_show(void);
+
+#line 76 "..\\src\\MenuCtrl\\runfunction.h"
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -5391,7 +5396,7 @@ uint8 GetFlagLed(void);
 #line 28 "..\\src\\MenuCtrl\\tasklist.c"
 
 
-void menu_setup_localaddr_tab(void)
+static void menu_setup_localaddr_tab(void)
 {
     if(get_entry_localaddr_flag()){
         AddLocalParaSel();
@@ -5407,7 +5412,7 @@ void menu_setup_localaddr_tab(void)
 
     }
 }
-void menu_comp_reg_tab(void)
+static void menu_comp_reg_tab(void)
 {
     
     
@@ -5415,7 +5420,7 @@ void menu_comp_reg_tab(void)
     CompReg_menu(GetCompRegDep(),GetCompRegNum(),0,GetCompRegAddr(),GetCompRegParaSel(),0);
 
 }
-void menu_setup_comp_tab(void)
+static void menu_setup_comp_tab(void)
 {
     AddComSet_seltab();
     if(GetComSet_seltab() > 3)
@@ -5423,7 +5428,7 @@ void menu_setup_comp_tab(void)
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),0);
 
 }
-void back_task_setup_datetime(void)
+static void back_task_setup_datetime(void)
 {
     AddSelTime();
     if(GetSelTime() > 6)
@@ -5432,7 +5437,7 @@ void back_task_setup_datetime(void)
     DateMod_Menu(GetYear(),GetMonth(),GetDay(),GetHour(),GetMintue(),GetSecond(),GetSelTime(),0);
 
 }
-void back_task_save(void)
+static void back_task_save(void)
 {
     AddAnnSel();
     if(GetAnnSel() > 2)
@@ -5440,7 +5445,7 @@ void back_task_save(void)
     ClearScreen(0);
     Annotate_Menu(GetAnnDep(),GetAnnCompNum(),GetAnnSel());
 }
-void back_task_comp_state(void)
+static void back_task_comp_state(void)
 {
     
     

@@ -13,6 +13,1294 @@
 
  
 
+
+#line 1 "..\\src\\MenuCtrl\\runfunction.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+#line 1 "..\\src\\common\\CFlashParam.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 1 "..\\src\\APP\\config.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+enum emTxResult{
+	U_TxError = 1,
+	U_TxSucc = 0,	
+};
+	
+	
+enum emErrorDef{
+	U_Error = 1,
+	U_Fault = 1,
+	U_Usual = 0,	
+	
+};
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+typedef  unsigned  char  tBoolean;
+typedef  unsigned char   uchar;                    
+typedef  unsigned char   uint8;                    
+typedef  signed   char   int8;                     
+typedef  unsigned short  uint16;                   
+typedef  signed   short  int16;                    
+typedef  unsigned int    uint32;                   
+typedef  signed   int    int32;                    
+typedef  float           fp32;                     
+typedef  double          fp64;                     	  
+typedef  unsigned long   ulong;
+
+
+
+ 
+
+
+#line 16 "..\\src\\common\\CFlashParam.h"
+
+
+
+
+#line 1 "..\\src\\Board\\pcf8563.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 19 "..\\src\\Board\\pcf8563.h"
+
+
+
+
+
+typedef struct _PCF8563_DATE{
+   uint8	second;
+   uint8	minute;
+   uint8	hour;
+   uint8	day;
+   uint8	week;
+   uint8	month;
+   uint16	year;
+}PCF8563_DATE;
+
+
+
+
+
+ 
+#line 46 "..\\src\\Board\\pcf8563.h"
+
+
+ 
+
+
+
+
+ 
+#line 60 "..\\src\\Board\\pcf8563.h"
+
+
+ 
+
+
+
+
+ 
+#line 74 "..\\src\\Board\\pcf8563.h"
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+ uint8 PCF8563_Set(PCF8563_DATE *tp);
+ uint8 PCF8563_Read(PCF8563_DATE *tp);
+ uint8 PCF8563_SS(uint8 cmd);
+ uint8 PCF8563_Set_TD(uint8 cmd, uint16 TD);
+ uint16 PCF8563_Get_TD(uint8 cmd);
+ uint8 PCF8563_Set_ClkOut(uint8 cmd);
+ uint8 PCF8563_Set_Alarm(uint8 cmd, uint8 tm);
+ uint8 PCF8563_Set_Timer(uint8 cmd, uint8 cnt);
+ uint8 PCF8563_INT_State(uint8 cmd);
+ void PCF8563_Init(void);
+
+void getcurrent_date(PCF8563_DATE *date);
+
+
+
+
+ 
+#line 21 "..\\src\\common\\CFlashParam.h"
+#line 1 "..\\src\\common\\CMaDefine.h"
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 35 "..\\src\\common\\CMaDefine.h"
+
+
+
+
+#line 22 "..\\src\\common\\CFlashParam.h"
+#line 1 "..\\src\\Hardware\\UART\\uart.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+#line 21 "..\\src\\Hardware\\UART\\uart.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 46 "..\\src\\Hardware\\UART\\uart.h"
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+typedef struct note_info_t
+{
+    uint8 frame1;
+    uint8 frame2;
+    uint8 frame3;
+    uint8 cmd1;
+    uint8 cmd_rw;
+    uint8 devtype;
+    uint8 targetaddr;
+    uint8 controllernum;
+    uint8 datelen;
+    uint8 loop;
+    uint8 addr;
+    uint8 hz[32];
+    uint8 cs[2];
+}note_info_t;
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void ClrData3(void);
+
+extern void NoteData_Init(void);
+extern uint8 GetCom0Ann(uint8 row,uint8 cow);
+extern uint8 GetAnnRow( uint8 comp);
+extern void ClrCom1Data0(void);
+extern void clr_tp(void);
+extern uint8 GetCom1Data0(uint8 row);
+void CSaveAnn(void);
+void AnnCounterInit(void);
+extern uint32 UARTInit( uint32 portNum, uint32 Baudrate );
+extern void UartIntEnd(void);
+extern void UartIntStart(void);
+extern void UART0_IRQHandler( void );
+extern void UART1_IRQHandler( void );
+extern void UARTSend(uint32 portNum, uint8 *Ptr, uint32 Length);
+extern uint32 uart1GetByte (void);
+extern void uart1GetStr (uint32 *pucStr, uint32 ulNum);
+
+static int Uart0SendByte(int buf, uint8 flag) ;
+
+extern uint32 Uart1SendByte(uint32 buf) ;
+extern void UART0_SendString (uint8 *s);
+extern void UART1_SendString (uint8 *s);
+uint8 GetAnnFlag(void);
+void HandleNote(void);
+void SaveAnnFun(void);
+void puts__(char *s);
+void lcd_printf(char *str,...);
+void DebugOnce(char *str,...);
+
+void uart_all_disable(void);
+void uart_all_enable(void);
+
+void SetConvertdataAll(void);
+
+void set_note_info(note_info_t *info);
+
+
+
+
+
+
+
+void add_note_nums(void);
+void add_note_size(void);
+void check_note_nums(void);
+void check_note_size(void);
+void reset_note_buf(uint8 notenum);
+void set_note_buf(uint8 notenum, uint8 note_size, uint8 val);
+void print_note_buf(void);
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 173 "..\\src\\Hardware\\UART\\uart.h"
+
+
+
+
+
+ 
+
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+
+ 
+ 
+
+ 
+ 
+
+
+ 
+
+ 
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+ 
+
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+
+typedef struct
+{
+    volatile uint32 tx_head;                 
+    volatile uint32 tx_tail;                 
+    volatile uint32 rx_head;                 
+    volatile uint32 rx_tail;                 
+    volatile uint8  tx[256];   
+    volatile uint8  rx[256];   
+} UART_RING_BUFFER_T;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
+typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+typedef struct{
+    unsigned short len;									 
+    unsigned short num;									 
+    unsigned char senden;
+    unsigned char datarray[0x100];			 
+}TdUartSend;
+
+typedef struct{
+    unsigned char clrlen;								 
+    unsigned char datarray[0x100];			 
+}TdUartRcv;
+
+
+
+
+
+
+
+ 
+#line 23 "..\\src\\common\\CFlashParam.h"
+
+
+
+
+
+
+
+
+
+#line 40 "..\\src\\common\\CFlashParam.h"
+
+
+#line 54 "..\\src\\common\\CFlashParam.h"
+
+
+
+
+
+
+
+#line 86 "..\\src\\common\\CFlashParam.h"
+
+
+ 
+ 
+ 
+ 
+ 
+
+#line 103 "..\\src\\common\\CFlashParam.h"
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+typedef	union FlashInfoDef
+{
+    
+    uint8    row;  
+    uint8 	 type;	
+    uint8	   setup;	
+    uint8    alarmtype;
+    
+    
+    uint16  year;
+    uint8   month;
+    uint8   day;
+    uint8   hour;
+    uint8   minute;
+    uint8   second;
+    
+    uint8    signal;
+    uint8    compann;
+}tFlashinfoDef,*PFlashinfoDef;
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+typedef void (void_fnc_t) (void);
+typedef struct Flash_Record{
+    uint32 addr;
+    uint8 (*buf)[(1)];
+    uint8 (*bigbuf)[(8)];
+    uint8 (*alarmbuf)[(18)];
+    uint8 (*nodebuf)[(2)]; 
+    uint8 (*histbuf)[(17)]; 
+    uint32 llen;
+    uint32 rlen;
+    void_fnc_t *initfun;
+    void_fnc_t *savefun;
+}Flash_Record;
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+typedef struct alarminfo{
+    uint8 inzone;
+    uint8 part;
+    uint8 ciraddr;
+    uint8 alarmsum;
+    uint8 type;
+    uint8 alarmed;
+    PCF8563_DATE dateyear;
+    uint8 firstalarm;
+    uint8 attr;
+    uint8 vAnnRow;
+    uint8 f_recvmesat3h;
+}alarminfo;
+
+ 
+ 
+ 
+ 
+ 
+typedef struct history_st{
+    uint8 order;
+    uint8 inzone;
+    uint8 part;
+    uint8 circleaddr;
+    uint8 vAnnRow;
+    uint8 attr;
+    uint8 opstype;
+    uint8 devtype;
+    uint8 lastnum;
+    PCF8563_DATE dateyear;
+}history_st;
+
+
+
+typedef struct
+{
+    uint32 firesum;
+    uint32 faultsum;
+    uint32 battlowsum;
+}tSum;
+
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+typedef struct compent{
+    uint8 inzone;
+    uint8 part;
+    uint8 ciraddr;
+    uint8 psn0;
+    uint8 psn1;
+    uint8 psn2;
+    uint8 psn3;
+    uint8 devtype;
+}compent;
+
+
+
+
+
+
+
+
+ 
+void SetHistFlag(uint8 tmp);
+uint8 GetHistFlag(void);
+
+uint8 gethistory_isfirealarm(uint32 row);
+
+uint8 gethistory_isbatlow(uint32 row);
+
+uint8 gethistory_isfault(uint32 row);
+void AddPageConter(void);
+void SetPageConter(uint8 tmp);
+uint8 GetPageConter(void);
+void AddHistConter(void);
+uint16 GetHistConter(void);
+void SetHistConter(uint16 tmp);
+
+void setHistFullFlag(uint8 flag);
+uint8 getHistFullFlag(void);
+
+uint8 getHistFull(void);
+static void init_record(const Flash_Record * flash_record);
+static void save_record(const Flash_Record * flash_record);
+
+static void set_array(const Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
+
+static uint8 get_array(const Flash_Record * flash_record,uint32 row,uint32 col);
+void init_basic_info(void);
+void set_basic_info(uint32 row,uint8 tmp);
+uint8 get_basic_info(uint32 row);
+
+void save_basic_info(void);
+
+void set_basic_nums(uint8 compnums);
+
+void add_basic_nums(void);
+
+void sub_basic_nums(void);
+void set_basic_localaddr(uint8 localaddr);
+void set_basic_zones(uint8 departallnums);
+uint32 get_basic_localaddr(void);
+uint32 get_basic_zones(void);
+uint32 get_basic_nums(void);
+void init_comp_info(void);
+void save_comp_info(void);
+
+static void set_comp_info(uint32 row,uint32 col,uint8 tmp);
+
+static uint8 get_comp_info(uint32 row,uint32 col);
+
+void set_comp_inzone(uint8 item,uint8 inzone);
+
+void set_comp_partnumber(uint8 item,uint8 partnumber);
+void set_comp_ciraddr(uint8 item,uint8 ciraddr);
+void set_comp_psn0(uint8 item,uint8 psn0);
+void set_comp_psn1(uint8 item,uint8 psn1);
+void set_comp_psn2(uint8 item,uint8 psn2);
+void set_comp_psn3(uint8 item,uint8 psn3);
+void set_comp_devtype(uint8 item,uint8 devtype);
+
+void set_comp_all(uint8 item,compent *compinfo);
+
+void clr_comp_all(uint8 item);
+
+void clr_comp_loop_all(void);
+
+void set_comp_all_and_save(uint8 item,compent *compinfo);
+
+uint8 get_comp_inzone(uint8 item);
+uint8 get_comp_partnumber(uint8 item);
+uint8 get_comp_ciraddr(uint8 item);
+
+uint8 judge_same_ciraddr(uint8 row,uint8 ciraddr);
+uint8 get_comp_psn0(uint8 item);
+uint8 get_comp_psn1(uint8 item);
+uint8 get_comp_psn2(uint8 item);
+uint8 get_comp_psn3(uint8 item);
+uint8 get_comp_devtype(uint8 item);
+
+void get_comp_all(uint8 item, compent *compinfo);
+void init_mask_info(void) ;
+void save_mask_info(void) ;
+void set_mask_info(uint32 row,uint8 tmp);
+uint8 get_mask_info(uint32 row) ;
+
+void init_alarm_info(void);
+
+void save_alarm_info(void) ;
+static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
+static uint8 get_alarm_info(uint32 row,uint32 col) ;
+
+uint8 get_alarm_attr(uint32 row);
+uint8 get_alarm_alarmed(uint32 row);
+
+uint8 judge_alarm_firealarmed(uint32 row);
+
+uint8 judge_alarm_faultalarmed(uint32 row);
+uint8 get_alarm_firstalarm(uint32 row);
+
+void set_alarm_inzone(uint32 item, uint8 tmp);
+void set_alarm_part(uint32 item, uint8 tmp);
+void set_alarm_ciraddr(uint32 item, uint8 tmp);
+void set_alarm_alarmsum(uint32 item, uint8 tmp);
+void set_alarm_type(uint32 item, uint8 tmp);
+void set_alarm_alarmed(uint32 item, uint8 tmp);
+void set_alarm_firstalarm(uint32 item, uint8 tmp);
+void set_alarm_attr(uint32 row, uint8 tmp);
+void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
+void clr_alarm_f_recvmess3h(uint32 item);
+void set_alarm_allinfo(uint32 item,alarminfo *info);
+
+void clr_alarm_allinfo(void);
+void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
+uint8 get_alarm_part(uint32 item);
+uint8 get_alarm_ciraddr(uint32 item);
+uint8 get_alarm_type(uint32 item);
+
+uint8 get_alarm_f_recvmess3h(uint32 item);
+void get_alarm_allinfo(uint32 item, alarminfo *info);
+
+void set_alarm_first(alarminfo *info);
+
+void get_alarm_first(alarminfo *info);
+
+uint8 get_alarm_firstflag(void);
+
+uint8 get_alarm_first_part(void);
+
+uint8 get_firealarm_nums(void);
+void clr_firealarm(void);
+
+uint8 get_alarm_item_bypart(uint8 part);
+
+uint8 get_faultalarm_nums(void);
+
+uint8 judge_alarm_first(void);
+void init_node_info(void) ;
+void save_node_info(void);
+
+void set_node_info(uint32 row,uint32 col,uint8 tmp);
+
+uint8 get_node_info(uint32 row,uint32 col);
+
+int8 get_node_row( uint8 comp);
+void save_node_and_nodenums(void) ;
+
+void init_nodenums_info(void) ;
+
+void save_nodenums_info(void);
+void set_nodenums(uint8 tmp);
+uint8 get_nodenums(void);
+void add_nodenums(void);
+void init_hist_info(void) ;
+void save_hist_info(void) ;
+
+static uint8 get_hist_info(uint32 row,uint8 col) ;
+void set_hist_info(uint32 row,uint8 col,uint8 tmp) ;
+void clr_hist_info(void)  ;
+uint8 get_hist_order(uint32 row) ;
+uint8 get_hist_inzone(uint32 row) ;
+uint8 get_hist_part(uint32 row) ;
+uint8 get_hist_circleaddr(uint32 row) ;
+uint8 get_hist_vAnnRow(uint32 row) ;
+uint8 get_hist_attr(uint32 row) ;
+uint8 get_hist_opstype(uint32 row) ;
+uint8 get_hist_devtype(uint32 row) ;
+uint8 get_hist_lastnum(uint32 row) ;
+
+void get_hist_datetime(uint32 row,PCF8563_DATE* dateyear) ;
+
+void get_hist_allinfo(uint32 row, history_st* info);
+
+void set_hist_allinfo(uint32 row, history_st* info);
+
+void save_hist_all(void);
+
+uint8 judge_histnums_full(void);
+
+void set_histnum_full(void);
+
+void init_histnums_info(void) ;
+void save_histnums_info(void) ;
+
+static void set_histnum_info(uint32 row,uint8 tmp);
+
+static uint8 get_histnum_info(uint32 row);
+
+void init_hist_and_histnums(void);
+void init_histsufix_info(void);
+
+void init_flash_all(void);
+
+uint8 CheckDepComp(uint8 dep,uint8 comp);
+
+int16 GetNum(uint8 psn0,uint8 psn1,uint8 psn2,uint8 psn3);
+void CAddCirCounter(void);
+void CSetCirCounter(uint8 tmp);
+uint8 CGetCirCounter(void);
+int8 GetRow(uint8 t1,uint8 t2);
+
+uint8 JudgeAlarmType(void);
+uint8 JudgeCompAlarmType(uint8 row);
+void SetDatatoFlash(uint8 row,uint8 col,uint8 tmp);
+uint8 GetDatatoFlash(uint8 row,uint8 col);
+
+uint8 GetDatatoFlashType(uint8 row);
+uint8 GetDatatoFlashAlarmType(uint8 row);
+void SetFlashData(uint8 id,uint8 tmp);
+void SetDepCompSum(uint16 temp,uint8 tmp);
+uint8 GetDepCompSum(uint16 tmp);
+
+uint8 ReadFlashPsn(uint8 row,uint8 col);
+void SetCom0Ann(uint8 row,uint8 cow,uint8 tmp);
+
+void set_node_all_info(uint32 row,note_info_t *info);
+
+
+
+
+
+
+ 
+
+
+#line 18 "..\\src\\MenuCtrl\\runfunction.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void DisplayKeyMenu(void);
+void Systemp_Task(void);
+void SendHeart(void);
+
+void CS0Setup(uint8 tmp);
+void inqury_state__byuart0(void);
+
+
+void show_head_menu(void);
+void set_history_alarm_pos(uint16 pos);
+
+void set_menu_alarm_info(alarminfo alarm_info);
+
+
+void clr_alarm_loop_show(void);
+void set_alarm_loop_show(void);
+uint8 get_alarm_loop_show(void);
+
+
+
+
+
+
+
+
+
+
+static uint8 time_sendheart;
+volatile uint8 loopflag=0; 
+
+
+#line 18 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\APP\\include.h"
 
 
@@ -1098,7 +2386,8 @@ static __inline void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  
 static __inline uint32_t SysTick_Config(uint32_t ticks)
 { 
-  if (ticks > ((1<<24) -1))  return (1);                                              
+  if (ticks > ((1<<24) -1))  
+    return (1);                                              
 
   ((SysTick_Type *) ((0xE000E000) + 0x0010))->LOAD  =  (ticks & ((1<<24) -1)) - 1;                                       
   NVIC_SetPriority (SysTick_IRQn, (1<<5) - 1);                             
@@ -1923,87 +3212,6 @@ typedef struct
 
 
 #line 19 "..\\src\\APP\\include.h"
-#line 1 "..\\src\\APP\\Config.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
- 
-
-
- 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-enum emTxResult{
-	U_TxError = 1,
-	U_TxSucc = 0,	
-};
-	
-	
-enum emErrorDef{
-	U_Error = 1,
-	U_Fault = 1,
-	U_Usual = 0,	
-	
-};
-
-
-
-
-
-
-
-
- 
-
-
-
-
- 
-typedef  unsigned  char  tBoolean;
-typedef  unsigned char   uchar;                    
-typedef  unsigned char   uint8;                    
-typedef  signed   char   int8;                     
-typedef  unsigned short  uint16;                   
-typedef  signed   short  int16;                    
-typedef  unsigned int    uint32;                   
-typedef  signed   int    int32;                    
-typedef  float           fp32;                     
-typedef  double          fp64;                     	  
-typedef  unsigned long   ulong;
-
-
-
- 
-
-
 #line 20 "..\\src\\APP\\include.h"
 #line 1 "..\\src\\common\\buffer.h"
                                   
@@ -2270,72 +3478,7 @@ extern void i2c0_disable(void);
  
 
 #line 19 "..\\src\\Board\\pcf8563.h"
-
-
-
-
-
-typedef struct _PCF8563_DATE{
-   uint8	second;
-   uint8	minute;
-   uint8	hour;
-   uint8	day;
-   uint8	week;
-   uint8	month;
-   uint16	year;
-}PCF8563_DATE;
-
-
-
-
-
- 
-#line 46 "..\\src\\Board\\pcf8563.h"
-
-
- 
-
-
-
-
- 
-#line 60 "..\\src\\Board\\pcf8563.h"
-
-
- 
-
-
-
-
- 
-#line 74 "..\\src\\Board\\pcf8563.h"
-
-
- 
-
-
-
-
-
-
-
- 
-
-
-
- uint8 PCF8563_Set(PCF8563_DATE *tp);
- uint8 PCF8563_Read(PCF8563_DATE *tp);
- uint8 PCF8563_SS(uint8 cmd);
- uint8 PCF8563_Set_TD(uint8 cmd, uint16 TD);
- uint16 PCF8563_Get_TD(uint8 cmd);
- uint8 PCF8563_Set_ClkOut(uint8 cmd);
- uint8 PCF8563_Set_Alarm(uint8 cmd, uint8 tm);
- uint8 PCF8563_Set_Timer(uint8 cmd, uint8 cnt);
- uint8 PCF8563_INT_State(uint8 cmd);
- void PCF8563_Init(void);
-
-void getcurrent_date(PCF8563_DATE *date);
-
+#line 101 "..\\src\\Board\\pcf8563.h"
 
 
 
@@ -2387,552 +3530,7 @@ void GPIOinit(void);
  
 #line 21 "..\\src\\Hardware\\UART\\uart.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 46 "..\\src\\Hardware\\UART\\uart.h"
-
-
-
-
-
- 
-
-
-
-
- 
-
-typedef struct note_info_t
-{
-    uint8 frame1;
-    uint8 frame2;
-    uint8 frame3;
-    uint8 cmd1;
-    uint8 cmd_rw;
-    uint8 devtype;
-    uint8 targetaddr;
-    uint8 controllernum;
-    uint8 datelen;
-    uint8 loop;
-    uint8 addr;
-    uint8 hz[32];
-    uint8 cs[2];
-}note_info_t;
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void ClrData3(void);
-
-extern void NoteData_Init(void);
-extern uint8 GetCom0Ann(uint8 row,uint8 cow);
-extern uint8 GetAnnRow( uint8 comp);
-extern void ClrCom1Data0(void);
-extern void clr_tp(void);
-extern uint8 GetCom1Data0(uint8 row);
-void CSaveAnn(void);
-void AnnCounterInit(void);
-extern uint32 UARTInit( uint32 portNum, uint32 Baudrate );
-extern void UartIntEnd(void);
-extern void UartIntStart(void);
-extern void UART0_IRQHandler( void );
-extern void UART1_IRQHandler( void );
-extern void UARTSend(uint32 portNum, uint8 *Ptr, uint32 Length);
-extern uint32 uart1GetByte (void);
-extern void uart1GetStr (uint32 *pucStr, uint32 ulNum);
-
-static int Uart0SendByte(int buf, uint8 flag) ;
-
-extern uint32 Uart1SendByte(uint32 buf) ;
-extern void UART0_SendString (uint8 *s);
-extern void UART1_SendString (uint8 *s);
-uint8 GetAnnFlag(void);
-void HandleNote(void);
-void SaveAnnFun(void);
-void puts__(char *s);
-void lcd_printf(char *str,...);
-void DebugOnce(char *str,...);
-
-void uart_all_disable(void);
-void uart_all_enable(void);
-
-void SetConvertdataAll(void);
-
-void set_note_info(note_info_t *info);
-
-
-
-
-
-
-
-void add_note_nums(void);
-void add_note_size(void);
-void check_note_nums(void);
-void check_note_size(void);
-void reset_note_buf(uint8 notenum);
-void set_note_buf(uint8 notenum, uint8 note_size, uint8 val);
-void print_note_buf(void);
-
-
-
-
-
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 173 "..\\src\\Hardware\\UART\\uart.h"
-
-
-
-
-
- 
-
-
- 
-
-
-
- 
-
-
-
-
- 
-
- 
-
-
- 
-
- 
-
-
-
- 
- 
-
- 
- 
-
-
- 
-
- 
- 
-
-
- 
-
- 
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
- 
-
- 
-
-
- 
-
-
- 
-
-
- 
-
- 
-
-
- 
-
- 
- 
-
-
- 
-
- 
- 
-
- 
-
- 
-
-
-
-
-
- 
-
-
-
- 
-
-
-
-
- 
-
-
- 
-
- 
-
- 
-
- 
-
- 
-
-
-
-
-
-typedef struct
-{
-    volatile uint32 tx_head;                 
-    volatile uint32 tx_tail;                 
-    volatile uint32 rx_head;                 
-    volatile uint32 rx_tail;                 
-    volatile uint8  tx[256];   
-    volatile uint8  rx[256];   
-} UART_RING_BUFFER_T;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
-typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-typedef struct{
-    unsigned short len;									 
-    unsigned short num;									 
-    unsigned char senden;
-    unsigned char datarray[0x100];			 
-}TdUartSend;
-
-typedef struct{
-    unsigned char clrlen;								 
-    unsigned char datarray[0x100];			 
-}TdUartRcv;
-
-
-
-
-
+#line 581 "..\\src\\Hardware\\UART\\uart.h"
 
 
  
@@ -3496,586 +4094,6 @@ void Delay1Ms(uint32 t);
 
 #line 55 "..\\src\\APP\\include.h"
 
-
-#line 1 "..\\src\\MenuCtrl\\runfunction.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 1 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 16 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-#line 1 "..\\src\\Board\\pcf8563.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 19 "..\\src\\Board\\pcf8563.h"
-#line 101 "..\\src\\Board\\pcf8563.h"
-
-
-
- 
-#line 21 "..\\src\\common\\CFlashParam.h"
-#line 1 "..\\src\\common\\CMaDefine.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 35 "..\\src\\common\\CMaDefine.h"
-
-
-
-
-#line 22 "..\\src\\common\\CFlashParam.h"
-#line 1 "..\\src\\Hardware\\UART\\uart.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-#line 21 "..\\src\\Hardware\\UART\\uart.h"
-
-#line 581 "..\\src\\Hardware\\UART\\uart.h"
-
-
- 
-#line 23 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-
-
-
-
-
-#line 40 "..\\src\\common\\CFlashParam.h"
-
-
-#line 54 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-
-
-
-#line 86 "..\\src\\common\\CFlashParam.h"
-
-
- 
- 
- 
- 
- 
-
-#line 103 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-typedef	union FlashInfoDef
-{
-    
-    uint8    row;  
-    uint8 	 type;	
-    uint8	   setup;	
-    uint8    alarmtype;
-    
-    
-    uint16  year;
-    uint8   month;
-    uint8   day;
-    uint8   hour;
-    uint8   minute;
-    uint8   second;
-    
-    uint8    signal;
-    uint8    compann;
-}tFlashinfoDef,*PFlashinfoDef;
-
-
-
-
-
-
- 
- 
- 
- 
- 
-
-typedef void (void_fnc_t) (void);
-typedef struct Flash_Record{
-    uint32 addr;
-    uint8 (*buf)[(1)];
-    uint8 (*bigbuf)[(8)];
-    uint8 (*alarmbuf)[(18)];
-    uint8 (*nodebuf)[(2)]; 
-    uint8 (*histbuf)[(17)]; 
-    uint32 llen;
-    uint32 rlen;
-    void_fnc_t *initfun;
-    void_fnc_t *savefun;
-}Flash_Record;
-
-
-
- 
- 
- 
- 
- 
-
-
-
-
-
-
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-typedef struct alarminfo{
-    uint8 inzone;
-    uint8 part;
-    uint8 ciraddr;
-    uint8 alarmsum;
-    uint8 type;
-    uint8 alarmed;
-    PCF8563_DATE dateyear;
-    uint8 firstalarm;
-    uint8 attr;
-    uint8 vAnnRow;
-    uint8 f_recvmesat3h;
-}alarminfo;
-
- 
- 
- 
- 
- 
-typedef struct history_st{
-    uint8 order;
-    uint8 inzone;
-    uint8 part;
-    uint8 circleaddr;
-    uint8 vAnnRow;
-    uint8 attr;
-    uint8 opstype;
-    uint8 devtype;
-    uint8 lastnum;
-    PCF8563_DATE dateyear;
-}history_st;
-
-
-
-typedef struct
-{
-    uint32 firesum;
-    uint32 faultsum;
-    uint32 battlowsum;
-}tSum;
-
- 
- 
- 
- 
- 
-
-
-
-
-
-
-typedef struct compent{
-    uint8 inzone;
-    uint8 part;
-    uint8 ciraddr;
-    uint8 psn0;
-    uint8 psn1;
-    uint8 psn2;
-    uint8 psn3;
-    uint8 devtype;
-}compent;
-
-
-
-
-
-
-
-
- 
-void SetHistFlag(uint8 tmp);
-uint8 GetHistFlag(void);
-
-uint8 gethistory_isfirealarm(uint32 row);
-
-uint8 gethistory_isbatlow(uint32 row);
-
-uint8 gethistory_isfault(uint32 row);
-void AddPageConter(void);
-void SetPageConter(uint8 tmp);
-uint8 GetPageConter(void);
-void AddHistConter(void);
-uint16 GetHistConter(void);
-void SetHistConter(uint16 tmp);
-
-void setHistFullFlag(uint8 flag);
-uint8 getHistFullFlag(void);
-
-uint8 getHistFull(void);
-static void init_record(Flash_Record * flash_record);
-static void save_record(Flash_Record * flash_record);
-
-static void set_array(Flash_Record * flash_record,uint32 row,uint32 col,uint8 tmp);
-
-static uint8 get_array(Flash_Record * flash_record,uint32 row,uint32 col);
-void init_basic_info(void);
-void set_basic_info(uint32 row,uint8 tmp);
-uint8 get_basic_info(uint32 row);
-
-void save_basic_info(void);
-
-void set_basic_nums(uint8 compnums);
-
-void add_basic_nums(void);
-
-void sub_basic_nums(void);
-void set_basic_localaddr(uint8 localaddr);
-void set_basic_zones(uint8 departallnums);
-uint32 get_basic_localaddr(void);
-uint32 get_basic_zones(void);
-uint32 get_basic_nums(void);
-void init_comp_info(void);
-void save_comp_info(void);
-
-static void set_comp_info(uint32 row,uint32 col,uint8 tmp);
-
-static uint8 get_comp_info(uint32 row,uint32 col);
-
-void set_comp_inzone(uint8 item,uint8 inzone);
-
-void set_comp_partnumber(uint8 item,uint8 partnumber);
-void set_comp_ciraddr(uint8 item,uint8 ciraddr);
-void set_comp_psn0(uint8 item,uint8 psn0);
-void set_comp_psn1(uint8 item,uint8 psn1);
-void set_comp_psn2(uint8 item,uint8 psn2);
-void set_comp_psn3(uint8 item,uint8 psn3);
-void set_comp_devtype(uint8 item,uint8 devtype);
-
-void set_comp_all(uint8 item,compent *compinfo);
-
-void clr_comp_all(uint8 item);
-
-void clr_comp_loop_all(void);
-
-void set_comp_all_and_save(uint8 item,compent *compinfo);
-
-uint8 get_comp_inzone(uint8 item);
-uint8 get_comp_partnumber(uint8 item);
-uint8 get_comp_ciraddr(uint8 item);
-
-uint8 judge_same_ciraddr(uint8 row,uint8 ciraddr);
-uint8 get_comp_psn0(uint8 item);
-uint8 get_comp_psn1(uint8 item);
-uint8 get_comp_psn2(uint8 item);
-uint8 get_comp_psn3(uint8 item);
-uint8 get_comp_devtype(uint8 item);
-
-void get_comp_all(uint8 item, compent *compinfo);
-void init_mask_info(void) ;
-void save_mask_info(void) ;
-void set_mask_info(uint32 row,uint8 tmp);
-uint8 get_mask_info(uint32 row) ;
-
-void init_alarm_info(void);
-
-void save_alarm_info(void) ;
-static void set_alarm_info(uint32 row,uint32 col, uint8 tmp);
-static uint8 get_alarm_info(uint32 row,uint32 col) ;
-
-uint8 get_alarm_attr(uint32 row);
-uint8 get_alarm_alarmed(uint32 row);
-
-uint8 judge_alarm_firealarmed(uint32 row);
-
-uint8 judge_alarm_faultalarmed(uint32 row);
-uint8 get_alarm_firstalarm(uint32 row);
-
-void set_alarm_inzone(uint32 item, uint8 tmp);
-void set_alarm_part(uint32 item, uint8 tmp);
-void set_alarm_ciraddr(uint32 item, uint8 tmp);
-void set_alarm_alarmsum(uint32 item, uint8 tmp);
-void set_alarm_type(uint32 item, uint8 tmp);
-void set_alarm_alarmed(uint32 item, uint8 tmp);
-void set_alarm_firstalarm(uint32 item, uint8 tmp);
-void set_alarm_attr(uint32 row, uint8 tmp);
-void set_alarm_f_recvmess3h(uint32 item,uint8 flag);
-void clr_alarm_f_recvmess3h(uint32 item);
-void set_alarm_allinfo(uint32 item,alarminfo *info);
-
-void clr_alarm_allinfo(void);
-void set_alarm_allinfo_andsave(uint32 item,alarminfo *info);
-uint8 get_alarm_part(uint32 item);
-uint8 get_alarm_ciraddr(uint32 item);
-uint8 get_alarm_type(uint32 item);
-
-uint8 get_alarm_f_recvmess3h(uint32 item);
-void get_alarm_allinfo(uint32 item, alarminfo *info);
-
-void set_alarm_first(alarminfo *info);
-
-void get_alarm_first(alarminfo *info);
-
-uint8 get_alarm_firstflag(void);
-
-uint8 get_alarm_first_part(void);
-
-uint8 get_firealarm_nums(void);
-void clr_firealarm(void);
-
-uint8 get_alarm_item_bypart(uint8 part);
-
-uint8 get_faultalarm_nums(void);
-
-uint8 judge_alarm_first(void);
-void init_node_info(void) ;
-void save_node_info(void);
-
-void set_node_info(uint32 row,uint32 col,uint8 tmp);
-
-uint8 get_node_info(uint32 row,uint32 col);
-
-int8 get_node_row( uint8 comp);
-void save_node_and_nodenums(void) ;
-
-void init_nodenums_info(void) ;
-
-void save_nodenums_info(void);
-void set_nodenums(uint8 tmp);
-uint8 get_nodenums(void);
-void add_nodenums(void);
-void init_hist_info(void) ;
-void save_hist_info(void) ;
-
-static uint8 get_hist_info(uint32 row,uint8 col) ;
-void set_hist_info(uint32 row,uint8 col,uint8 tmp) ;
-void clr_hist_info(void)  ;
-uint8 get_hist_order(uint32 row) ;
-uint8 get_hist_inzone(uint32 row) ;
-uint8 get_hist_part(uint32 row) ;
-uint8 get_hist_circleaddr(uint32 row) ;
-uint8 get_hist_vAnnRow(uint32 row) ;
-uint8 get_hist_attr(uint32 row) ;
-uint8 get_hist_opstype(uint32 row) ;
-uint8 get_hist_devtype(uint32 row) ;
-uint8 get_hist_lastnum(uint32 row) ;
-
-void get_hist_datetime(uint32 row,PCF8563_DATE* dateyear) ;
-
-void get_hist_allinfo(uint32 row, history_st* info);
-
-void set_hist_allinfo(uint32 row, history_st* info);
-
-void save_hist_all(void);
-
-uint8 judge_histnums_full(void);
-
-void set_histnum_full(void);
-
-void init_histnums_info(void) ;
-void save_histnums_info(void) ;
-
-static void set_histnum_info(uint32 row,uint8 tmp);
-
-static uint8 get_histnum_info(uint32 row);
-
-void init_hist_and_histnums(void);
-void init_histsufix_info(void);
-
-void init_flash_all(void);
-
-uint8 CheckDepComp(uint8 dep,uint8 comp);
-
-int16 GetNum(uint8 psn0,uint8 psn1,uint8 psn2,uint8 psn3);
-void CAddCirCounter(void);
-void CSetCirCounter(uint8 tmp);
-uint8 CGetCirCounter(void);
-int8 GetRow(uint8 t1,uint8 t2);
-
-uint8 JudgeAlarmType(void);
-uint8 JudgeCompAlarmType(uint8 row);
-void SetDatatoFlash(uint8 row,uint8 col,uint8 tmp);
-uint8 GetDatatoFlash(uint8 row,uint8 col);
-
-uint8 GetDatatoFlashType(uint8 row);
-uint8 GetDatatoFlashAlarmType(uint8 row);
-void SetFlashData(uint8 id,uint8 tmp);
-void SetDepCompSum(uint16 temp,uint8 tmp);
-uint8 GetDepCompSum(uint16 tmp);
-
-uint8 ReadFlashPsn(uint8 row,uint8 col);
-void SetCom0Ann(uint8 row,uint8 cow,uint8 tmp);
-
-void set_node_all_info(uint32 row,note_info_t *info);
-
-
-
-
-
-
- 
-
-
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void DisplayKeyMenu(void);
-void Systemp_Task(void);
-void SendHeart(void);
-
-void CS0Setup(uint8 tmp);
-void inqury_state__byuart0(void);
-
-
-void show_head_menu(void);
-void set_history_alarm_pos(uint16 pos);
-
-void set_menu_alarm_info(alarminfo alarm_info);
-
-
-void clr_alarm_loop_show(void);
-void set_alarm_loop_show(void);
-uint8 get_alarm_loop_show(void);
 
 #line 58 "..\\src\\APP\\include.h"
 
@@ -4776,7 +4794,7 @@ void clr_xialasignal(void);
  
 
 
-#line 16 "..\\src\\MenuCtrl\\runfunction.c"
+#line 19 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\Board\\key.h"
 
 
@@ -4854,104 +4872,7 @@ uint8 get_ok_tkeyflag(void);
 #line 107 "..\\src\\Board\\key.h"
 
 
-#line 17 "..\\src\\MenuCtrl\\runfunction.c"
-#line 1 "..\\src\\MenuCtrl\\runfunction.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 1 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 16 "..\\src\\common\\CFlashParam.h"
-
-#line 479 "..\\src\\common\\CFlashParam.h"
-
-
- 
-
-
-#line 16 "..\\src\\MenuCtrl\\runfunction.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void DisplayKeyMenu(void);
-void Systemp_Task(void);
-void SendHeart(void);
-
-void CS0Setup(uint8 tmp);
-void inqury_state__byuart0(void);
-
-
-void show_head_menu(void);
-void set_history_alarm_pos(uint16 pos);
-
-void set_menu_alarm_info(alarminfo alarm_info);
-
-
-void clr_alarm_loop_show(void);
-void set_alarm_loop_show(void);
-uint8 get_alarm_loop_show(void);
-
-
-
-
-
-
-
-
-
-
-static uint8 time_sendheart;
-volatile uint8 loopflag=0; 
-#line 19 "..\\src\\MenuCtrl\\runfunction.c"
+#line 20 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\tasklist.h"
 
 
@@ -4990,7 +4911,7 @@ void Silence_Task(void);
 
 
 
-#line 20 "..\\src\\MenuCtrl\\runfunction.c"
+#line 21 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\CKeyCounter.h"
 
 
@@ -5044,7 +4965,7 @@ void SetMenuFlag(uint8 tmp);
 
 void SetPasswordFlag(uint8 tmp);
 uint8 GetPasswordFlag(void);
-#line 21 "..\\src\\MenuCtrl\\runfunction.c"
+#line 22 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\12UARTHandle\\CComHandle.h"
 
 
@@ -5175,50 +5096,8 @@ void menu_fault_deal(alarminfo* alarm_info);
  
 
 
-#line 22 "..\\src\\MenuCtrl\\runfunction.c"
-#line 1 "..\\src\\13CirCon\\CAddressCount.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-void AddCirCounter(void);
-uint32 GetCirCounter(void);
-
-void Clr_Alarm(void);
-
-
-
-
-
-
-void SetAlarm_Circuit_Flag(uint8 tmp);
-
-
-void SetSync(void);
-uint8 GetSync(void);
-void ClrSync(void);
-
-
-uint32 SyncFlagCounter(void);
-void ClrCirCounter(void);
-void addxialasignal(void);
-uint8 getxialasignal(void);
-void add_weixialasignal(void);
-
-void clr_weixialasignal(void);
-void clr_xialasignal(void);
 #line 23 "..\\src\\MenuCtrl\\runfunction.c"
+
 #line 1 "..\\src\\12UARTHandle\\CComPara.h"
 
 
@@ -5339,52 +5218,9 @@ uint8 GetFlagLed(void);
  
 
 
-#line 24 "..\\src\\MenuCtrl\\runfunction.c"
-#line 1 "..\\src\\Board\\CLED.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-void Led_Init(void);
-void Led_ALL_On(void);
-void Led_Off(void);
-
-void Led_Run_Init(void);
-void Led_Run_On(void);
-void Led_Run_Off(void);
-
-void Led_Silence_Init(void);
-void Led_Silence_On(void);
-void Led_Silence_Off(void);
-
-void Led_Wireless_Init(void);
-void Led_Wireless_On(void);
-void Led_Wireless_Off(void);
-
-
-void Led_Fault_Init(void);
-void Led_Fault_On(void);
-void Led_Fault_Off(void);
-
-
-void Led_Fire_Init(void);
-void Led_Fire_On(void);
-void Led_Fire_Off(void);
-
 #line 25 "..\\src\\MenuCtrl\\runfunction.c"
-#line 26 "..\\src\\MenuCtrl\\runfunction.c"
+
+
 #line 1 "..\\src\\Menu\\CModelFault.h"
 
 
@@ -5404,7 +5240,7 @@ void Led_Fire_Off(void);
 
 void menu_wirelessmod_fault(void);
 void menu_vh75_connect_fault(uint8 part);
-#line 27 "..\\src\\MenuCtrl\\runfunction.c"
+#line 28 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\14Sand195\\CSendTo195.h"
 
 
@@ -5429,31 +5265,8 @@ void uart1_stop_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
 void uart1_offsound_reponse_atfire(uint8 PSN3,uint8 PSN2,uint8 PSN1,uint8 PSN0);
 
 
-#line 28 "..\\src\\MenuCtrl\\runfunction.c"
-#line 1 "..\\src\\common\\CFlashParam.h"
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-#line 16 "..\\src\\common\\CFlashParam.h"
-
-#line 479 "..\\src\\common\\CFlashParam.h"
-
-
- 
-
-
 #line 29 "..\\src\\MenuCtrl\\runfunction.c"
+
 #line 1 "..\\src\\timesharectrl\\SysCtrl.h"
 #line 4 "..\\src\\timesharectrl\\SysCtrl.h"
 
@@ -5604,7 +5417,7 @@ extern  uint8 Get_CSys1MFlag(void);
 
 
 
-#line 30 "..\\src\\MenuCtrl\\runfunction.c"
+#line 31 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\Hardware\\Timer\\CTimeDef.h"
 
 
@@ -5733,7 +5546,7 @@ void Clr2msArrived(void);
 #line 154 "..\\src\\Hardware\\Timer\\CTimeDef.h"
 
 
-#line 31 "..\\src\\MenuCtrl\\runfunction.c"
+#line 32 "..\\src\\MenuCtrl\\runfunction.c"
 #line 1 "..\\src\\MenuCtrl\\CTaskSure.h"
 
 
@@ -5840,17 +5653,25 @@ void set_entry_localaddr_flag(void);
 uint8 get_entry_localaddr_flag(void);
 void clr_entry_localaddr_flag(void);
 void reset_ok(void);
-#line 32 "..\\src\\MenuCtrl\\runfunction.c"
+#line 33 "..\\src\\MenuCtrl\\runfunction.c"
 
-extern volatile uint32 match_counter1;
-uint8 vCounterLed=0;
-uint8 HeartTaskFlag=1;
-uint8 csflag=0;
-uint8 TickCounter=0;
 
-uint8 vHeartLostFlag=0;
-uint8 vMaskScreen=0;
-uint8 alarm_display_counter=1;
+
+
+
+
+
+
+
+extern uint32 match_counter1;
+
+
+
+
+
+static uint8 vHeartLostFlag=0;
+
+
 
 
 
@@ -5885,35 +5706,6 @@ void show_head_menu(void)
 
 
 
-void gethistory_show_pos(uint8 keyflag,uint16 *curpos)
-{
-    int i;
-    uint16 his_nums=GetHistConter();
-    if(!keyflag){
-        for(i=*curpos;i<his_nums;i++)
-            if(gethistory_isfirealarm(i))
-            {
-                *curpos=i;
-                break;
-            }
-        lcd_printf("up key! curpos:%d\n",*curpos);
-    }
-
-    if(keyflag){
-        for(i=*curpos;i>=0;i--)
-            if(gethistory_isfirealarm(i))
-            {
-                *curpos=i;
-                break;
-            }
-        lcd_printf("down key! curpos:%d\n",*curpos);
-    }
-}
-uint16 his_pos;
-void set_history_alarm_pos(uint16 pos)
-{
-    his_pos=pos;
-}
 
 
 
@@ -5921,7 +5713,35 @@ void set_history_alarm_pos(uint16 pos)
 
 
 
-alarminfo menu_alarm_info;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static alarminfo menu_alarm_info;
 void set_menu_alarm_info(alarminfo alarm_info)
 {
     
@@ -5937,32 +5757,32 @@ void set_menu_alarm_info(alarminfo alarm_info)
     lcd_printf("attr:  %d\n",menu_alarm_info.attr);
     lcd_printf("vAnnRow:  %d\n",menu_alarm_info.vAnnRow);
 }
-alarminfo* get_menu_alarm_info(void)
+static alarminfo* get_menu_alarm_info(void)
 {
     return &menu_alarm_info;
 }
 
-uint8 record_alarmnum=0; 
-static uint8 record_showalarm=0; 
+static uint8 record_alarmnum=0; 
+volatile static uint8 record_showalarm=0; 
 
-uint8 alarmpart[50+1]={0,};
-uint8 alarm_newest_pos =0;
-void set_alarm_newest_pos(uint8 row)
-{
-    alarm_newest_pos = row;
-}
-uint8 get_alarm_newest_pos(void)
-{
-    return alarm_newest_pos;
-}
-
-uint8 get_alarmpart(uint8 row)
-{
-    return alarmpart[row-1];
-}
+static uint8 alarmpart[50+1]={0,};
 
 
-void add_alarmnums(uint8 part)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static void add_alarmnums(uint8 part)
 {
     alarmpart[record_alarmnum] = part;
     record_alarmnum++;
@@ -5972,51 +5792,51 @@ void add_alarmnums(uint8 part)
     }
 }
 
-uint8 get_record_alarmnum(void)
+static uint8 get_record_alarmnum(void)
 {
     return record_alarmnum;
 }
 
 
- 
-void set_record_showalarm(uint8 pos)
+
+static void set_record_showalarm(uint8 pos)
 {
     record_showalarm = pos;
 }
-uint8 get_record_showalarm(void)
-{
-    return record_showalarm;
-}
-
-void sub_record_showalarm(void)
-{
-    record_showalarm--;
-}
-void add_record_showalarm(void)
-{
-    record_showalarm++;
-}
-
-uint8 get_cur_alarmpart(void)
-{
-    return alarmpart[get_record_showalarm()];
-}
 
 
-uint8 get_alarm_newest_nums()
-{
-    uint32 i=0;
-    uint8 num=0;
-    for(i=(1);i<= 50;i++)
-    {
-        if(get_alarmpart(i) != 0)
-        {
-            set_alarm_newest_pos(i);
-            num++;
-        }
-    }
-    return num;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void clr_alarm_loop_show(void)
@@ -6033,9 +5853,9 @@ uint8 get_alarm_loop_show(void)
 }
 
 
-alarminfo alarm_info_loop;
+static alarminfo alarm_info_loop;
 static uint8 pos;
-void menu_alarm_fire(void)
+static void menu_alarm_fire(void)
 {
     
     static uint8 current_alarmpart = (0xff);
@@ -6145,7 +5965,7 @@ void menu_alarm_fire(void)
 
 
 
-void menu_alarm_fault(void)
+static void menu_alarm_fault(void)
 {
     
     if(GetSpeaker_Flag()&&!GetZjFlag()){
@@ -6158,8 +5978,6 @@ void menu_alarm_fault(void)
               get_menu_alarm_info()->type,
               &get_menu_alarm_info()->dateyear);
 }
-
-
 
 
 
@@ -6304,22 +6122,22 @@ void Systemp_Task(void)
 
 
 
-void set_time_sendheart(uint8 n)
-{
-    time_sendheart = n;
-}
 
-void add_time_sendheart()
+
+
+
+
+static void add_time_sendheart()
 {
     time_sendheart++;
 }
 
-uint8 get_time_sendheart(void)
+static uint8 get_time_sendheart(void)
 {
     return time_sendheart;
 }
 
-void clr_time_sendheart(void)
+static void clr_time_sendheart(void)
 {
     time_sendheart=0;
 }
@@ -6393,7 +6211,7 @@ void SendHeart(void)
     
     
 }
-#line 665 "..\\src\\MenuCtrl\\runfunction.c"
+#line 671 "..\\src\\MenuCtrl\\runfunction.c"
 
 
 

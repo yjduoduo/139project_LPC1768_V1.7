@@ -18,13 +18,13 @@
 #include  "CGetGrap.h"
 #include  "tasklist.h"
 #include  "CKeyCounter.h"
-#include  "CFlashParam.h"
+// #include  "CFlashParam.h"
 #include  "CComHandle.h"
 #include  "CSendToFlash.h"
-#include "CLED.h"
+// #include "CLED.h"
 #include  "CGetCompSum.h"
-#include  "CMaDefine.h"
-#include  "CComHandle.h"
+// #include  "CMaDefine.h"
+// #include  "CComHandle.h"
 #include  "CComPara.h"
 #include  "CSysReset.h"
 #include  "CTaskDown.h"
@@ -36,6 +36,7 @@
 #include  "CTaskReturn.h"
 #include  "CNodeInfo.h"
 #include  "key.h"
+#include  "CTimeCtrl.h"
 
 
 //数据量变为实际存储位置，相关1
@@ -43,16 +44,16 @@
 
 
 
-uint8 menu_in_setuplocaladdr =0 ;
+static uint8 menu_in_setuplocaladdr =0 ;
 
 extern tFlashinfoDef  FlashInfo;
 PCF8563_DATE    timedate;
 extern uint8 vMaskPSN[MASKSUM];
-uint8 vMaskCount=0;
-uint8 vmaskflag = 0;
-uint8 vAnnUartFlag=0;//汉字注释标志
-uint8 vZjFlag=0;//自检标志
-uint8 vSpeaker_Counter=1; //默认蜂鸣器开
+volatile static uint8 vMaskCount=0;
+volatile static uint8 vmaskflag = 0;
+static uint8 vAnnUartFlag=0;//汉字注释标志
+static uint8 vZjFlag=0;//自检标志
+static uint8 vSpeaker_Counter=1; //默认蜂鸣器开
 void SetZjFlag(uint8 tmp)
 {
     vZjFlag=tmp;
@@ -103,16 +104,16 @@ uint8 Get_Note_Flag(void)
 //    return vMaskPSN[row];
 //}
 
-void setup_ok(void)
+static void setup_ok(void)
 {
     GetSetGrap(GetCounter2());
     Set_Note_Flag();
 }
-void query_ok(void)
+static void query_ok(void)
 {
     GetCheckGrap(GetCounter2());
 }
-void test_ok(void)
+static void test_ok(void)
 {
     GetTestGrap(GetCounter2());
 }
@@ -160,7 +161,7 @@ void reset_ok(void)
     DelayMs(3000);
 }
 
-void factory_ok(void)
+static void factory_ok(void)
 {
     uint32 delflag=1;
 
@@ -241,7 +242,7 @@ void factory_ok(void)
     }
 
 }
-void speaker_ok(void)
+static void speaker_ok(void)
 {
     CLevel27_Sure();
 }
@@ -294,7 +295,7 @@ void CLevel1_Sure(uint8 tmp)//第一层任务
         break;
     }
 }
-void get_local_addr(void)
+static void get_local_addr(void)
 {
     if(0xff == get_basic_localaddr()){//如果已经被清除了，默认值为DEFAULT_LOCALADDR
         set_basic_localaddr(DEFAULT_LOCALADDR);
@@ -306,7 +307,7 @@ void get_local_addr(void)
 }
 
 //检测回路合法
-void detect_circuirt(void)
+static void detect_circuirt(void)
 {
     if(local_addr_value() > MAX_LOOP)
     {
@@ -335,7 +336,7 @@ void clr_entry_localaddr_flag(void)
 {
     menu_in_setuplocaladdr =0;
 }
-void menu_setup_localaddr_ok(void)
+static void menu_setup_localaddr_ok(void)
 {
     set_entry_localaddr_flag();//进入设置标志
     get_local_addr();
@@ -344,7 +345,7 @@ void menu_setup_localaddr_ok(void)
                Get_zone_bit(1),Get_zone_bit(2),1,MENU_SAVE_NONE);
 
 }
-void menu_setup_compreg_ok(void)
+static void menu_setup_compreg_ok(void)
 {
     if(GetCompRegNum()>MAX_COMP)//单防区最大部件数
         SetCompRegDep(0);
@@ -353,12 +354,12 @@ void menu_setup_compreg_ok(void)
     //    NVIC_DisableIRQ(EINT3_IRQn);
 
 }
-void menu_setup_setcomp_ok(void)
+static void menu_setup_setcomp_ok(void)
 {//默认选择第二项
     CompSet_Menu(GetCompSetDep(),GetCompSetNum(),GetComSetSelSet(),GetComSet_seltab(),0);
 
 }
-void menu_setup_datetime_ok(void)
+static void menu_setup_datetime_ok(void)
 {
     PCF8563_DATE    timeAndDate;
 
@@ -430,7 +431,7 @@ void setup_Sure(uint8 tmp)
     }
 }
 
-uint8 enter_flag=EXIT_MENU;
+static uint8 enter_flag=EXIT_MENU;
 void set_enter_flag(void)
 {
     enter_flag = ENTER_MENU;
@@ -447,7 +448,7 @@ void clr_enter_flag(void)
 
 
 
-void query_system_ok(void)
+static void query_system_ok(void)
 {
     set_enter_flag();
     ClearScreen(0);
@@ -475,7 +476,7 @@ void query_compstatus_ok(void)
     //   CompStat_Menu(GetStatusDep(),GetStatusComp(),0,0,0,1);
 }
 
-void query_historyrecord_ok(void)
+static void query_historyrecord_ok(void)
 {
     int32 row;
     history_st histinfo;
@@ -549,7 +550,7 @@ void query_Sure(uint8 tmp)
     }
 }
 
-void selftest_ok(void)
+static void selftest_ok(void)
 {
     ClearScreen(0);
     UartBindSend(CMD_139W,2);	   //发送心跳命令
@@ -570,7 +571,7 @@ void selftest_ok(void)
     Return_Task();
 
 }
-void sigstrength_ok(void)
+static void sigstrength_ok(void)
 {
     CompInten_Menu(0,0,0,0);
     CSetIntenFlag(1);
@@ -644,7 +645,7 @@ uint16 local_addr_value(void)
 //    return (100*Get_zone_bit(0)+10*Get_zone_bit(1)+Get_zone_bit(2));
 //}
 
-void menu_set_localaddr_ok(void)
+static void menu_set_localaddr_ok(void)
 {
     if(local_addr_value() > MAX_LOOP)
     {
@@ -765,10 +766,10 @@ void menu_comp_started(void)
     DisplayJBHZK(2,line,0, HZ_SHOW(hz,8));
 }
 
-void menu_colon(void)
-{
-    Displaynumber(2,0,16,0x0A);
-}
+// static void menu_colon(void)
+// {
+//     Displaynumber(2,0,16,0x0A);
+// }
 void menu_compset(void)
 {
     uint8 hz[]="部件设置";
@@ -780,14 +781,14 @@ void menu_compset(void)
 }
 
 
-uint8 opstype_deleted(void)
+static uint8 opstype_deleted(void)
 {
     return (GetComSetSelSet()==OPSTYPE_DEL);
 }
 
-history_st setupinfo;
+static history_st setupinfo;
 
-void setup_menu_deal(void)
+static void setup_menu_deal(void)
 {
     int16 row;
     uint8 /*i,*/j=1;
@@ -958,7 +959,7 @@ void setup_menu_deal(void)
     }
 }
 
-void query_menu_deal(void)
+static void query_menu_deal(void)
 {
 
     switch(GetCounter2())
@@ -994,7 +995,7 @@ void query_menu_deal(void)
 
 }
 
-void test_menu_deal(void)
+static void test_menu_deal(void)
 {
     switch(GetCounter2())
     {
@@ -1011,7 +1012,7 @@ void test_menu_deal(void)
 
 }
 
-void speaker_menu_deal(void)
+static void speaker_menu_deal(void)
 {
 
 }

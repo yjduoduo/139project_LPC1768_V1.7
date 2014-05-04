@@ -49,15 +49,15 @@
 
 //变量定义
 extern PCF8563_DATE    timedate;
-PdUartMsgUnion pdUartSend;//结构体定义
+static PdUartMsgUnion pdUartSend;//结构体定义
 //PdUartMsgUnion uart0_rev_data;
-PdUartMsgUnion pdUartRcv;
+static PdUartMsgUnion pdUartRcv;
 tFlashinfoDef  FlashInfo;
 
 
 history_st  histinfo;
 
-compent  compreg;
+static compent  compreg;
 //函数声明
 void AddHeartFaultFlag(void);
 
@@ -180,7 +180,7 @@ uint8 wireless_data_check(void)
 }
 /*************查找防区部件******************/
 //防区数和和部件数都相等时，不注册
-uint8 find_zone_comp(uint8 inzone,uint8 partnumber)
+static uint8 find_zone_comp(uint8 inzone,uint8 partnumber)
 {
     uint8 i;
 //    Debug("searching inzone:%d,partnumber:%d\n",inzone,partnumber);
@@ -193,16 +193,16 @@ uint8 find_zone_comp(uint8 inzone,uint8 partnumber)
         }
     return 0;
 }
-//打印注册内容信息
-void printf_zone_comp_info(void)
-{
-    uint8 i;
-    for(i=COMP_START;i<=MAX_COMP;i++)
-        Debug("->info::%d:inzone:%d,partnumber:%d\n",i,get_comp_inzone(i),get_comp_partnumber(i));
+// //打印注册内容信息
+// static void printf_zone_comp_info(void)
+// {
+//     uint8 i;
+//     for(i=COMP_START;i<=MAX_COMP;i++)
+//         Debug("->info::%d:inzone:%d,partnumber:%d\n",i,get_comp_inzone(i),get_comp_partnumber(i));
 
-}
+// }
 //选择数自动加1显示
-void autoadd_compreg(void)
+static void autoadd_compreg(void)
 {
     AddCompRegNum();
     if(GetCompRegNum() >MAX_COMP)
@@ -211,7 +211,7 @@ void autoadd_compreg(void)
 
 
 /*************部件注册  处理******************/
-void comp_reg_deal(void)
+static void comp_reg_deal(void)
 {
     uint16 ciraddr,partnumber,total_nums;
     int16 com_num=-1;
@@ -353,7 +353,7 @@ END:
 }
 
 /*************查询信号强度******************/
-void inquiry_signal_strength(void)
+static void inquiry_signal_strength(void)
 {
     int16 com_num=-1;
     int8 ret;
@@ -372,7 +372,7 @@ void inquiry_signal_strength(void)
         CompInten_Menu(0,0,INITVAL,0);
     }
 }
-uint8 is_0xff(uint8 psn)
+static uint8 is_0xff(uint8 psn)
 {
     return (INITVAL == psn);
 }
@@ -390,7 +390,7 @@ uint8 check_psn_all0xff(void)
 }
 
 /*************是否为已经注册的psn码******************/
-uint8 is_my_psn(int16* com_num)
+static uint8 is_my_psn(int16* com_num)
 {
     *com_num=-1;
     if(0 == CompareAddr(COM_PSN(3),COM_PSN(2),COM_PSN(1),COM_PSN(0),com_num))
@@ -399,7 +399,7 @@ uint8 is_my_psn(int16* com_num)
         return FALSE;
 
 }
-void led_relay_deal(void)
+static void led_relay_deal(void)
 {
     Fire_Relay_On();
     Led_Fire_On();
@@ -434,7 +434,7 @@ void set_normalalarm_ciraddr(uint8 cir_addr)
 //}
 
 /*************首警界面处理******************/
-void menu_firealarm_face(alarminfo* alarm1_info)
+static void menu_firealarm_face(alarminfo* alarm1_info)
 {
     memset(&histinfo,0,sizeof(history_st));
 
@@ -635,9 +635,9 @@ void menu_fault_deal(alarminfo* alarm_info)
     set_hist_allinfo(GetHistConter(),&histinfo);
     save_hist_all();
 }
-const uint8 fault_restore_cfg[2]={0x0b,0x01};
+static const uint8 fault_restore_cfg[2]={0x0b,0x01};
 
-void normal_deal(uint8 num,uint8 cir_addr)
+static void normal_deal(uint8 num,uint8 cir_addr)
 {
     Debug("normal,ciraddr:%d\n",cir_addr);
     if(Flag195)
@@ -664,7 +664,7 @@ void normal_deal(uint8 num,uint8 cir_addr)
     }
 }
 
-alarminfo  alarm_info;
+static alarminfo  alarm_info;
 
 response_atfire respfire_val={INITVAL,INITVAL,INITVAL,INITVAL,INITVAL};
 
