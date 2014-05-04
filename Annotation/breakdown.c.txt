@@ -1,8 +1,0 @@
-//E:/139/gasproject_LPC1768_V1.7/src/Menu/breakdown.c
-//2014/04/29 08:53:24
-/*****************************************************************************
-*author:
-*time  :
-*****************************************************************************/
-void menu_batlow(void);
-void Breakdown(uint8 attr,uint8 compent,uint16 sum,uint8 type,PCF8563_DATE* timed);

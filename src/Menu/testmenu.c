@@ -41,26 +41,26 @@ void Test_Menu(uint8 tmp)//
 
 }
 
-static void Test_Menu1(void)
-{
-	 //自检
-	 Displaynumber(1,0,10,1);//display 1
-	 Displaynumber(1,0,18,0x0A);
-	 Display(1,0,32,76);
-	 Display(1,0,48,73);
-	
-	 //部件信号强度
-	 Display(1,2,0,18);
-	 Displaynumber(1,2,10,2);//display 2
-	 Displaynumber(1,2,18,0x0A);	
-	 Display(1,2,32,64);
-	 Display(1,2,48,65);
-	 Display(2,2,0,78);
-	 Display(2,2,16,49);
-	 Display(2,2,0,79);
-	 Display(2,2,16,80);
+// static void Test_Menu1(void)
+// {
+// 	 //自检
+// 	 Displaynumber(1,0,10,1);//display 1
+// 	 Displaynumber(1,0,18,0x0A);
+// 	 Display(1,0,32,76);
+// 	 Display(1,0,48,73);
+// 	
+// 	 //部件信号强度
+// 	 Display(1,2,0,18);
+// 	 Displaynumber(1,2,10,2);//display 2
+// 	 Displaynumber(1,2,18,0x0A);	
+// 	 Display(1,2,32,64);
+// 	 Display(1,2,48,65);
+// 	 Display(2,2,0,78);
+// 	 Display(2,2,16,49);
+// 	 Display(2,2,0,79);
+// 	 Display(2,2,16,80);
 
-}
+// }
 
 
 

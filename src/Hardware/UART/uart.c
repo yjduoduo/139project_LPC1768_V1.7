@@ -47,7 +47,7 @@
 
 
 static uint8 testann[NODE_BUFSIZE]={0,};
-static uint8 testann1[10]={0};
+static volatile uint8 testann1[10]={0};
 static uint16 tp3=0;
 static uint16 tp4=0;
 static uint8 Save_Ann_flag=0;
@@ -685,7 +685,7 @@ void puts__(char *s)
 }
 //ต๗สิ
 //#define DEBUGFlag
-#define DEBUGOnceFlag
+//#define DEBUGOnceFlag
 
 //void Uart0_printf(char *str,...)
 #ifdef DEBUGFlag

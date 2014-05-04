@@ -85,18 +85,18 @@ static void menu_compreged(void)
     DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
 
 }
-static void menu_devreged(void)
-{
-    uint8 hz[]="设备已注册";
-    uint8 line =4;
-    //    uint8 offset =0;
-    DisplayJBHZK(1,line,48,HZ_SHOW(hz,0));
-    DisplayJBHZK(2,line,0,HZ_SHOW(hz,2));
-    DisplayJBHZK(2,line,16,HZ_SHOW(hz,4));
-    DisplayJBHZK(2,line,32,HZ_SHOW(hz,6));
-    DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
+// static void menu_devreged(void)
+// {
+//     uint8 hz[]="设备已注册";
+//     uint8 line =4;
+//     //    uint8 offset =0;
+//     DisplayJBHZK(1,line,48,HZ_SHOW(hz,0));
+//     DisplayJBHZK(2,line,0,HZ_SHOW(hz,2));
+//     DisplayJBHZK(2,line,16,HZ_SHOW(hz,4));
+//     DisplayJBHZK(2,line,32,HZ_SHOW(hz,6));
+//     DisplayJBHZK(2,line,48,HZ_SHOW(hz,8));
 
-}
+// }
 static void menu_overcompnums(void)
 {
     uint8 hz[]="部件已超量";
