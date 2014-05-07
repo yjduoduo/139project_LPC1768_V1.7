@@ -74,6 +74,7 @@ EX_CTimeCtrl void judge_3h_over(uint8 part);
 #define  cTime1_200ms_Count     (200/cTime1_Base)
 #define  cTime1_500ms_Count     (500/cTime1_Base)
 #define  cTime1_1s_Count        (1000/cTime1_Base)
+#define  cTime1_2s_Count        (2000/cTime1_Base)
 #define  cTime1_5s_Count        (5000/cTime1_Base)
 #define  cTime1_10s_Count        (10000/cTime1_Base)
 #define  cTime1_1m_Count        (60000/cTime1_Base)

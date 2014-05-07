@@ -447,7 +447,7 @@ void   T1Int_CTimeCtrl(void)
         }
         else if(ALARM_FAULT == GetAlarmFlag(POS_ALARM_BIT))//π ’œ…˘
         {
-            set_speark_ss_time(cTime1_100ms_Count,cTime1_1s_Count);
+            set_speark_ss_time(cTime1_100ms_Count,cTime1_2s_Count);
         }
         else{
             set_speark_ss_time(cTime1_1s_Count,cTime1_1s_Count);
