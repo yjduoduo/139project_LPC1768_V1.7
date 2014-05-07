@@ -117,7 +117,8 @@ void show_head_menu(void)
 //报警页面
 
 
-static alarminfo menu_alarm_info;
+static alarminfo menu_alarm_info;//火警界面变量
+static alarminfo menu_faultalarm_info;//故障界面变量
 void set_menu_alarm_info(alarminfo alarm_info)
 {
     //    menu_alarm_info.ciraddr  =alarm_info.ciraddr;
@@ -137,11 +138,33 @@ static alarminfo* get_menu_alarm_info(void)
 {
     return &menu_alarm_info;
 }
+void set_menu_faultalarm_info(alarminfo alarm_info)
+{
+    //    menu_alarm_info.ciraddr  =alarm_info.ciraddr;
+    //    menu_alarm_info.part     = alarm_info.part;
+    //    menu_alarm_info.type     = alarm_info.type;
+    //    menu_alarm_info.attr     = alarm_info.attr;
+    //    menu_alarm_info.vAnnRow  = alarm_info.vAnnRow;
+    menu_faultalarm_info=alarm_info;
+    Debug("------>>>>>>>set menu fault alarm info\n");
+    Debug("part:  %d\n",menu_faultalarm_info.part);
+    Debug("ciraddr:  %d\n",menu_faultalarm_info.ciraddr);
+    Debug("type:  %d\n",menu_faultalarm_info.type);
+    Debug("attr:  %d\n",menu_faultalarm_info.attr);
+    Debug("vAnnRow:  %d\n",menu_faultalarm_info.vAnnRow);
+}
+static alarminfo* get_menu_faultalarm_info(void)
+{
+    return &menu_faultalarm_info;
+}
 //记录报警部件
 static uint8 record_alarmnum=0; //记录保存信息的最大位置
+static uint8 record_alarmnum_fault=0; //记录保存信息的最大位置
 volatile static uint8 record_showalarm=0; //记录上下按键显示的位置
+volatile static uint8 record_showalarm_fault=0; //记录上下按键显示的位置
 
 static uint8 alarmpart[MAX_COMP+1]={0,};//此中保存的是part值
+static uint8 alarmpart_fault[MAX_COMP+1]={0,};//此中保存的是part值
 // uint8 alarm_newest_pos =0;
 // static void set_alarm_newest_pos(uint8 row)
 // {
@@ -172,6 +195,24 @@ static uint8 get_record_alarmnum(void)
 {
     return record_alarmnum;
 }
+
+//自加报警数
+static void add_alarmnums_fault(uint8 part)
+{
+    alarmpart_fault[record_alarmnum_fault] = part;
+    record_alarmnum_fault++;
+    if(record_alarmnum_fault > MAX_COMP)
+    {
+        Debug("alarm nums err!\n");
+    }
+}
+//报警数目
+static uint8 get_record_alarmnum_fault(void)
+{
+    return record_alarmnum_fault;
+}
+
+
 // /*********************************************
 //   *********显示的位置**************************
 //   ******************************************/
@@ -179,6 +220,13 @@ static void set_record_showalarm(uint8 pos)
 {
     record_showalarm = pos;
 }
+static void set_record_showalarm_fault(uint8 pos)
+{
+    record_showalarm_fault = pos;
+}
+
+
+
 // static uint8 get_record_showalarm(void)
 // {
 //     return record_showalarm;
@@ -227,7 +275,20 @@ uint8 get_alarm_loop_show(void)
 {
     return loopflag;
 }
+//故障警报时界面轮显循环显示
 
+void clr_alarm_loop_show_fault(void)
+{
+    loopflag_fault=0;
+}
+void set_alarm_loop_show_fault(void)
+{
+    loopflag_fault=1;
+}
+uint8 get_alarm_loop_show_fault(void)
+{
+    return loopflag_fault;
+}
 //界面轮显
 static alarminfo alarm_info_loop;
 static uint8 pos;
@@ -326,12 +387,6 @@ static void menu_alarm_fire(void)
         }
     }
 
-
-
-
-    //    }
-
-
 }
 //void menu_alarm_batlow(void)
 //{
@@ -341,8 +396,108 @@ static void menu_alarm_fire(void)
 //                Getdisplay_alarm(4),
 //                Getalarmtime());
 //}
+
+//界面轮显
+static alarminfo alarm_info_loop_fault;
+static uint8 pos_fault;
+
 static void menu_alarm_fault(void)
 {
+#if 1
+
+    //获取最新的报警部件
+    static uint8 current_alarmpart_fault = INITVAL;
+    uint8 alarmnums = get_faultalarm_nums()/*get_record_alarmnum()*/;
+
+    Debug("get_alarm_loop_show:%d\n",get_alarm_loop_show_fault());
+    if(current_alarmpart_fault != get_menu_faultalarm_info()->part)
+    {
+
+        Debug("fault alarm!!!\n");
+        Debug("current alarm part:%d\n",current_alarmpart_fault);
+        Debug("alarm info part   :%d\n",get_menu_faultalarm_info()->part);
+
+
+        //非自检且打开时
+        if(GetSpeaker_Flag()&&!GetZjFlag()){
+            PWM1_Start();
+            set_PWM1_Started();
+        }
+        Breakdown(get_menu_faultalarm_info()->attr,
+                  get_menu_faultalarm_info()->part,
+                  get_faultalarm_nums(),
+                  get_menu_faultalarm_info()->type,
+                  &get_menu_faultalarm_info()->dateyear);
+
+
+        //记录此次的内容
+        current_alarmpart_fault = get_menu_faultalarm_info()->part;
+
+        set_record_showalarm_fault(get_record_alarmnum_fault());
+
+        add_alarmnums_fault(get_menu_faultalarm_info()->part);
+        pos_fault = alarmnums-1;//添加位置
+    }
+    else if((alarmnums > 1)&&get_alarm_loop_show_fault() )
+    {
+
+        uint8 part = alarmpart_fault[pos_fault];
+        //get item by part
+        uint8 item = get_alarm_item_bypart(part);
+
+        clr_alarm_loop_show_fault();
+
+        get_alarm_allinfo(item,&alarm_info_loop_fault);
+        Debug("loop show pos:%d\n",pos_fault);
+        Debug("alarmnums:%d\n",alarmnums);
+
+        Breakdown(get_menu_faultalarm_info()->attr,
+                  get_menu_faultalarm_info()->part,
+                  get_faultalarm_nums(),
+                  get_menu_faultalarm_info()->type,
+                  &get_menu_faultalarm_info()->dateyear);
+
+
+
+        if(pos_fault > 1)
+            pos_fault--;
+        else if(1 == pos_fault)
+            pos_fault = 0;
+        else if(0 == pos_fault)
+            pos_fault = alarmnums-1;
+
+    }
+    else
+    {
+        if(alarmnums > 1)
+        {
+            uint8 part = alarmpart_fault[pos_fault];
+            //get item by part
+            uint8 item = get_alarm_item_bypart(part);
+
+            clr_alarm_loop_show_fault();
+
+            get_alarm_allinfo(item,&alarm_info_loop_fault);
+            Debug("loop show pos_fault:%d\n",pos_fault);
+            Debug("alarmnums:%d\n",alarmnums);
+
+            Breakdown(get_menu_faultalarm_info()->attr,
+                      get_menu_faultalarm_info()->part,
+                      get_faultalarm_nums(),
+                      get_menu_faultalarm_info()->type,
+                      &get_menu_faultalarm_info()->dateyear);
+        }else{
+            Breakdown(get_menu_faultalarm_info()->attr,
+                      get_menu_faultalarm_info()->part,
+                      get_faultalarm_nums(),
+                      get_menu_faultalarm_info()->type,
+                      &get_menu_faultalarm_info()->dateyear);
+        }
+    }
+
+
+#else
+
     //非自检且打开时
     if(GetSpeaker_Flag()&&!GetZjFlag()){
         PWM1_Start();
@@ -353,6 +508,7 @@ static void menu_alarm_fault(void)
               get_faultalarm_nums(),
               get_menu_alarm_info()->type,
               &get_menu_alarm_info()->dateyear);
+#endif
 }
 
 ////after 30s return to alarm page if have alarm info,so reset will clear
@@ -376,6 +532,7 @@ void DisplayKeyMenu(void)//主界面
     uint8 hz[]="请输入密码";//hz：汉字
     if(GetMenuFlag() == MENU_MAIN)//初始化界面
     {
+        Debug("->>MENU_MAIN\n");
         //        show_head_menu();//显示首页
         if(Get_KeyValue() == KEY_Sure)//确定键
         {
@@ -410,44 +567,66 @@ void DisplayKeyMenu(void)//主界面
     }
     else if(GetMenuFlag() == MENU_FIREALARM)//显示报警界面
     {
+        Debug("-->>MENU_FIREALARM\n");
         //添加上下按键浏览报警信息
         if(GetDisplay_alarm_flag() == PAGE_AT_FIRE )
             menu_alarm_fire();
-        else if(GetDisplay_alarm_flag() == PAGE_AT_FAULT)
-            menu_alarm_fault();
         if(Get_KeyValue() == KEY_Return)
         {
-            Debug("set MENU_RUN at MENU_FIREALARM\n");
+            Debug("-->>set MENU_RUN\n");
             SetMenuFlag(MENU_RUN);
             Main_Menu(1);
+            SetGrapCount(1);
+            SetPasswordFlag(1);
         }
 
 
     }
+    else if(GetMenuFlag() == MENU_FAULTALARM)//显示故障界面
+    {
+        Debug("-->>MENU_FAULTALARM\n");
+        //添加上下按键浏览报警信息
+        if(GetDisplay_alarm_flag() == PAGE_AT_FAULT)
+            menu_alarm_fault();
+
+        if(Get_KeyValue() == KEY_Return)
+        {
+            Debug("set MENU_RUN at MENU_FAULTALARM \n");
+            SetMenuFlag(MENU_RUN);
+            Main_Menu(1);
+            SetGrapCount(1);
+            SetPasswordFlag(1);
+        }
+    }
     else if(GetMenuFlag() == MENU_RUN)
     {
+        Debug("-->>MENU_RUN\n");
         //        have_alarm_backafter30s();
         Systemp_Task();//主界面
     }
     else
     {
+        Debug("-->>else MENU\n");
         if(Get_KeyValue() == KEY_Return)//按返回键
         {
 
+
             if(GetDisplay_alarm_flag() == PAGE_AT_FIRE )
             {
-                BEEPOff();
                 SetMenuFlag(MENU_FIREALARM);
                 SetPasswordFlag(1);
-                //                Main_Menu(1);
             }
-
+            if(GetDisplay_alarm_flag() == PAGE_AT_FAULT )
+            {
+                SetMenuFlag(MENU_FAULTALARM);
+                SetPasswordFlag(1);
+            }
             //            SetMenuFlag(MENU_MAIN);
             //            SetPasswordFlag(1);
             //            SetCheckInfoFlag(0,0);
             //            SetCheckInfoFlag(1,0);
             //            SetCheckInfoFlag(2,0);
-            SetAlarmFlag(0,0);
+//            SetAlarmFlag(0,0);
             //            ShuaFlag=0;
             SetReleaseFlag(0);
             Led_Silence_Off();
@@ -455,8 +634,13 @@ void DisplayKeyMenu(void)//主界面
     }
     if(Get_KeyValue() == KEY_Silence)//消音
     {
+
+        clr_PWM1_Started();
+        PWM1_Stop();
         BEEPOff();
-        SetAlarmFlag(0,0);
+
+
+//        SetAlarmFlag(0,0);
         if(GetDisplay_alarm_flag())
             Led_Silence_On();
         PWM1_Stop();
@@ -467,6 +651,7 @@ void Systemp_Task(void)//主工作任务
 {
     uint16 temp = 0;
 
+//    Debug("GetCounter0:(%d)1:(%d)2:(%d)\n",GetGrapCount(),GetCounter1(),GetCounter2());
     temp = Get_KeyValue();
 
     switch(temp)
@@ -547,7 +732,7 @@ void SendHeart(void)//心跳发送
             if(GetMenuFlag() == MENU_WIRELESS_FAULT)
             {
                 SetMenuFlag(MENU_MAIN);
-                SetAlarmFlag(POS_ALARM_BIT,0);
+                SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
                 Led_Fault_Off();//turn off fault and wireless led
                 Led_Wireless_Off();
             }
@@ -700,7 +885,7 @@ void CS0Setup(uint8 tmp)
 //uart0 发送信息至短信模块
 void inqury_state__byuart0(void)
 {
-    if(GetFlag_195())//&&GetE3_flag())//有查询命令标志
+    if(GetFlag_195()/*&&GetE3_flag()*/)//有查询命令标志
     {
         if((GetAlarmFlag(POS_ALARM_BIT)==ALARM_FIRE))
         {
@@ -721,8 +906,8 @@ void inqury_state__byuart0(void)
         else//normal state
             Query_ByUart0(0x13,0x00,0x00);
 
+//        SetFlag_195();
         ClrFlag_195();
-
     }
 }
 

@@ -522,10 +522,12 @@ uint16 Get_KeyValue(void)
 //        {
             //enable_timer(2);
             vKeyCounter[1] = 0;
-            BEEPOff();
-            PWM1_Stop();
+
+
             clr_PWM1_Started();
-            SetAlarmFlag(POS_ALARM_BIT,0);//reset alarm flag,so pwm1 stop
+            PWM1_Stop();
+            BEEPOff();
+//            SetAlarmFlag(POS_ALARM_BIT,0);//reset alarm flag,so pwm1 stop
 
             return KEY_Silence;
 //        }
@@ -592,7 +594,7 @@ uint16 Get_KeyValue(void)
             BEEPOff();
             PWM1_Stop();
             clr_PWM1_Started();
-            SetAlarmFlag(POS_ALARM_BIT,0);//reset alarm flag,so pwm1 stop
+//            SetAlarmFlag(POS_ALARM_BIT,0);//reset alarm flag,so pwm1 stop
 
             return KEY_Silence;
 //        }

@@ -55,7 +55,7 @@ void show_head_menu(void);
 void set_history_alarm_pos(uint16 pos);
 
 void set_menu_alarm_info(alarminfo alarm_info);
-
+void set_menu_faultalarm_info(alarminfo alarm_info);
 
 void clr_alarm_loop_show(void);
 void set_alarm_loop_show(void);
@@ -72,6 +72,7 @@ uint8 get_alarm_loop_show(void);
 //心跳时间设置
 static uint8 time_sendheart;
 volatile uint8 loopflag=0; //火警时界面轮显循环显示
+volatile uint8 loopflag_fault=0; //故障时界面轮显循环显示
 #endif
 
 #endif

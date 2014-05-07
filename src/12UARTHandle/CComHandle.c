@@ -619,17 +619,20 @@ void menu_fault_deal(alarminfo* alarm_info)
     Fault_Relay_On();
 
 
-    if(GetAlarmFlag(POS_ALARM_BIT) !=ALARM_FIRE)
+    if(GetAlarmFlag(POS_ALARM_BIT) !=ALARM_FIRE){
+        Debug("-->>set fault bit\n");
         SetAlarmFlag(POS_ALARM_BIT,ALARM_FAULT);
+    }
     if(GetReleaseFlag()==0)//只有在复位后才显示出来
     {
+        Debug("-->>GetReleaseFlag is 0\n");
         set_faultalarm_ciraddr(alarm_info->ciraddr);//通知回路——故障
         SetReleaseFlag(4);
         //进入故障界面——使用
         SetMenuFlag(MENU_FAULTALARM);
         SetDisplay_alarm_flag(PAGE_AT_FAULT);
         //设置内容到另外一个存储中
-        set_menu_alarm_info(*alarm_info);
+        set_menu_faultalarm_info(*alarm_info);
     }
 
     set_hist_allinfo(GetHistConter(),&histinfo);
@@ -645,8 +648,9 @@ static void normal_deal(uint8 num,uint8 cir_addr)
 
         set_normalalarm_ciraddr(cir_addr);
         Query_ByUart0(fault_restore_cfg[0],fault_restore_cfg[1],cir_addr);
+        Flag195 = 0;
     }
-    Flag195 = 0;
+
     if(reset_fault_flag)
     {
         reset_fault_flag=0;
@@ -658,8 +662,8 @@ static void normal_deal(uint8 num,uint8 cir_addr)
         {
             set_alarm_attr(num,ATTR_NORMAL);
         }
-//        SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
-//        SetDisplay_alarm_flag(PAGE_AT_NORMAL);
+        SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
+        SetDisplay_alarm_flag(PAGE_AT_NORMAL);
         SetMenuFlag(MENU_MAIN);
     }
 }

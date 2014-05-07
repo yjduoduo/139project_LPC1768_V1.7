@@ -378,7 +378,7 @@ void clr_faultnum_3h_(uint8 part)
 void judge_3h_over(uint8 part)
 {
 //    Debug("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
-    DebugOnce("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
+//    DebugOnce("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
     if(get_3h_counter(part) > vTimer1_6H + 5)
     {
         vTime1_3h_exist[part].faultnums = 2;
@@ -441,16 +441,16 @@ void   T1Int_CTimeCtrl(void)
     //control pwm1 start and stop periodicity
     if(get_PWM1_Started())
     {
-        if(MENU_FIREALARM == GetMenuFlag())//»ð¾¯Éù
+        if(ALARM_FIRE == GetAlarmFlag(POS_ALARM_BIT))//»ð¾¯Éù
         {
             set_speark_ss_time(cTime1_500ms_Count,cTime1_500ms_Count);
         }
-        else if(MENU_FAULTALARM == GetMenuFlag())//¹ÊÕÏÉù
+        else if(ALARM_FAULT == GetAlarmFlag(POS_ALARM_BIT))//¹ÊÕÏÉù
         {
             set_speark_ss_time(cTime1_100ms_Count,cTime1_1s_Count);
         }
         else{
-            set_speark_ss_time(cTime1_1s_Count,cTime1_500ms_Count);
+            set_speark_ss_time(cTime1_1s_Count,cTime1_1s_Count);
         }
 
     }else{

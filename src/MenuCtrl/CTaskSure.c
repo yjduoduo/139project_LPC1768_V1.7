@@ -130,8 +130,8 @@ void reset_ok(void)
     Led_Fire_Off();
     Fire_Relay_Off();
     Fault_Relay_Off();
-    SetAlarmFlag(POS_ALARM_BIT,0);
-    SetAlarmFlag(POS_INQUIRY_BIT,0);
+    SetAlarmFlag(POS_ALARM_BIT,ALARM_NORMAL);
+    SetAlarmFlag(POS_INQUIRY_BIT,ALARM_NORMAL);
     SetReleaseFlag(0);
 
 
@@ -147,7 +147,10 @@ void reset_ok(void)
     //清报警回路
     clr_alarm_allinfo();
 
+    clr_PWM1_Started();
     PWM1_Stop();
+    BEEPOff();
+
 
     //清计数
     clr_weixialasignal();
@@ -159,6 +162,9 @@ void reset_ok(void)
     Menu_complete();
     Eint_En();//开中断
     DelayMs(3000);
+
+
+
 }
 
 static void factory_ok(void)
@@ -556,9 +562,15 @@ static void selftest_ok(void)
     UartBindSend(CMD_139W,2);	   //发送心跳命令
     //加声光
     Led_ALL_On();
-    SetZjFlag(1);
-    PWM1_Start();
-    set_PWM1_Started();
+    if((GetAlarmFlag(POS_ALARM_BIT) ==ALARM_FIRE)
+            ||(GetAlarmFlag(POS_ALARM_BIT) ==ALARM_FAULT))
+    {
+    }else{
+        SetZjFlag(1);
+        PWM1_Start();
+        set_PWM1_Started();
+    }
+
     //延时
     DelayMs(15000);
     TestSelf_Menu();
@@ -569,6 +581,15 @@ static void selftest_ok(void)
     SetCounter1(3);
     SetCounter2(1);
     Return_Task();
+
+    if((GetAlarmFlag(POS_ALARM_BIT) ==ALARM_FIRE)
+            ||(GetAlarmFlag(POS_ALARM_BIT) ==ALARM_FAULT))
+    {
+    }else{
+        PWM1_Stop();
+        clr_PWM1_Started();
+    }
+
 
 }
 static void sigstrength_ok(void)

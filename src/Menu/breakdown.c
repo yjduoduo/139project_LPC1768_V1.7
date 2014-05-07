@@ -101,25 +101,24 @@ void Breakdown(uint8 attr,uint8 compent,uint16 sum,uint8 type,PCF8563_DATE* time
         }
 
         //报警 时间
-        // 		Displaynumber(1,4,48,2);
-        // 		Displaynumber(1,4,56,0);
-        Displaynumber(1,4,32,(((timed->year%1000)%100)/10));
-        Displaynumber(1,4,40,(timed->year%10));
+        //报警 时间
+        Displaynumber(1,4,0,(((timed->year%1000)%100)/10));
+        Displaynumber(1,4,8,(timed->year%10%100%10));
         //Display(1,4,32,81);	  // 年
-        Displaynumber(1,4,48,(timed->month / 10));
-        Displaynumber(1,4,56,(timed->month % 10));
+        Displaynumber(1,4,16,(timed->month / 10));
+        Displaynumber(1,4,24,(timed->month % 10));
         // Display(2,4,0,82);	// 月
-        Displaynumber(2,4,0,(timed->day / 10));
-        Displaynumber(2,4,8,(timed->day % 10));
+        Displaynumber(1,4,32,(timed->day / 10));
+        Displaynumber(1,4,40,(timed->day % 10));
         //时
-        Displaynumber(2,4,16,(timed->hour/10));
-        Displaynumber(2,4,24,(timed->hour%10));
-        // 		Displaynumber(2,4,48,0x0A);
-        Displaynumber(2,4,32,(timed->minute/10));
-        Displaynumber(2,4,40,(timed->minute%10));
-        // 		Displaynumber(1,6,56,0x0A);
-        Displaynumber(2,4,48,(timed->second/10));
-        Displaynumber(2,4,56,(timed->second%10));
+        Displaynumber(1,4,48,(timed->hour/10));
+        Displaynumber(1,4,56,(timed->hour%10));
+// 		Displaynumber(2,4,48,0x0A);
+        Displaynumber(2,4,0,(timed->minute/10));
+        Displaynumber(2,4,8,(timed->minute%10));
+// 		Displaynumber(1,6,56,0x0A);
+        Displaynumber(2,4,16,(timed->second/10));
+        Displaynumber(2,4,24,(timed->second%10));
 
         //输入地址注释
         row = GetAnnRow(compent);

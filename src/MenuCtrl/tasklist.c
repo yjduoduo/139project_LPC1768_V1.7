@@ -231,9 +231,14 @@ void Return_Task(void)
         SubGrapCount();
         SetCounter1(1);
         //to alarm menu if have alarm,else to main
-        if(GetDisplay_alarm_flag())
+        if(GetDisplay_alarm_flag()==PAGE_AT_FIRE)
         {
             SetMenuFlag(MENU_FIREALARM);
+            ClearScreen(0);
+        }
+        else if(GetDisplay_alarm_flag()==PAGE_AT_FAULT)
+        {
+            SetMenuFlag(MENU_FAULTALARM);
             ClearScreen(0);
         }
         else
