@@ -15,4 +15,4 @@
 // #include  "CModelFault.h"
 
 void menu_wirelessmod_fault(void);
-void menu_vh75_connect_fault(uint8 part);
+void menu_vh75_6h_connect_fault(uint8 part);

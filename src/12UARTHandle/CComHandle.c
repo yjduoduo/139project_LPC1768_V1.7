@@ -727,6 +727,12 @@ void HandleInfo_Uart1(void)//Ö÷Ñ­»·ÖÐ
                 clr_alarm_f_recvmess3h(num);
                 clr_3h_counter(num);
                 clr_faultnum_3h_(num);
+                if((GetAlarmFlag(POS_ALARM_BIT) != ALARM_FAULT)
+                        &&(GetAlarmFlag(POS_ALARM_BIT) != ALARM_FIRE)){
+                    SetMenuFlag(MENU_MAIN);
+                    Led_Fault_Off();
+                    Fault_Relay_Off();
+                }
 
                 respfire_val.num = num;
                 respfire_val.psn3 = get_comp_psn3(num);

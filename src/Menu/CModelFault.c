@@ -31,7 +31,7 @@ void menu_wirelessmod_fault(void)
 // 	Display(2,6,48,294);
 }
 //vh75连接故障
-void menu_vh75_connect_fault(uint8 part)
+void menu_vh75_6h_connect_fault(uint8 part)
 {
     uint8 hz[]="部件连接故障";
     ClearScreen(0);

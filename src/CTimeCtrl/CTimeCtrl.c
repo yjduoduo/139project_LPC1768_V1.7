@@ -316,6 +316,7 @@ static void set_speark_ss_time(uint16 startT,uint16 stopT)
 #define vTimer1_Base (1UL)  /*(1 minute)*/
 #define vTimer1_3H   ((60*3)/vTimer1_Base)
 #define vTimer1_6H   ((60*6)/vTimer1_Base)
+#define vTimer1_12H   ((60*12)/vTimer1_Base)
 #else//test
 #define vTimer1_Base 1UL  /*(1 minute)*/
 #define vTimer1_3H   1*3/vTimer1_Base
@@ -368,32 +369,40 @@ void clr_3h_counter(uint8 part)
 //通讯时，判断时间是否在正常范围内，小于6个小时就可以清空
 void clr_faultnum_3h_(uint8 part)
 {
-    if(get_3h_counter(part) < vTimer1_6H )
+    if(get_3h_counter(part) < vTimer1_12H )
     {
         vTime1_3h_exist[part].faultnums = 0;
     }
 }
 
-//主循环处理6小时故障
+//主循环处理12小时故障
 void judge_3h_over(uint8 part)
 {
 //    Debug("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
 //    DebugOnce("p-c part:%d,counter:%d\n",part,get_3h_counter(part));
-    if(get_3h_counter(part) > vTimer1_6H + 5)
+    if(get_3h_counter(part) > vTimer1_12H )
     {
-        vTime1_3h_exist[part].faultnums = 2;
+        vTime1_3h_exist[part].faultnums = 4;
     }
-    else if(get_3h_counter(part) > vTimer1_3H + 5)
+    else if(get_3h_counter(part) > vTimer1_3H )
     {
         vTime1_3h_exist[part].faultnums++;
     }
 
-    if(vTime1_3h_exist[part].faultnums >= 2)
+    if(vTime1_3h_exist[part].faultnums >= 4)
     {
         //        menu_fault_deal(&alarm_info);
         //故障菜单
 //        SetMenuFlag(MENU_OFFLINE);
-        menu_vh75_connect_fault(part);
+        menu_vh75_6h_connect_fault(part);
+        Led_Fault_On();
+        Fault_Relay_On();
+
+#if 1 //故障界面只报一次即清除计数
+        clr_alarm_f_recvmess3h(part);
+        clr_3h_counter(part);
+        clr_faultnum_3h_(part);
+#endif
 //        if(GetAlarmFlag(POS_ALARM_BIT) != ALARM_FIRE)
 //            SetAlarmFlag(POS_ALARM_BIT,ALARM_FAULT);
     }

@@ -18,7 +18,7 @@
 #include  "include.h"
 
 //汉字
-static uint8 hz[]="本机设置本机地址防区总数";
+static uint8 hz[]="本机设置报警地址防区总数";
 
 static void menu_haved_saved(void)
 {
