@@ -40,7 +40,7 @@ void Level2_Up(void)
         if(GetCounter2() > 1)
             SubCounter2();
         else
-            SetCounter2(3);
+            SetCounter2(4);
         GetCheckGrap(GetCounter2());
         break;
     case 3:

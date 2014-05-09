@@ -93,7 +93,7 @@ static PCF8563_DATE history_alarmtime;//历史记录的时间
 //各个内容必须不同，否则有初始化问题
 #define ONESIZE (1)
 #define BIGSIZE (8)
-#define ALARMSIZE (18)/*与HISTSIZE相同了，不行*/
+#define ALARMSIZE (19)/*与HISTSIZE相同了，不行*/
 #ifndef test
 #define NODESIZE (2)
 #else

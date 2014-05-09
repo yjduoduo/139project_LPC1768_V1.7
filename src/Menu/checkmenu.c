@@ -20,7 +20,7 @@
 
 void Check_Menu(uint8 tmp)
 {
-    uint8 hz[]="系统查询部件状态历史记录";
+    uint8 hz[]="系统查询部件状态历史记录版本";
     ClearScreen(0);
     if(tmp == 1)
         Display(1,0,0,0);
@@ -28,6 +28,8 @@ void Check_Menu(uint8 tmp)
         Display(1,2,0,0);
     else if(tmp == 3)
         Display(1,4,0,0);
+    else if(tmp == 4)
+        Display(1,6,0,0);
     //系统查询
     Displaynumber(1,0,10,1);//display 1
     Displaynumber(1,0,18,0x0A);
@@ -49,7 +51,11 @@ void Check_Menu(uint8 tmp)
     DisplayJBHZK(1,4,48,((hz[18]<<8)+hz[19]));
     DisplayJBHZK(2,4,0,((hz[20]<<8)+hz[21]));
     DisplayJBHZK(2,4,16,((hz[22]<<8)+hz[23]));
-
+    //关于
+    Displaynumber(1,6,10,4);//display 3
+    Displaynumber(1,6,18,0x0A);
+    DisplayJBHZK(1,6,32,((hz[24]<<8)+hz[25]));
+    DisplayJBHZK(1,6,48,((hz[26]<<8)+hz[27]));
 }
 
 

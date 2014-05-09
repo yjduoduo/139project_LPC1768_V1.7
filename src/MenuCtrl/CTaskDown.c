@@ -53,7 +53,7 @@ void Level2_Down(void)//µÚ¶þ²ã
         break;
     case 2:
         AddCounter2();//vCounter[1]++;
-        if(GetCounter2()>3)//if(vCounter[1] > 3)
+        if(GetCounter2()>4)//if(vCounter[1] > 3)
             SetCounter2(1);//vCounter[1] = 1;
         GetCheckGrap(GetCounter2());
         break;

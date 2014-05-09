@@ -109,7 +109,11 @@ void CLevel22_Return(void)
         ClearScreen(0);
         Check_Menu(3);
         break;
-    default:break;
+    case 4:
+        Check_Menu(4);
+        break;
+    default:
+        break;
     }
     SetCounter3(1);
 }

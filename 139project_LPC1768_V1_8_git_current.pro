@@ -97,7 +97,9 @@ HEADERS += \
 ./src/componentinfo/componentinfo.h\
 ./src/componentinfo/store_addr.h\
 ./src/timesharectrl/SysCtrl.h\
-./src/lpc177x_8x_uart.h
+./src/lpc177x_8x_uart.h \
+    src/about139.h \
+    src/Menu/about139.h
 SOURCES += \
 ./src/12UARTHandle/CAlarmBuffer.c\
 ./src/12UARTHandle/CComAnn.c\
@@ -174,7 +176,9 @@ SOURCES += \
 ./src/lpc177x_8x_uart.c\
 ./src/system_LPC17xx.c\
 ./src/target.c\
-./src/timer.c
+./src/timer.c \
+    src/about139.c \
+    src/Menu/about139.c
 OTHER_FILES += \
 ./Project/output/139W.axf\
 ./Project/output/139W.hex\

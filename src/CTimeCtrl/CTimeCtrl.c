@@ -161,19 +161,26 @@ void  AnsCommT0_CTimeCtrl(void)
         {
             return ;
         }
-        //火警后采集信号，判断，LOOP_LD是否有输出，即回路上有下拉
-        if(vRunTime0 <= cTime1ms)
-        {//火警，拉低为原理图上为低电平
-            if(!get_loopLD_state())//低电平
-            {
-                //                Debug("addr:%d\n",vAddr);
-                addxialasignal();
-            }else{//高电平
-                if(getxialasignal()>30)
-                    add_weixialasignal();
-            }
+        if(GetAlarmFlag(POS_ALARM_BIT) == ALARM_FIRE)
+        {
+            //火警后采集信号，判断，LOOP_LD是否有输出，即回路上有下拉
+            if(vRunTime0 <= cTime1ms)
+            {//火警，拉低为原理图上为低电平
+                if(!get_loopLD_state())//低电平
+                {
+                    //                Debug("addr:%d\n",vAddr);
+                    addxialasignal();
+                }else{//高电平
+                    if(getxialasignal()>30)
+                        add_weixialasignal();
+                }
 
+            }
+        }else{
+            clr_xialasignal();
+            clr_weixialasignal();
         }
+
 
         if(vRunTime0 < m_AnsStatTime[GetComm_CLpScanCtrl()])
         {

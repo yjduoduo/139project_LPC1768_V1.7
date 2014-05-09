@@ -94,6 +94,9 @@ void GetCheckGrap(uint8 tmp)
     case 3://历史记录
         Check_Menu(3);
         break;
+    case 4://版本
+        Check_Menu(4);
+        break;
     default:break;
     }
 }

@@ -37,6 +37,8 @@
 #include  "CNodeInfo.h"
 #include  "key.h"
 #include  "CTimeCtrl.h"
+#include  "about139.h"
+#include  "CSoftVerDef.h"
 
 
 //数据量变为实际存储位置，相关1
@@ -551,6 +553,12 @@ void query_Sure(uint8 tmp)
     case 3://历史记录www
         query_historyrecord_ok();
         break;
+    case 4://关于：版本信息
+        about_version_Menu(CSoftVer_A,
+                           CSoftVer_B,
+                           CSoftVer_C,
+                           CSoftVer_D);
+
     default:
         break;
     }
